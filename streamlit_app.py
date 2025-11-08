@@ -42,15 +42,15 @@ async def main():
     st.title("Streaming chatbot with Burr")
     app = initialize_app()
 
-    prompt = st.chat_input("Ask me a question!", key="chat_input")
+    query = st.chat_input("Ask me a question!", key="chat_input")
     for chat_message in app.state.get("chat_history", []):
         render_chat_message(chat_message)
 
-    if prompt:
-        render_chat_message({"role": "user", "content": prompt, "type": "text"})
+    if query:
+        render_chat_message({"role": "user", "content": query, "type": "text"})
         with st.spinner(text="Waiting for response..."):
             action, streaming_container = await app.astream_result(
-                halt_after=chatbot_application.TERMINAL_ACTIONS, inputs={"prompt": prompt}
+                halt_after=chatbot_application.TERMINAL_ACTIONS, inputs={"query": query}
             )
         await render_streaming_chat_message(streaming_container)
 

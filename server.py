@@ -59,7 +59,7 @@ def _get_application(project_id: str, app_id: str) -> Application:
             tracker,
             resume_at_next_action=False,  # always resume from entrypoint in the case of failure
             default_state={"chat_history": []},
-            default_entrypoint="prompt",
+            default_entrypoint="query",
         )
         .with_tracker(tracker, use_otel_tracing=opentelemetry_available)
         .with_identifiers(app_id=app_id)
@@ -67,12 +67,12 @@ def _get_application(project_id: str, app_id: str) -> Application:
     )
 
 
-class PromptInput(pydantic.BaseModel):
-    prompt: str
+class QueryInput(pydantic.BaseModel):
+    query: str
 
 
 @router.post("/response/{project_id}/{app_id}", response_class=StreamingResponse)
-async def chat_response(project_id: str, app_id: str, prompt: PromptInput) -> StreamingResponse:
+async def chat_response(project_id: str, app_id: str, query: QueryInput) -> StreamingResponse:
     """Chat response endpoint. User passes in a prompt and the system returns the
     full chat history, so its easier to render.
 
@@ -84,7 +84,7 @@ async def chat_response(project_id: str, app_id: str, prompt: PromptInput) -> St
     burr_app = _get_application(project_id, app_id)
     chat_history = burr_app.state.get("chat_history", [])
     action, streaming_container = await burr_app.astream_result(
-        halt_after=chat_application.TERMINAL_ACTIONS, inputs=dict(prompt=prompt.prompt)
+        halt_after=chat_application.TERMINAL_ACTIONS, inputs=dict(query=query.query)
     )
 
     async def sse_generator():
