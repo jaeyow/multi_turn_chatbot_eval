@@ -1,3 +1,0 @@
-burr[streamlit,start]
-openai==1.99.9
-python-dotenv==1.1.1
