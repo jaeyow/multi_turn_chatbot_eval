@@ -8,15 +8,17 @@ This uses Server Sent Events (SSE) to stream data from FastAPI to the frontend. 
 
 ## Example
 
-The application we created will be a simple chatbot proxy. It has a few diffrent modes -- it can either decide a prompt is "unsafe" (in this case meaning that it has the word "unsafe" in it, but this would typically go to specific model),
-or do one of the following:
+The application we created is a chatbot for JO's Bike Shop. It has a few different modes to handle customer queries:
 
-1. Generate code
-2. Answer a question
-3. Generate a poem
-4. Prompt for more
+1. Shop information (hours, location, contact)
+2. Product inquiries (bikes, accessories, availability)
+3. Book appointments (service bookings)
+4. Maintenance tips
+5. Policy questions (returns, warranties, delivery)
+6. What can you do (explain capabilities)
+7. Prompt for more (fallback for unclear queries)
 
-It will use an LLM to decide which to do. It streams back text using async streaming in Burr. Read more about how that is implemented [here](https://burr.dagworks.io/concepts/streaming-actions/).
+It will use an LLM to decide which mode to use based on the customer's query. It streams back text using async streaming in Burr. Read more about how that is implemented [here](https://burr.dagworks.io/concepts/streaming-actions/).
 
 Note that, even though not every response is streaming (E.G. unsafe response, which is hardcoded), they are modeled as streaming to make interaction with the app simpler.
 
