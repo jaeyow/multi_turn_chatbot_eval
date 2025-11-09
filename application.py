@@ -275,6 +275,42 @@ def _generate_appointment_confirmation(appointment_data: dict) -> str:
     return message
 
 
+async def _is_off_topic_query(query: str, chat_history: list) -> bool:
+    """Detect if customer's query is off-topic (not related to appointment booking)."""
+    
+    prompt = f"""You are analyzing a customer query during an active appointment booking process.
+
+Current query: "{query}"
+
+Recent conversation context: {json.dumps(chat_history[-3:] if len(chat_history) > 3 else chat_history)}
+
+Is this query related to booking/scheduling an appointment, or is it an off-topic question (like asking about products, shop hours, policies, etc.)?
+
+Respond with ONLY "on_topic" or "off_topic".
+
+Examples:
+- "What are your hours?" -> off_topic
+- "Do you sell helmets?" -> off_topic
+- "Tuesday afternoon works" -> on_topic
+- "I prefer morning" -> on_topic
+- "Actually, I need a repair" -> on_topic
+- "How much does a tune-up cost?" -> off_topic (price question, not scheduling)
+- "Can I bring my bike in Thursday?" -> on_topic
+"""
+    
+    client = _get_openai_client()
+    result = await client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {"role": "system", "content": "You are a query classifier. Respond only with 'on_topic' or 'off_topic'."},
+            {"role": "user", "content": prompt},
+        ],
+    )
+    
+    response = result.choices[0].message.content.strip().lower()
+    return response == "off_topic"
+
+
 @streaming_action(reads=["query", "chat_history", "appointment_data"], writes=["response", "appointment_data", "in_appointment_flow", "awaiting_confirmation"])
 async def start_appointment_booking(
     state: State,
@@ -389,6 +425,69 @@ async def continue_appointment_booking(
             }
             yield result, state.update(**result).append(chat_history=result["response"])
             return
+    
+    # Check if customer is asking an off-topic question
+    query_lower = state["query"].lower()
+    is_canceling = any(word in query_lower for word in ["cancel", "nevermind", "never mind", "forget it", "stop", "exit"])
+    
+    if is_canceling:
+        # Customer wants to cancel the booking
+        cancel_message = "No problem! I've canceled the appointment booking. Is there anything else I can help you with?"
+        
+        for word in cancel_message.split():
+            await asyncio.sleep(0.05)
+            yield {"delta": word + " "}, None
+        
+        result = {
+            "response": {
+                "content": cancel_message,
+                "type": "text",
+                "role": "assistant",
+            },
+            "appointment_data": {},  # Clear appointment data
+            "appointment_complete": False,
+            "in_appointment_flow": False,  # Exit appointment flow
+            "awaiting_confirmation": False,
+        }
+        yield result, state.update(**result).append(chat_history=result["response"])
+        return
+    
+    # Check if query is off-topic (customer asking about something else)
+    is_off_topic = await _is_off_topic_query(state["query"], state["chat_history"])
+    
+    if is_off_topic:
+        # Gently redirect back to appointment booking
+        missing_required = [
+            field for field in APPOINTMENT_REQUIRED_FIELDS 
+            if field not in appointment_data or not appointment_data[field]
+        ]
+        
+        if missing_required:
+            redirect_message = (
+                "I'd be happy to help with that, but first let's finish booking your appointment! "
+                + _ask_for_missing_info(missing_required, appointment_data)
+                + " (Or say 'cancel' if you'd like to stop the booking.)"
+            )
+        else:
+            redirect_message = "I can help with that question, but first let's confirm your appointment details. Does the information I shared look correct?"
+        
+        for word in redirect_message.split():
+            await asyncio.sleep(0.05)
+            yield {"delta": word + " "}, None
+        
+        result = {
+            "response": {
+                "content": redirect_message,
+                "type": "text",
+                "role": "assistant",
+            },
+            "appointment_data": appointment_data,  # Keep existing data
+            "appointment_complete": False,
+            "in_appointment_flow": True,  # Stay in appointment flow
+            "awaiting_confirmation": awaiting_confirmation,  # Keep confirmation state
+        }
+        yield result, state.update(**result).append(chat_history=result["response"])
+        return
     
     # Extract new information from current query
     extracted_info = await _extract_appointment_info(
