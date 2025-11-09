@@ -13,14 +13,22 @@ A text-based chatbot designed to assist customers visiting the JO's Bike Shop we
 - Guide users to products and services
 
 ### 3. Functional Requirements
+
+#### Single-Turn Capabilities
 - Answer shop hours, location, and contact info
 - Show available bikes and accessories
 - Check product availability
-- Book service appointments
 - Provide maintenance tips
 - Handle FAQs (returns, warranties, delivery)
 - Guide users to online purchase or reservation
 - Collect customer feedback
+
+#### Multi-Turn Capabilities
+- **Book Service Appointments** - Intelligently collects required information through conversation:
+  - Required: Service type, preferred date, preferred time
+  - Optional: Bike details, specific issues, contact information
+  - Handles both single-turn (all details provided upfront) and multi-turn flows (asks follow-up questions as needed)
+  - Confirms all collected details before finalising
 
 ### 4. Non-Functional Requirements
 - Fast response times
