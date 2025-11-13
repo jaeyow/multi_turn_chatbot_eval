@@ -35,6 +35,60 @@ APPOINTMENT_OPTIONAL_FIELDS = [
     "contact_info",      # phone/email for confirmation
 ]
 
+# Shop information details
+SHOP_INFO = {
+    "name": "JO's Bike Shop",
+    "tagline": "Your Trusted Partner for All Things Cycling",
+    "address": {
+        "street": "456 Pedal Lane",
+        "city": "Portland",
+        "state": "OR",
+        "zip": "97201",
+        "full": "456 Pedal Lane, Portland, OR 97201"
+    },
+    "contact": {
+        "phone": "(503) 555-BIKE",
+        "email": "info@josbikeshop.com",
+        "website": "www.josbikeshop.com"
+    },
+    "hours": {
+        "monday": "9:00 AM - 6:00 PM",
+        "tuesday": "9:00 AM - 6:00 PM",
+        "wednesday": "9:00 AM - 6:00 PM",
+        "thursday": "9:00 AM - 7:00 PM",
+        "friday": "9:00 AM - 7:00 PM",
+        "saturday": "8:00 AM - 5:00 PM",
+        "sunday": "10:00 AM - 4:00 PM",
+        "description": "Open 7 days a week! Extended hours Thursday and Friday evenings."
+    },
+    "services": [
+        "Basic Tune-ups ($75 - includes brake and gear adjustments, chain cleaning)",
+        "Full Service ($150 - complete inspection and maintenance)",
+        "Custom Builds (starting at $500 - we'll build your dream bike)",
+        "Wheel Truing and Spoke Replacement",
+        "Brake and Gear Cable Replacement",
+        "Bearing Service and Overhaul",
+        "Suspension Service",
+        "Frame Alignment and Repair"
+    ],
+    "specialties": [
+        "Expert bike fitting services",
+        "Professional race team support",
+        "E-bike sales and service",
+        "Custom frame building",
+        "Vintage bike restoration"
+    ],
+    "about": (
+        "JO's Bike Shop has been serving the Portland cycling community since 2010. "
+        "Founded by Joe 'JO' Martinez, a former professional cyclist, we're passionate about "
+        "getting people on bikes and keeping them rolling. Our team of certified mechanics "
+        "has over 50 years of combined experience. Whether you're a weekend warrior, daily "
+        "commuter, or competitive racer, we've got you covered!"
+    ),
+    "parking": "Free parking available in our lot behind the shop. Bike racks at the front entrance.",
+    "accessibility": "Wheelchair accessible entrance and facilities. Service counter at accessible height.",
+}
+
 
 @action(reads=[], writes=["chat_history", "query"])
 def process_query(state: State, query: str) -> Tuple[dict, State]:
@@ -179,6 +233,70 @@ async def explain_capabilities(
     for word in result["response"]["content"].split():
         await asyncio.sleep(0.05)
         yield {"delta": word + " "}, None
+    yield result, state.update(**result).append(chat_history=result["response"])
+
+
+@streaming_action(reads=["query", "chat_history"], writes=["response"])
+async def shop_info_response(
+    state: State,
+) -> AsyncGenerator[Tuple[dict, Optional[State]], None]:
+    """Provides detailed shop information using the SHOP_INFO data."""
+    
+    # Create a detailed context from shop info
+    shop_context = f"""
+You are answering questions about JO's Bike Shop. Use this information to provide helpful, accurate answers:
+
+BASIC INFORMATION:
+- Name: {SHOP_INFO['name']}
+- Address: {SHOP_INFO['address']['full']}
+- Phone: {SHOP_INFO['contact']['phone']}
+- Email: {SHOP_INFO['contact']['email']}
+- Website: {SHOP_INFO['contact']['website']}
+
+HOURS:
+{chr(10).join([f"- {day.title()}: {hours}" for day, hours in SHOP_INFO['hours'].items() if day != 'description'])}
+Note: {SHOP_INFO['hours']['description']}
+
+SERVICES OFFERED:
+{chr(10).join([f"- {service}" for service in SHOP_INFO['services']])}
+
+SPECIALTIES:
+{chr(10).join([f"- {specialty}" for specialty in SHOP_INFO['specialties']])}
+
+ABOUT US:
+{SHOP_INFO['about']}
+
+PARKING & ACCESSIBILITY:
+- Parking: {SHOP_INFO['parking']}
+- Accessibility: {SHOP_INFO['accessibility']}
+
+Customer's question: {state['query']}
+
+Provide a friendly, helpful answer using the information above. Be conversational and enthusiastic about bikes!
+"""
+    
+    chat_history_api_format = [
+        {"role": "system", "content": "You are a helpful assistant for JO's Bike Shop. Provide accurate information based on the shop details provided."},
+        {"role": "user", "content": shop_context}
+    ]
+    
+    client = _get_openai_client()
+    result = await client.chat.completions.create(
+        model="gpt-3.5-turbo", messages=chat_history_api_format, stream=True
+    )
+    buffer = []
+    async for chunk in result:
+        chunk_str = chunk.choices[0].delta.content
+        if chunk_str is None:
+            continue
+        buffer.append(chunk_str)
+        yield {
+            "delta": chunk_str,
+        }, None
+
+    result = {
+        "response": {"content": "".join(buffer), "type": "text", "role": "assistant"},
+    }
     yield result, state.update(**result).append(chat_history=result["response"])
 
 
@@ -626,9 +744,7 @@ graph = (
         check_safety=check_safety,
         unsafe_response=unsafe_response,
         decide_mode=choose_mode,
-        shop_info=chat_response.bind(
-            prepend_prompt="Please provide information about JO's Bike Shop (hours, location, contact) based on the following query",
-        ),
+        shop_info=shop_info_response,
         product_inquiry=chat_response.bind(
             prepend_prompt="Please help the customer with their product inquiry about bikes or accessories",
         ),
