@@ -311,6 +311,55 @@ Examples:
     return response == "off_topic"
 
 
+async def _classify_confirmation_response(query: str) -> str:
+    """Classify customer's response to appointment confirmation.
+    
+    Returns:
+        - "affirmative": Customer confirms/approves the appointment
+        - "negative": Customer rejects/declines the appointment
+        - "change": Customer wants to modify something
+    """
+    
+    prompt = f"""You are analyzing a customer's response to an appointment confirmation.
+
+Customer's response: "{query}"
+
+Classify this response into one of these categories:
+- "affirmative": Customer is confirming/approving the appointment (yes, correct, looks good, confirm it, book it, perfect, that works, etc.)
+- "negative": Customer is rejecting/declining the appointment (no, that's wrong, not correct, cancel, nevermind, etc.)
+- "change": Customer wants to modify something (change the time, different date, update the service, I'd like to change X, actually can we do Y instead, etc.)
+
+Respond with ONLY one word: "affirmative", "negative", or "change".
+
+Examples:
+- "yes please" -> affirmative
+- "looks good!" -> affirmative
+- "perfect, book it" -> affirmative
+- "that works for me" -> affirmative
+- "no that doesn't work" -> negative
+- "that's not right" -> negative
+- "can we change the time?" -> change
+- "I'd like to book for a different day" -> change
+- "actually, make it morning instead" -> change
+- "update the service to full service" -> change
+"""
+    
+    client = _get_openai_client()
+    result = await client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {"role": "system", "content": "You are a response classifier. Respond only with 'affirmative', 'negative', or 'change'."},
+            {"role": "user", "content": prompt},
+        ],
+    )
+    
+    response = result.choices[0].message.content.strip().lower()
+    # Ensure we return a valid response
+    if response not in ["affirmative", "negative", "change"]:
+        return "change"  # Default to change if unclear
+    return response
+
+
 @streaming_action(reads=["query", "chat_history", "appointment_data"], writes=["response", "appointment_data", "in_appointment_flow", "awaiting_confirmation"])
 async def start_appointment_booking(
     state: State,
@@ -379,11 +428,12 @@ async def continue_appointment_booking(
     appointment_data = state.get("appointment_data", {})
     awaiting_confirmation = state.get("awaiting_confirmation", False)
     
-    # If we're awaiting confirmation, check if customer confirmed
+    # If we're awaiting confirmation, check customer's response
     if awaiting_confirmation:
-        query_lower = state["query"].lower()
-        # Check for confirmation (yes, correct, confirm, etc.)
-        if any(word in query_lower for word in ["yes", "correct", "confirm", "looks good", "that's right", "perfect"]):
+        # Use LLM to classify the response
+        response_type = await _classify_confirmation_response(state["query"])
+        
+        if response_type == "affirmative":
             # Customer confirmed! Book the appointment
             confirmation_message = "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
             
@@ -404,7 +454,30 @@ async def continue_appointment_booking(
             }
             yield result, state.update(**result).append(chat_history=result["response"])
             return
-        else:
+        
+        elif response_type == "negative":
+            # Customer rejected the appointment
+            rejection_message = "I understand. I've canceled this appointment booking. Would you like to start over or can I help you with something else?"
+            
+            for word in rejection_message.split():
+                await asyncio.sleep(0.05)
+                yield {"delta": word + " "}, None
+            
+            result = {
+                "response": {
+                    "content": rejection_message,
+                    "type": "text",
+                    "role": "assistant",
+                },
+                "appointment_data": {},  # Clear appointment data
+                "appointment_complete": False,
+                "in_appointment_flow": False,  # Exit appointment flow
+                "awaiting_confirmation": False,
+            }
+            yield result, state.update(**result).append(chat_history=result["response"])
+            return
+        
+        else:  # response_type == "change"
             # Customer wants to make changes
             change_message = "No problem! What would you like to change?"
             
