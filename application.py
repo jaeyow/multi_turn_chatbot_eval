@@ -80,7 +80,7 @@ SHOP_INFO = {
     ],
     "about": (
         "JO's Bike Shop has been serving the Portland cycling community since 2010. "
-        "Founded by Joe 'JO' Martinez, a former professional cyclist, we're passionate about "
+        "Founded by Jose 'JO' Reyes, a former professional cyclist, we're passionate about "
         "getting people on bikes and keeping them rolling. Our team of certified mechanics "
         "has over 50 years of combined experience. Whether you're a weekend warrior, daily "
         "commuter, or competitive racer, we've got you covered!"
