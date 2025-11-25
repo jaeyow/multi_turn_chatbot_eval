@@ -1,216 +1,408 @@
-# Streaming in FastAPI
+# JO's Bike Shop Chatbot
 
-This example demonstrates how to stream data from Burr's streaming mode through FastAPI.
+A sophisticated multi-turn conversational AI chatbot built with Burr and OpenAI, designed to handle customer inquiries for a bicycle shop. This application demonstrates advanced state management, intelligent conversation flows, and real-time streaming responses.
 
-This is gone over in more detail in [our blog post](https://blog.dagworks.io/p/streaming-chatbot-with-burr-fastapi). This README will go over the main code + roles and how to run the example.
+Built as a realistic example of a multi-turn chatbot for evaluation and demonstration purposes, based on the [Streaming API example in the Burr repository](https://github.com/apache/burr/tree/main/examples/streaming-fastapi).
 
-This uses Server Sent Events (SSE) to stream data from FastAPI to the frontend. This also uses Async Generators to ensure optimal performance.
+## [Streamlit](https://streamlit.io/) frontend (choose your own UI)
 
-## Example
+![Streamlit Chatbot UI](frontend.png)
 
-The application we created is a chatbot for JO's Bike Shop. It has a few different modes to handle customer queries:
+## Application state machine diagram:
 
-1. Shop information (hours, location, contact)
-2. Product inquiries (bikes, accessories, availability)
-3. Book appointments (service bookings)
-4. Maintenance tips
-5. Policy questions (returns, warranties, delivery)
-6. What can you do (explain capabilities)
-7. Prompt for more (fallback for unclear queries)
+![Application State Machine](statemachine.png)
 
-It will use an LLM to decide which mode to use based on the customer's query. It streams back text using async streaming in Burr. Read more about how that is implemented [here](https://burr.dagworks.io/concepts/streaming-actions/).
+## Features
 
-Note that, even though not every response is streaming (E.G. unsafe response, which is hardcoded), they are modeled as streaming to make interaction with the app simpler.
+### 🤖 Intelligent Mode Detection
+- **LLM-Powered Classification**: Uses GPT-4o to automatically detect customer intent and route to appropriate handlers
+- **Context-Aware**: Understands customer queries in natural language without requiring specific keywords
+- **Multi-Modal Support**: Handles seven different conversation modes seamlessly
 
-The app looks like this:
+### 🏪 Comprehensive Shop Information
+Built-in knowledge base with complete shop details:
+- **Location**: 456 Pedal Lane, Portland, OR 97201
+- **Hours**: Open 7 days a week (Mon-Fri 9AM-6PM, extended Thu-Fri until 7PM, Sat 8AM-5PM, Sun 10AM-4PM)
+- **Services**: Tune-ups ($75), Full Service ($150), Custom Builds ($500+), and specialized repairs
+- **Specialties**: Bike fitting, race team support, e-bike service, custom frame building, vintage restoration
+- **Contact**: (503) 555-BIKE, info@josbikeshop.com
 
-![application graph](statemachine.png)
+### 📅 Advanced Multi-Turn Appointment Booking
+Intelligent conversation flow that adapts to customer input:
 
-## Running the example
+- **Dual-Flow Support**: 
+  - **Single-Turn**: Processes all information provided upfront
+  - **Multi-Turn**: Progressively collects missing details through natural conversation
 
-You will need an API key from Open AI to run this.
+- **Smart Information Extraction**: Uses GPT-4o to extract appointment details from natural language
+  - Required fields: service type, preferred date, preferred time
+  - Optional fields: bike details, specific issues, contact information
 
-You'll first have to have `burr[start]` installed. You can then view this demo in your app by running Burr:
+- **Intelligent Confirmation Handling**: LLM-based response classification
+  - Detects affirmative responses ("yes", "looks good", "book it")
+  - Handles negative responses ("no", "that's wrong", "cancel")
+  - Recognizes change requests ("update the time", "different date")
 
+- **Focus Management**:
+  - Detects off-topic queries during booking
+  - Gently redirects customers to complete appointment
+  - Supports explicit cancellation ("cancel", "nevermind", "forget it")
+
+### 🛡️ Additional Capabilities
+- **Product Inquiries**: Information about bikes, accessories, and availability
+- **Maintenance Tips**: Expert advice on bike care and maintenance
+- **Policy Questions**: Answers about returns, warranties, and delivery
+- **Safety Filtering**: Basic content moderation
+- **Capability Explanation**: Helps users understand what the chatbot can do
+
+## Architecture
+
+### Technology Stack
+- **State Machine**: Burr framework for robust state management and workflow orchestration
+- **LLM Models**:
+  - GPT-4o for intent detection, information extraction, and response classification
+  - GPT-3.5-turbo for conversational responses
+- **Streaming**: Async generators for real-time response streaming
+- **APIs**: FastAPI server with Server-Sent Events (SSE)
+- **UI**: Streamlit for interactive demonstration
+
+### State Management
+The application maintains conversation state across turns:
+- `chat_history`: Complete conversation history
+- `appointment_data`: Collected appointment information
+- `in_appointment_flow`: Boolean flag indicating active booking session
+- `awaiting_confirmation`: Boolean flag for confirmation state
+
+State is preserved across conversation turns using selective field retention, ensuring appointment data persists while other state is refreshed.
+
+## Prerequisites
+
+- Python 3.8 or higher
+- OpenAI API key
+- Dependencies listed in `requirements.txt`
+
+## Installation
+
+1. **Clone the repository**
+```bash
+git clone <repository-url>
+cd multi_turn_chatbot_eval
+```
+
+2. **Create and activate a virtual environment**
+```bash
+# Create virtual environment
+python -m venv .venv
+
+# Activate on macOS/Linux
+source .venv/bin/activate
+
+# Activate on Windows
+.venv\Scripts\activate
+```
+
+3. **Install dependencies**
+```bash
+pip install -r requirements.txt
+```
+
+4. **Set up environment variables**
+
+Create a `.env` file in the project root:
+```bash
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+## Running the Application
+
+### Option 1: Streamlit UI (Recommended for Quick Start)
+```bash
+streamlit run streamlit_app.py
+```
+Opens an interactive web interface at `http://localhost:8501`
+
+### Option 2: FastAPI Server
+```bash
+uvicorn server:app --reload
+```
+Starts the API server at `http://localhost:8000`
+
+### Option 3: Burr UI (Monitoring & Debugging)
+```bash
+burr
+```
+Opens the Burr monitoring interface at `http://localhost:7241` for viewing application traces and debugging.
+
+### Option 4: Visualize State Machine
+```bash
+python application.py
+```
+Generates and displays the state machine diagram (`statemachine.png`)
+
+## Application Structure
+
+```
+multi_turn_chatbot_eval/
+├── application.py          # Core Burr application with state machine logic
+├── server.py              # FastAPI server implementation
+├── streamlit_app.py       # Streamlit UI for interactive demo
+├── prd.md                 # Product requirements document
+├── requirements.txt       # Python dependencies
+├── statemachine.png       # Generated state machine visualization
+└── README.md             # This file
+```
+
+### Key Files
+
+- **`application.py`**: Contains all Burr actions, state machine graph, and business logic
+  - State machine definition with transitions
+  - Streaming actions for all conversation modes
+  - Helper functions for appointment booking
+  - Shop information constants
+
+- **`server.py`**: FastAPI server with SSE streaming endpoints
+  - Application instance management
+  - Streaming response handlers
+  - CORS configuration
+
+- **`streamlit_app.py`**: Interactive UI for testing and demonstration
+  - Chat interface
+  - Conversation history display
+  - State visualization
+
+## How It Works
+
+### Conversation Flow
+
+1. **Query Processing**: Customer input is captured and chat history is updated
+2. **Safety Check**: Basic content moderation filter
+3. **Routing Decision**:
+   - If `in_appointment_flow=True`: Route to `continue_booking` action
+   - Otherwise: Use LLM to detect mode and route to appropriate action
+4. **Action Execution**: Selected action processes query and generates response
+5. **Response Streaming**: Response is streamed back to user in real-time
+6. **Loop**: Return to query processing for next turn
+
+### Appointment Booking Flow
+
+#### Starting a Booking (`start_booking` action)
+1. Extract all available information from initial query using LLM
+2. Check which required fields are missing
+3. **If complete**: Show confirmation immediately (single-turn flow)
+4. **If incomplete**: Ask for first missing field and enter multi-turn flow
+5. Set `in_appointment_flow=True` to maintain booking context
+
+#### Continuing a Booking (`continue_booking` action)
+1. **If awaiting confirmation**:
+   - Use LLM to classify response (affirmative/negative/change)
+   - Affirmative: Book appointment and exit flow
+   - Negative: Cancel booking and exit flow
+   - Change: Ask what to change and continue collecting
+
+2. **Check for explicit cancellation**: Keywords like "cancel", "nevermind"
+3. **Check for off-topic queries**: Redirect back to booking if customer strays
+4. **Extract new information**: Process customer's response
+5. **Update appointment data**: Merge new info with existing data
+6. **Check completeness**:
+   - Complete: Generate confirmation and wait for approval
+   - Incomplete: Ask for next missing field
+
+#### State Transitions
+
+```mermaid
+stateDiagram-v2
+    [*] --> query
+    
+    query --> check_safety
+    
+    check_safety --> continue_booking: safe=True & in_appointment_flow=True
+    check_safety --> decide_mode: safe=True & in_appointment_flow=False
+    check_safety --> unsafe_response: safe=False
+    
+    decide_mode --> shop_info: mode=shop_info
+    decide_mode --> product_inquiry: mode=product_inquiry
+    decide_mode --> start_booking: mode=book_appointment
+    decide_mode --> maintenance_tips: mode=maintenance_tips
+    decide_mode --> policy_question: mode=policy_question
+    decide_mode --> what_can_you_do: mode=what_can_you_do
+    decide_mode --> prompt_for_more: mode=unknown
+    
+    shop_info --> query
+    product_inquiry --> query
+    start_booking --> query
+    continue_booking --> query
+    maintenance_tips --> query
+    policy_question --> query
+    what_can_you_do --> query
+    prompt_for_more --> query
+    unsafe_response --> query
+    
+    note right of continue_booking
+        Multi-turn booking flow
+        Stays in loop until
+        appointment confirmed
+        or cancelled
+    end note
+    
+    note right of start_booking
+        Initial booking
+        Sets in_appointment_flow=True
+        Routes to continue_booking
+        on next query
+    end note
+```
+
+## Streaming Implementation
+
+### Burr Streaming Actions
+
+Actions are defined as async generators using the `@streaming_action` decorator:
+
+```python
+@streaming_action(reads=["query", "chat_history"], writes=["response"])
+async def shop_info_response(state: State) -> AsyncGenerator[Tuple[dict, Optional[State]], None]:
+    # Stream response word by word
+    for word in response.split():
+        await asyncio.sleep(0.05)
+        yield {"delta": word + " "}, None
+    
+    # Final yield with complete result and updated state
+    yield result, state.update(**result).append(chat_history=result["response"])
+```
+
+**Key Points**:
+- Yields tuples of `(delta, state)`
+- Intermediate yields have `state=None`
+- Final yield includes updated state
+- Enables real-time user feedback
+
+### Integration with FastAPI
+
+The FastAPI server bridges Burr's streaming with Server-Sent Events:
+
+```python
+async def sse_generator():
+    async for item in streaming_container:
+        yield f"data: {json.dumps({'type': 'delta', 'value': item['delta']})}\n\n"
+
+return StreamingResponse(sse_generator())
+```
+
+This allows the frontend to receive updates in real-time as the LLM generates responses.
+
+## Configuration
+
+### Appointment Fields
+
+**Required Fields** (must be collected before booking):
+```python
+APPOINTMENT_REQUIRED_FIELDS = [
+    "service_type",      # tune-up, repair, full service, etc.
+    "preferred_date",    # customer's preferred date
+    "preferred_time",    # morning, afternoon, specific time
+]
+```
+
+**Optional Fields** (collected if provided):
+```python
+APPOINTMENT_OPTIONAL_FIELDS = [
+    "bike_details",      # make/model if available
+    "specific_issues",   # any specific problems to address
+    "contact_info",      # phone/email for confirmation
+]
+```
+
+### Available Modes
+
+The chatbot supports seven operational modes:
+1. `shop_info` - Shop hours, location, contact, services
+2. `product_inquiry` - Bikes, accessories, availability
+3. `book_appointment` - Service appointment booking
+4. `maintenance_tips` - Bike maintenance advice
+5. `policy_question` - Returns, warranties, delivery
+6. `what_can_you_do` - Chatbot capabilities
+7. `unknown` - Fallback for unclear queries
+
+### Shop Information
+
+All shop details are centralized in the `SHOP_INFO` constant in `application.py`. Update this dictionary to modify shop information without changing code logic.
+
+## State Management
+
+### State Fields
+
+- **`chat_history`**: List of all conversation messages (role, content, type)
+- **`appointment_data`**: Dictionary of collected appointment information
+- **`in_appointment_flow`**: Boolean indicating active appointment booking session
+- **`awaiting_confirmation`**: Boolean indicating waiting for customer confirmation
+- **`query`**: Current customer query
+- **`mode`**: Detected conversation mode
+- **`safe`**: Safety check result
+
+### State Persistence
+
+The `process_query` action uses selective state wiping:
+```python
+keep_fields = ["query", "chat_history", "in_appointment_flow", "appointment_data", "awaiting_confirmation"]
+state.wipe(keep=keep_fields)
+```
+
+This ensures:
+- Appointment data persists across conversation turns
+- Booking state is maintained during multi-turn flows
+- Temporary state (mode, response deltas) is cleared between queries
+
+## Development
+
+### Visualizing the State Machine
+
+Generate and view the state machine diagram:
+```bash
+python application.py
+```
+
+This creates `statemachine.png` showing all states, actions, and transitions.
+
+### Debugging with Burr UI
+
+Run the Burr monitoring interface:
 ```bash
 burr
 ```
 
-This will open a browser on [http://localhost:7241](http://localhost:7241)
+Features:
+- View all application traces
+- Inspect state at each step
+- Debug conversation flows
+- Analyze performance metrics
+- Compare different conversation paths
 
-Navigate to the [streaming example](http://localhost:7241/demos/streaming-chatbot).
+### Modifying Shop Information
 
-## Streaming in Burr
-
-Read more [here](https://burr.dagworks.io/concepts/streaming-actions/)
-To use streaming in Burr, you write your actions as a generator. If you're using the function-based API (as we do in this example),
-the function should yield a tuple, consisting of:
-1. The result (intermediate or final)
-2. The updated (`None` if intermediate, present if final)
-
-(2) will always be the last yield, and indicate that the streaming action is complete. Take, for example, the
-"unsafe" response, meaning that the LLM has determined that it cannot respond. This is a simple example -- just to illustrate streaming:
-
-This sleeps to make a point (and make the demo more fun/give the appearance of the app "thinking") -- in reality you really would not want to do this.
-
+Edit the `SHOP_INFO` dictionary in `application.py`:
 ```python
-@streaming_action(reads=["prompt", "chat_history"], writes=["response"])
-async def unsafe_response(state: State) -> Tuple[dict, State]:
-    result = {
-        "response": {
-            "content": "I am afraid I can't respond to that...",
-            "type": "text",
-            "role": "assistant",
-        }
-    }
-    for word in result["response"]["content"].split():
-        await asyncio.sleep(0.1)
-        yield {"delta": word + " "}, None
-    yield result, state.update(**result).append(chat_history=result["response"])
-```
-
-This is an async generator that yields just the delta until it gets to the end. This can easily proxy from another service (openAI for example),
-or do some other async operation.
-
-When you call the action, you will get back a `AsyncStreamingResponseContainer` object. This is *also* an async generator!
-
-```python
-action, streaming_container = await app.astream_result(
-    halt_after=TERMINAL_ACTIONS, inputs={"prompt": "Please generate a limerick about Alexander Hamilton and Aaron Burr"}
-)
-
-async for item in streaming_container:
-    print(item['delta'], end="")
-```
-
-This will stream the results out.
-
-## Connecting to FastAPI
-
-To connect to FastAPI, we need to do the following:
-
-1. Instantiate a Burr Application in FastAPI
-2. Create a route that will stream the data to the frontend, which is *also* an async generator.
-3. Bridge the two together
-
-In [server.py](server.py), we have a helpful `_get_application` function that will get or create an application for us.
-We can then call a chat_response function that looks like this:
-
-```python
-@router.post("/response/{project_id}/{app_id}", response_class=StreamingResponse)
-async def chat_response(project_id: str, app_id: str, prompt: PromptInput) -> StreamingResponse:
-    burr_app = _get_application(project_id, app_id)
-    chat_history = burr_app.state.get("chat_history", [])
-    action, streaming_container = await burr_app.astream_result(
-        halt_after=chat_application.TERMINAL_ACTIONS, inputs=dict(prompt=prompt.prompt)
-    )
-
-    async def sse_generator():
-        yield f"data: {json.dumps({'type': 'chat_history', 'value': chat_history})}\n\n"
-
-        async for item in streaming_container:
-            yield f"data: {json.dumps({'type': 'delta', 'value': item['delta']})} \n\n"
-
-    return StreamingResponse(sse_generator())
-```
-
-Note this returns a [StreamingResponse](https://fastapi.tiangolo.com/advanced/custom-response/#streamingresponse)
-and does some fancy stuff with the SSE API. Particularly:
-1. It returns the initial state, so the UI can update to the latest (not strictly necessary, but nice to have for rendering)
-2. It streams the deltas as they come in
-3. It returns the data in the format: "data: ...\n\n" as this is standard for SSE
-
-And it's as simple as that! You can now stream data from Burr to FastAPI.
-
-## Streaming in Typescript/React
-
-This part can get a little messy with state management/chat history, but here's the basics of it. There are multiple approaches
-to managing SSE in React, but we will be using the very bare-bones `fetch` and `getReaders()` API.
-
-The following code is the `submitPrompt` function that will send the prompt and modify the state. This gets called when the
-user submits a prompt (E.G. on the `onClick` of a button).
-
-It relies on the state variables:
-
-- `currentPrompt`/`setCurrentPrompt` - the current prompt
-- `chatHistory`/`setChatHistory` - the chat history
-
-This also assumes the server is a post request with the prompt in the URL (putting it in the body is probably better...)
-
-### Fetch the result (POST)
-
-First we'll fetch the result with a post request to match the endpoint above. We will also get a reader object
-to help us iterate through the inputs:
-
-```typescript
-const response = await fetch(
-      `/api/v0/streaming_chatbot/response/${props.projectId}/${props.appId}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: currentPrompt })
-      }
-    );
-const reader = response.body?.getReader();
-```
-
-Then we'll run through the reader object and parse the data, modifying the state as we go:
-
-```typescript
-if (reader) {
-      const decoder = new TextDecoder('utf-8');
-      // eslint-disable-next-line no-constant-condition
-      while (true) {
-        const result = await reader.read();
-        if (result.done) {
-          break;
-        }
-        const message = decoder.decode(result.value, { stream: true });
-        message
-          .split('data: ')
-          .slice(1)
-          .forEach((item) => {
-            const event: Event = JSON.parse(item);
-            if (event.type === 'chat_history') {
-              const chatMessageEvent = event as ChatHistoryEvent;
-              setDisplayedChatHistory(chatMessageEvent.value);
-            }
-            if (event.type === 'delta') {
-              const chatMessageEvent = event as ChatMessageEvent;
-              chatResponse += chatMessageEvent.value;
-              setCurrentResponse(chatResponse);
-            }
-          });
-      }
-      setDisplayedChatHistory((chatHistory) => [
-        ...chatHistory,
-        {
-          role: ChatItem.role.USER,
-          content: currentPrompt,
-          type: ChatItem.type.TEXT
-        },
-        {
-          role: ChatItem.role.ASSISTANT,
-          content: chatResponse,
-          type: ChatItem.type.TEXT
-        }
-      ]);
-      setCurrentPrompt('');
-      setCurrentResponse('');
-      setIsChatWaiting(false);
+SHOP_INFO = {
+    "name": "Your Shop Name",
+    "address": {...},
+    "contact": {...},
+    "hours": {...},
+    # ... etc
 }
 ```
-In the above we:
-1. Check if the reader is present (it is likely worth adding more error-correcting here)
-2. Break if the reader is done
-3. Decode the message
-4. Parse the message
-    a. If it is a chat history event, update the chat history
-    b. If it is a delta event, update the chat response
-5. Update the chat history with the new prompt and response
-6. Reset the variables so we don't render them twice
 
-While the logic of updating state is bespoke to how we do it here, looping through the reader and parsing the data
-is a common, highly generatizable operation.
+No code changes needed - the `shop_info_response` action automatically uses this data.
 
-Note there are multiple ways of doing this -- this was just the simplest.
+### Adding New Modes
+
+1. Add mode name to `MODES` list
+2. Update `choose_mode` action prompt with examples
+3. Create action handler (or bind existing `chat_response`)
+4. Add transition in graph builder
+5. Add to `TERMINAL_ACTIONS` list
+
+## References
+
+- [Burr Documentation](https://burr.dagworks.io/)
+- [Burr Streaming Actions Guide](https://burr.dagworks.io/concepts/streaming-actions/)
+- [Original Streaming API Example](https://github.com/apache/burr/tree/main/examples/streaming-fastapi)
+- [Blog Post: Streaming Chatbot with Burr & FastAPI](https://blog.dagworks.io/p/streaming-chatbot-with-burr-fastapi)
