@@ -10,6 +10,9 @@ from burr.core.action import action, streaming_action
 from burr.core.graph import GraphBuilder
 from dotenv import load_dotenv
 
+from opentelemetry.instrumentation.openai import OpenAIInstrumentor
+OpenAIInstrumentor().instrument()
+
 load_dotenv()
 
 MODES = [
@@ -91,7 +94,7 @@ SHOP_INFO = {
 
 
 @action(reads=[], writes=["chat_history", "query"])
-def process_query(state: State, query: str) -> Tuple[dict, State]:
+async def process_query(state: State, query: str) -> Tuple[dict, State]:
     result = {"chat_item": {"role": "user", "content": query, "type": "text"}}
     # Always preserve in_appointment_flow, appointment_data, and awaiting_confirmation
     keep_fields = ["query", "chat_history", "in_appointment_flow", "appointment_data", "awaiting_confirmation"]
@@ -102,7 +105,7 @@ def process_query(state: State, query: str) -> Tuple[dict, State]:
 
 
 @action(reads=["query"], writes=["safe"])
-def check_safety(state: State) -> Tuple[dict, State]:
+async def check_safety(state: State) -> Tuple[dict, State]:
     result = {"safe": "unsafe" not in state["query"]}  # quick hack to demonstrate
     return result, state.update(safe=result["safe"])
 
@@ -796,7 +799,7 @@ def application(app_id: Optional[str] = None):
         .with_entrypoint("query")
         .with_state(chat_history=[], appointment_data={}, in_appointment_flow=False, awaiting_confirmation=False)
         .with_graph(graph)
-        .with_tracker(project="multi_turn_chatbot_eval")
+        .with_tracker(project="multi_turn_chatbot_eval", use_otel_tracing=True)
         .with_identifiers(app_id=app_id)
         .build()
     )
