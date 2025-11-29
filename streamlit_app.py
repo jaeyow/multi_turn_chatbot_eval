@@ -16,7 +16,7 @@ def render_chat_message(chat_item: dict):
     content = chat_item["content"]
     role = chat_item["role"]
     with st.chat_message(role):
-        st.write(content)
+        st.markdown(content)
 
 
 async def render_streaming_chat_message(stream: AsyncStreamingResultContainer):
@@ -27,7 +27,7 @@ async def render_streaming_chat_message(stream: AsyncStreamingResultContainer):
         with st.empty():
             async for item in stream:
                 buffer += item["delta"]
-                st.write(buffer)
+                st.markdown(buffer)
 
 
 def initialize_app() -> burr.core.Application:
