@@ -138,7 +138,7 @@ async def choose_mode(state: State) -> Tuple[dict, State]:
     )
 
     result = await _get_openai_client().chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4o", # Pick a more capable model for classification, or fine-tune a smaller one
         messages=[
             {"role": "system", "content": "You are a helpful assistant"},
             {"role": "user", "content": prompt},
@@ -156,17 +156,49 @@ async def choose_mode(state: State) -> Tuple[dict, State]:
 async def prompt_for_more(
     state: State,
 ) -> AsyncGenerator[Tuple[dict, Optional[State]], None]:
-    """Not streaming, as we have the result immediately."""
+    """Intelligently responds to out-of-scope questions while informing the customer of limitations."""
+    
+    prompt = f"""You are a helpful assistant for JO's Bike Shop. A customer has asked a question that is outside your core capabilities.
+
+Customer's question: "{state['query']}"
+
+Your capabilities include:
+- Shop information (hours, location, contact)
+- Product inquiries (bikes, accessories)
+- Booking service appointments
+- Maintenance tips
+- Shop policies (returns, warranties, delivery)
+
+Please provide a helpful, friendly response that:
+1. Acknowledges their question with empathy
+2. Provides any general guidance or information you can (if applicable)
+3. Politely explains that this specific topic is outside your area of expertise
+4. Suggests what you CAN help them with or recommends they contact the shop directly
+
+Be warm, conversational, and helpful - not robotic. Keep the response concise (2-3 sentences)."""
+
+    chat_history_api_format = [
+        {"role": "system", "content": "You are a helpful, friendly assistant for JO's Bike Shop."},
+        {"role": "user", "content": prompt}
+    ]
+    
+    client = _get_openai_client()
+    result = await client.chat.completions.create(
+        model="gpt-3.5-turbo", messages=chat_history_api_format, stream=True
+    )
+    buffer = []
+    async for chunk in result:
+        chunk_str = chunk.choices[0].delta.content
+        if chunk_str is None:
+            continue
+        buffer.append(chunk_str)
+        yield {
+            "delta": chunk_str,
+        }, None
+
     result = {
-        "response": {
-            "content": "None of the response modes I support apply to your question. Please clarify?",
-            "type": "text",
-            "role": "assistant",
-        }
+        "response": {"content": "".join(buffer), "type": "text", "role": "assistant"},
     }
-    for word in result["response"]["content"].split():
-        await asyncio.sleep(0.1)
-        yield {"delta": word + " "}, None
     yield result, state.update(**result).append(chat_history=result["response"])
 
 
@@ -801,6 +833,9 @@ graph = (
         shop_info=shop_info_response,
         start_booking=start_appointment_booking,
         continue_booking=continue_appointment_booking,
+        what_can_you_do=explain_capabilities,
+        prompt_for_more=prompt_for_more,
+
         product_inquiry=chat_response.bind(
             prepend_prompt="Please help the customer with their product inquiry about bikes or accessories",
         ),
@@ -810,8 +845,6 @@ graph = (
         policy_question=chat_response.bind(
             prepend_prompt="Please answer the customer's question about shop policies (returns, warranties, delivery)",
         ),
-        what_can_you_do=explain_capabilities,
-        prompt_for_more=prompt_for_more,
     )
     .with_transitions(
         ("query", "check_safety", default),
