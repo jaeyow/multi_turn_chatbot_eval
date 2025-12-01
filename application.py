@@ -11,6 +11,7 @@ from burr.core.graph import GraphBuilder
 from dotenv import load_dotenv
 
 from opentelemetry.instrumentation.openai import OpenAIInstrumentor
+
 OpenAIInstrumentor().instrument()
 
 load_dotenv()
@@ -27,15 +28,15 @@ MODES = [
 
 # Appointment booking configuration
 APPOINTMENT_REQUIRED_FIELDS = [
-    "service_type",      # tune-up, repair, full service, etc.
-    "preferred_date",    # customer's preferred date
-    "preferred_time",    # morning, afternoon, specific time
+    "service_type",  # tune-up, repair, full service, etc.
+    "preferred_date",  # customer's preferred date
+    "preferred_time",  # morning, afternoon, specific time
 ]
 
 APPOINTMENT_OPTIONAL_FIELDS = [
-    "bike_details",      # make/model if available
-    "specific_issues",   # any specific problems to address
-    "contact_info",      # phone/email for confirmation
+    "bike_details",  # make/model if available
+    "specific_issues",  # any specific problems to address
+    "contact_info",  # phone/email for confirmation
 ]
 
 # Shop information details
@@ -47,12 +48,12 @@ SHOP_INFO = {
         "city": "Portland",
         "state": "OR",
         "zip": "97201",
-        "full": "456 Pedal Lane, Portland, OR 97201"
+        "full": "456 Pedal Lane, Portland, OR 97201",
     },
     "contact": {
         "phone": "(503) 555-BIKE",
         "email": "info@josbikeshop.com",
-        "website": "www.josbikeshop.com"
+        "website": "www.josbikeshop.com",
     },
     "hours": {
         "monday": "9:00 AM - 6:00 PM",
@@ -62,7 +63,7 @@ SHOP_INFO = {
         "friday": "9:00 AM - 7:00 PM",
         "saturday": "8:00 AM - 5:00 PM",
         "sunday": "10:00 AM - 4:00 PM",
-        "description": "Open 7 days a week! Extended hours Thursday and Friday evenings."
+        "description": "Open 7 days a week! Extended hours Thursday and Friday evenings.",
     },
     "services": [
         "Basic Tune-ups ($75 - includes brake and gear adjustments, chain cleaning)",
@@ -72,14 +73,14 @@ SHOP_INFO = {
         "Brake and Gear Cable Replacement",
         "Bearing Service and Overhaul",
         "Suspension Service",
-        "Frame Alignment and Repair"
+        "Frame Alignment and Repair",
     ],
     "specialties": [
         "Expert bike fitting services",
         "Professional race team support",
         "E-bike sales and service",
         "Custom frame building",
-        "Vintage bike restoration"
+        "Vintage bike restoration",
     ],
     "about": (
         "JO's Bike Shop has been serving the Portland cycling community since 2010. "
@@ -97,8 +98,14 @@ SHOP_INFO = {
 async def process_query(state: State, query: str) -> Tuple[dict, State]:
     result = {"chat_item": {"role": "user", "content": query, "type": "text"}}
     # Always preserve in_appointment_flow, appointment_data, and awaiting_confirmation
-    keep_fields = ["query", "chat_history", "in_appointment_flow", "appointment_data", "awaiting_confirmation"]
-    
+    keep_fields = [
+        "query",
+        "chat_history",
+        "in_appointment_flow",
+        "appointment_data",
+        "awaiting_confirmation",
+    ]
+
     return result, state.wipe(keep=keep_fields).append(
         chat_history=result["chat_item"]
     ).update(query=query)
@@ -131,7 +138,7 @@ async def choose_mode(state: State) -> Tuple[dict, State]:
     )
 
     result = await _get_openai_client().chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4o", # Pick a more capable model for classification, or fine-tune a smaller one
         messages=[
             {"role": "system", "content": "You are a helpful assistant"},
             {"role": "user", "content": prompt},
@@ -149,17 +156,49 @@ async def choose_mode(state: State) -> Tuple[dict, State]:
 async def prompt_for_more(
     state: State,
 ) -> AsyncGenerator[Tuple[dict, Optional[State]], None]:
-    """Not streaming, as we have the result immediately."""
+    """Intelligently responds to out-of-scope questions while informing the customer of limitations."""
+    
+    prompt = f"""You are a helpful assistant for JO's Bike Shop. A customer has asked a question that is outside your core capabilities.
+
+Customer's question: "{state['query']}"
+
+Your capabilities include:
+- Shop information (hours, location, contact)
+- Product inquiries (bikes, accessories)
+- Booking service appointments
+- Maintenance tips
+- Shop policies (returns, warranties, delivery)
+
+Please provide a helpful, friendly response that:
+1. Acknowledges their question with empathy
+2. Provides any general guidance or information you can (if applicable)
+3. Politely explains that this specific topic is outside your area of expertise
+4. Suggests what you CAN help them with or recommends they contact the shop directly
+
+Be warm, conversational, and helpful - not robotic. Keep the response concise (2-3 sentences)."""
+
+    chat_history_api_format = [
+        {"role": "system", "content": "You are a helpful, friendly assistant for JO's Bike Shop."},
+        {"role": "user", "content": prompt}
+    ]
+    
+    client = _get_openai_client()
+    result = await client.chat.completions.create(
+        model="gpt-3.5-turbo", messages=chat_history_api_format, stream=True
+    )
+    buffer = []
+    async for chunk in result:
+        chunk_str = chunk.choices[0].delta.content
+        if chunk_str is None:
+            continue
+        buffer.append(chunk_str)
+        yield {
+            "delta": chunk_str,
+        }, None
+
     result = {
-        "response": {
-            "content": "None of the response modes I support apply to your question. Please clarify?",
-            "type": "text",
-            "role": "assistant",
-        }
+        "response": {"content": "".join(buffer), "type": "text", "role": "assistant"},
     }
-    for word in result["response"]["content"].split():
-        await asyncio.sleep(0.1)
-        yield {"delta": word + " "}, None
     yield result, state.update(**result).append(chat_history=result["response"])
 
 
@@ -199,7 +238,9 @@ async def chat_response(
 
 
 @streaming_action(reads=["query", "chat_history"], writes=["response"])
-async def unsafe_response(state: State) -> AsyncGenerator[Tuple[dict, Optional[State]], None]:
+async def unsafe_response(
+    state: State,
+) -> AsyncGenerator[Tuple[dict, Optional[State]], None]:
     result = {
         "response": {
             "content": "I am afraid I can't respond to that...",
@@ -218,24 +259,29 @@ async def explain_capabilities(
     state: State,
 ) -> AsyncGenerator[Tuple[dict, Optional[State]], None]:
     """Explains what the chatbot can help with."""
+    content = (
+        "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n"
+        "• **Shop Information** - Opening hours, location, and contact details\n\n"
+        "• **Product Inquiries** - Available bikes, accessories, and product availability\n\n"
+        "• **Service Appointments** - Booking bike service and repairs\n\n"
+        "• **Maintenance Tips** - Advice on keeping your bike in top condition\n\n"
+        "• **Shop Policies** - Questions about returns, warranties, and delivery\n\n"
+        "How can I help you today?"
+    )
+
     result = {
         "response": {
-            "content": (
-                "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n"
-                "• Shop Information - Opening hours, location, and contact details\n"
-                "• Product Inquiries - Available bikes, accessories, and product availability\n"
-                "• Service Appointments - Booking bike service and repairs\n"
-                "• Maintenance Tips - Advice on keeping your bike in top condition\n"
-                "• Shop Policies - Questions about returns, warranties, and delivery\n\n"
-                "How can I help you today?"
-            ),
+            "content": content,
             "type": "text",
             "role": "assistant",
         }
     }
-    for word in result["response"]["content"].split():
-        await asyncio.sleep(0.05)
-        yield {"delta": word + " "}, None
+
+    # Stream character by character to preserve markdown formatting
+    for i, char in enumerate(content):
+        await asyncio.sleep(0.01)
+        yield {"delta": char}, None
+
     yield result, state.update(**result).append(chat_history=result["response"])
 
 
@@ -244,7 +290,7 @@ async def shop_info_response(
     state: State,
 ) -> AsyncGenerator[Tuple[dict, Optional[State]], None]:
     """Provides detailed shop information using the SHOP_INFO data."""
-    
+
     # Create a detailed context from shop info
     shop_context = f"""
 You are answering questions about JO's Bike Shop. Use this information to provide helpful, accurate answers:
@@ -277,12 +323,15 @@ Customer's question: {state['query']}
 
 Provide a friendly, helpful answer using the information above. Be conversational and enthusiastic about bikes!
 """
-    
+
     chat_history_api_format = [
-        {"role": "system", "content": "You are a helpful assistant for JO's Bike Shop. Provide accurate information based on the shop details provided."},
-        {"role": "user", "content": shop_context}
+        {
+            "role": "system",
+            "content": "You are a helpful assistant for JO's Bike Shop. Provide accurate information based on the shop details provided.",
+        },
+        {"role": "user", "content": shop_context},
     ]
-    
+
     client = _get_openai_client()
     result = await client.chat.completions.create(
         model="gpt-3.5-turbo", messages=chat_history_api_format, stream=True
@@ -305,13 +354,15 @@ Provide a friendly, helpful answer using the information above. Be conversationa
 
 async def _extract_appointment_info(query: str, chat_history: list) -> dict:
     """Extract ALL appointment information from query and context using LLM."""
-    
+
     # Build context from recent chat history
-    context = "\n".join([
-        f"{msg['role']}: {msg['content']}" 
-        for msg in chat_history[-5:]  # last 5 messages for context
-    ])
-    
+    context = "\n".join(
+        [
+            f"{msg['role']}: {msg['content']}"
+            for msg in chat_history[-5:]  # last 5 messages for context
+        ]
+    )
+
     prompt = f"""
 Extract appointment booking information from this conversation:
 
@@ -332,26 +383,29 @@ Example: {{"service_type": "tune-up", "preferred_date": "next Tuesday", "preferr
 
 If nothing is found, return: {{}}
 """
-    
+
     client = _get_openai_client()
     result = await client.chat.completions.create(
         model="gpt-4o",
         messages=[
-            {"role": "system", "content": "You are a precise information extraction assistant. Extract structured data from conversation."},
+            {
+                "role": "system",
+                "content": "You are a precise information extraction assistant. Extract structured data from conversation.",
+            },
             {"role": "user", "content": prompt},
         ],
         response_format={"type": "json_object"},
     )
-    
+
     extracted = json.loads(result.choices[0].message.content)
-    
+
     # Filter out null values
     return {k: v for k, v in extracted.items() if v is not None}
 
 
 def _ask_for_missing_info(missing_fields: list, current_data: dict) -> str:
     """Generate a natural question asking for missing required information."""
-    
+
     # Acknowledge what we have so far if anything was collected
     if current_data:
         acknowledgment = "Great! "
@@ -359,24 +413,26 @@ def _ask_for_missing_info(missing_fields: list, current_data: dict) -> str:
             acknowledgment += f"I have you down for a {current_data['service_type']}. "
     else:
         acknowledgment = ""
-    
+
     # Ask for the first missing field
     field = missing_fields[0]
-    
+
     questions = {
         "service_type": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
         "preferred_date": "What date works best for you?",
         "preferred_time": "What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
     }
-    
-    return acknowledgment + questions.get(field, f"Could you provide your {field.replace('_', ' ')}?")
+
+    return acknowledgment + questions.get(
+        field, f"Could you provide your {field.replace('_', ' ')}?"
+    )
 
 
 def _generate_appointment_confirmation(appointment_data: dict) -> str:
     """Generate confirmation message with all collected details."""
-    
+
     message = "Perfect! Let me confirm your appointment:\n\n"
-    
+
     field_labels = {
         "service_type": "Service",
         "preferred_date": "Date",
@@ -385,20 +441,20 @@ def _generate_appointment_confirmation(appointment_data: dict) -> str:
         "specific_issues": "Issues",
         "contact_info": "Contact",
     }
-    
+
     for field in APPOINTMENT_REQUIRED_FIELDS + APPOINTMENT_OPTIONAL_FIELDS:
         if field in appointment_data and appointment_data[field]:
             label = field_labels.get(field, field.replace("_", " ").title())
             message += f"• {label}: {appointment_data[field]}\n"
-    
+
     message += "\nDoes this look correct? I can book this for you now!"
-    
+
     return message
 
 
 async def _is_off_topic_query(query: str, chat_history: list) -> bool:
     """Detect if customer's query is off-topic (not related to appointment booking)."""
-    
+
     prompt = f"""You are analyzing a customer query during an active appointment booking process.
 
 Current query: "{query}"
@@ -418,29 +474,32 @@ Examples:
 - "How much does a tune-up cost?" -> off_topic (price question, not scheduling)
 - "Can I bring my bike in Thursday?" -> on_topic
 """
-    
+
     client = _get_openai_client()
     result = await client.chat.completions.create(
         model="gpt-4o",
         messages=[
-            {"role": "system", "content": "You are a query classifier. Respond only with 'on_topic' or 'off_topic'."},
+            {
+                "role": "system",
+                "content": "You are a query classifier. Respond only with 'on_topic' or 'off_topic'.",
+            },
             {"role": "user", "content": prompt},
         ],
     )
-    
+
     response = result.choices[0].message.content.strip().lower()
     return response == "off_topic"
 
 
 async def _classify_confirmation_response(query: str) -> str:
     """Classify customer's response to appointment confirmation.
-    
+
     Returns:
         - "affirmative": Customer confirms/approves the appointment
         - "negative": Customer rejects/declines the appointment
         - "change": Customer wants to modify something
     """
-    
+
     prompt = f"""You are analyzing a customer's response to an appointment confirmation.
 
 Customer's response: "{query}"
@@ -464,16 +523,19 @@ Examples:
 - "actually, make it morning instead" -> change
 - "update the service to full service" -> change
 """
-    
+
     client = _get_openai_client()
     result = await client.chat.completions.create(
         model="gpt-4o",
         messages=[
-            {"role": "system", "content": "You are a response classifier. Respond only with 'affirmative', 'negative', or 'change'."},
+            {
+                "role": "system",
+                "content": "You are a response classifier. Respond only with 'affirmative', 'negative', or 'change'.",
+            },
             {"role": "user", "content": prompt},
         ],
     )
-    
+
     response = result.choices[0].message.content.strip().lower()
     # Ensure we return a valid response
     if response not in ["affirmative", "negative", "change"]:
@@ -481,32 +543,40 @@ Examples:
     return response
 
 
-@streaming_action(reads=["query", "chat_history", "appointment_data"], writes=["response", "appointment_data", "in_appointment_flow", "awaiting_confirmation"])
+@streaming_action(
+    reads=["query", "chat_history", "appointment_data"],
+    writes=[
+        "response",
+        "appointment_data",
+        "in_appointment_flow",
+        "awaiting_confirmation",
+    ],
+)
 async def start_appointment_booking(
     state: State,
 ) -> AsyncGenerator[Tuple[dict, Optional[State]], None]:
     """Initial appointment booking - extracts all available info and routes to multi-turn if needed."""
-    
+
     # Extract information from initial query
     extracted_info = await _extract_appointment_info(
-        state["query"], 
-        state["chat_history"]
+        state["query"], state["chat_history"]
     )
-    
+
     # Check what's still missing
     missing_required = [
-        field for field in APPOINTMENT_REQUIRED_FIELDS 
+        field
+        for field in APPOINTMENT_REQUIRED_FIELDS
         if field not in extracted_info or not extracted_info[field]
     ]
-    
+
     if not missing_required:
         # Customer provided everything! Show confirmation immediately
         confirmation = _generate_appointment_confirmation(extracted_info)
-        
+
         for word in confirmation.split():
             await asyncio.sleep(0.05)
             yield {"delta": word + " "}, None
-        
+
         result = {
             "response": {
                 "content": confirmation,
@@ -521,11 +591,11 @@ async def start_appointment_booking(
     else:
         # Missing info - ask for the first missing field and enter multi-turn flow
         next_question = _ask_for_missing_info(missing_required, extracted_info)
-        
+
         for word in next_question.split():
             await asyncio.sleep(0.05)
             yield {"delta": word + " "}, None
-        
+
         result = {
             "response": {
                 "content": next_question,
@@ -539,29 +609,38 @@ async def start_appointment_booking(
         yield result, state.update(**result).append(chat_history=result["response"])
 
 
-@streaming_action(reads=["query", "chat_history", "appointment_data", "awaiting_confirmation"], writes=["response", "appointment_data", "appointment_complete", "in_appointment_flow", "awaiting_confirmation"])
+@streaming_action(
+    reads=["query", "chat_history", "appointment_data", "awaiting_confirmation"],
+    writes=[
+        "response",
+        "appointment_data",
+        "appointment_complete",
+        "in_appointment_flow",
+        "awaiting_confirmation",
+    ],
+)
 async def continue_appointment_booking(
     state: State,
 ) -> AsyncGenerator[Tuple[dict, Optional[State]], None]:
     """Multi-turn appointment booking - collects missing info and handles confirmation."""
-    
+
     # Get existing appointment data
     appointment_data = state.get("appointment_data", {})
     awaiting_confirmation = state.get("awaiting_confirmation", False)
-    
+
     # If we're awaiting confirmation, check customer's response
     if awaiting_confirmation:
         # Use LLM to classify the response
         response_type = await _classify_confirmation_response(state["query"])
-        
+
         if response_type == "affirmative":
             # Customer confirmed! Book the appointment
             confirmation_message = "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
-            
+
             for word in confirmation_message.split():
                 await asyncio.sleep(0.05)
                 yield {"delta": word + " "}, None
-            
+
             result = {
                 "response": {
                     "content": confirmation_message,
@@ -575,15 +654,15 @@ async def continue_appointment_booking(
             }
             yield result, state.update(**result).append(chat_history=result["response"])
             return
-        
+
         elif response_type == "negative":
             # Customer rejected the appointment
             rejection_message = "I understand. I've canceled this appointment booking. Would you like to start over or can I help you with something else?"
-            
+
             for word in rejection_message.split():
                 await asyncio.sleep(0.05)
                 yield {"delta": word + " "}, None
-            
+
             result = {
                 "response": {
                     "content": rejection_message,
@@ -597,15 +676,15 @@ async def continue_appointment_booking(
             }
             yield result, state.update(**result).append(chat_history=result["response"])
             return
-        
+
         else:  # response_type == "change"
             # Customer wants to make changes
             change_message = "No problem! What would you like to change?"
-            
+
             for word in change_message.split():
                 await asyncio.sleep(0.05)
                 yield {"delta": word + " "}, None
-            
+
             result = {
                 "response": {
                     "content": change_message,
@@ -619,19 +698,22 @@ async def continue_appointment_booking(
             }
             yield result, state.update(**result).append(chat_history=result["response"])
             return
-    
+
     # Check if customer is asking an off-topic question
     query_lower = state["query"].lower()
-    is_canceling = any(word in query_lower for word in ["cancel", "nevermind", "never mind", "forget it", "stop", "exit"])
-    
+    is_canceling = any(
+        word in query_lower
+        for word in ["cancel", "nevermind", "never mind", "forget it", "stop", "exit"]
+    )
+
     if is_canceling:
         # Customer wants to cancel the booking
         cancel_message = "No problem! I've canceled the appointment booking. Is there anything else I can help you with?"
-        
+
         for word in cancel_message.split():
             await asyncio.sleep(0.05)
             yield {"delta": word + " "}, None
-        
+
         result = {
             "response": {
                 "content": cancel_message,
@@ -645,17 +727,18 @@ async def continue_appointment_booking(
         }
         yield result, state.update(**result).append(chat_history=result["response"])
         return
-    
+
     # Check if query is off-topic (customer asking about something else)
     is_off_topic = await _is_off_topic_query(state["query"], state["chat_history"])
-    
+
     if is_off_topic:
         # Gently redirect back to appointment booking
         missing_required = [
-            field for field in APPOINTMENT_REQUIRED_FIELDS 
+            field
+            for field in APPOINTMENT_REQUIRED_FIELDS
             if field not in appointment_data or not appointment_data[field]
         ]
-        
+
         if missing_required:
             redirect_message = (
                 "I'd be happy to help with that, but first let's finish booking your appointment! "
@@ -664,11 +747,11 @@ async def continue_appointment_booking(
             )
         else:
             redirect_message = "I can help with that question, but first let's confirm your appointment details. Does the information I shared look correct?"
-        
+
         for word in redirect_message.split():
             await asyncio.sleep(0.05)
             yield {"delta": word + " "}, None
-        
+
         result = {
             "response": {
                 "content": redirect_message,
@@ -682,30 +765,30 @@ async def continue_appointment_booking(
         }
         yield result, state.update(**result).append(chat_history=result["response"])
         return
-    
+
     # Extract new information from current query
     extracted_info = await _extract_appointment_info(
-        state["query"], 
-        state["chat_history"]
+        state["query"], state["chat_history"]
     )
-    
+
     # Merge with existing data (new info takes precedence)
     appointment_data.update(extracted_info)
-    
+
     # Check what's still missing
     missing_required = [
-        field for field in APPOINTMENT_REQUIRED_FIELDS 
+        field
+        for field in APPOINTMENT_REQUIRED_FIELDS
         if field not in appointment_data or not appointment_data[field]
     ]
-    
+
     if not missing_required:
         # We have everything! Generate confirmation and ask for approval
         confirmation = _generate_appointment_confirmation(appointment_data)
-        
+
         for word in confirmation.split():
             await asyncio.sleep(0.05)
             yield {"delta": word + " "}, None
-        
+
         result = {
             "response": {
                 "content": confirmation,
@@ -721,11 +804,11 @@ async def continue_appointment_booking(
     else:
         # Ask for missing information and stay in appointment flow
         next_question = _ask_for_missing_info(missing_required, appointment_data)
-        
+
         for word in next_question.split():
             await asyncio.sleep(0.05)
             yield {"delta": word + " "}, None
-        
+
         result = {
             "response": {
                 "content": next_question,
@@ -748,19 +831,20 @@ graph = (
         unsafe_response=unsafe_response,
         decide_mode=choose_mode,
         shop_info=shop_info_response,
+        start_booking=start_appointment_booking,
+        continue_booking=continue_appointment_booking,
+        what_can_you_do=explain_capabilities,
+        prompt_for_more=prompt_for_more,
+
         product_inquiry=chat_response.bind(
             prepend_prompt="Please help the customer with their product inquiry about bikes or accessories",
         ),
-        start_booking=start_appointment_booking,
-        continue_booking=continue_appointment_booking,
         maintenance_tips=chat_response.bind(
             prepend_prompt="Please provide helpful bike maintenance tips for the following",
         ),
         policy_question=chat_response.bind(
             prepend_prompt="Please answer the customer's question about shop policies (returns, warranties, delivery)",
         ),
-        what_can_you_do=explain_capabilities,
-        prompt_for_more=prompt_for_more,
     )
     .with_transitions(
         ("query", "check_safety", default),
@@ -797,7 +881,12 @@ def application(app_id: Optional[str] = None):
     return (
         ApplicationBuilder()
         .with_entrypoint("query")
-        .with_state(chat_history=[], appointment_data={}, in_appointment_flow=False, awaiting_confirmation=False)
+        .with_state(
+            chat_history=[],
+            appointment_data={},
+            in_appointment_flow=False,
+            awaiting_confirmation=False,
+        )
         .with_graph(graph)
         .with_tracker(project="multi_turn_chatbot_eval", use_otel_tracing=True)
         .with_identifiers(app_id=app_id)
