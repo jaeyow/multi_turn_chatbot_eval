@@ -8,21 +8,20 @@ digraph {
 	unsafe_response [label=unsafe_response shape=box style="rounded,filled"]
 	decide_mode [label=decide_mode shape=box style="rounded,filled"]
 	shop_info [label=shop_info shape=box style="rounded,filled"]
-	input__model [label="input: model" shape=rect style=dashed]
-	input__model -> shop_info
+	start_booking [label=start_booking shape=box style="rounded,filled"]
+	continue_booking [label=continue_booking shape=box style="rounded,filled"]
+	what_can_you_do [label=what_can_you_do shape=box style="rounded,filled"]
+	recall_booking [label=recall_booking shape=box style="rounded,filled"]
+	prompt_for_more [label=prompt_for_more shape=box style="rounded,filled"]
 	product_inquiry [label=product_inquiry shape=box style="rounded,filled"]
 	input__model [label="input: model" shape=rect style=dashed]
 	input__model -> product_inquiry
-	start_booking [label=start_booking shape=box style="rounded,filled"]
-	continue_booking [label=continue_booking shape=box style="rounded,filled"]
 	maintenance_tips [label=maintenance_tips shape=box style="rounded,filled"]
 	input__model [label="input: model" shape=rect style=dashed]
 	input__model -> maintenance_tips
 	policy_question [label=policy_question shape=box style="rounded,filled"]
 	input__model [label="input: model" shape=rect style=dashed]
 	input__model -> policy_question
-	what_can_you_do [label=what_can_you_do shape=box style="rounded,filled"]
-	prompt_for_more [label=prompt_for_more shape=box style="rounded,filled"]
 	query -> check_safety [style=solid]
 	check_safety -> continue_booking [label="in_appointment_flow=True, safe=True" style=dashed]
 	check_safety -> decide_mode [label="safe=True" style=dashed]
@@ -33,6 +32,7 @@ digraph {
 	decide_mode -> maintenance_tips [label="mode=maintenance_tips" style=dashed]
 	decide_mode -> policy_question [label="mode=policy_question" style=dashed]
 	decide_mode -> what_can_you_do [label="mode=what_can_you_do" style=dashed]
+	decide_mode -> recall_booking [label="mode=recall_booking" style=dashed]
 	decide_mode -> prompt_for_more [style=solid]
 	shop_info -> query [style=solid]
 	product_inquiry -> query [style=solid]
@@ -41,6 +41,7 @@ digraph {
 	maintenance_tips -> query [style=solid]
 	policy_question -> query [style=solid]
 	what_can_you_do -> query [style=solid]
+	recall_booking -> query [style=solid]
 	prompt_for_more -> query [style=solid]
 	unsafe_response -> query [style=solid]
 }
