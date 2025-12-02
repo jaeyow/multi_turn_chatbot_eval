@@ -23,6 +23,7 @@ MODES = [
     "maintenance_tips",  # Bike maintenance advice
     "policy_question",  # Returns, warranties, delivery FAQs
     "what_can_you_do",  # Explain chatbot capabilities
+    "recall_booking",  # Remember and recall previous bookings in this session
     "unknown",
 ]
 
@@ -97,13 +98,14 @@ SHOP_INFO = {
 @action(reads=[], writes=["chat_history", "query"])
 async def process_query(state: State, query: str) -> Tuple[dict, State]:
     result = {"chat_item": {"role": "user", "content": query, "type": "text"}}
-    # Always preserve in_appointment_flow, appointment_data, and awaiting_confirmation
+    # Always preserve in_appointment_flow, appointment_data, awaiting_confirmation, and completed_bookings
     keep_fields = [
         "query",
         "chat_history",
         "in_appointment_flow",
         "appointment_data",
         "awaiting_confirmation",
+        "completed_bookings",
     ]
 
     return result, state.wipe(keep=keep_fields).append(
@@ -134,6 +136,7 @@ async def choose_mode(state: State) -> Tuple[dict, State]:
         "- If the prompt is something along the lines of 'how do I maintain my bike?' or 'chain maintenance tips?', the mode would be 'maintenance_tips'.\n"
         "- If the prompt is something along the lines of 'what is your return policy?' or 'do you offer warranties?', the mode would be 'policy_question'.\n"
         "- If the customer is asking about what the chatbot can help with, the mode should be 'what_can_you_do'.\n"
+        "- If the customer is asking about a booking they already made in this session (e.g., 'what was my booking?', 'remind me about my appointment', 'when is my appointment?'), the mode should be 'recall_booking'.\n"
         "If none of these modes apply, please respond with 'unknown'."
     )
 
@@ -251,6 +254,55 @@ async def unsafe_response(
     for word in result["response"]["content"].split():
         await asyncio.sleep(0.1)
         yield {"delta": word + " "}, None
+    yield result, state.update(**result).append(chat_history=result["response"])
+
+
+@streaming_action(reads=["query", "chat_history", "completed_bookings"], writes=["response"])
+async def recall_booking(
+    state: State,
+) -> AsyncGenerator[Tuple[dict, Optional[State]], None]:
+    """Recalls information about bookings made in the current session."""
+    
+    completed_bookings = state.get("completed_bookings", [])
+    
+    if not completed_bookings:
+        content = "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+    else:
+        # Get the most recent booking (or we could list all of them)
+        latest_booking = completed_bookings[-1]
+        
+        content = "Here's the appointment you booked:\n\n"
+        
+        field_labels = {
+            "service_type": "Service",
+            "preferred_date": "Date",
+            "preferred_time": "Time",
+            "bike_details": "Bike",
+            "specific_issues": "Issues to address",
+            "contact_info": "Contact",
+        }
+        
+        for field, value in latest_booking.items():
+            if value:
+                label = field_labels.get(field, field.replace("_", " ").title())
+                content += f"• {label}: {value}\n"
+        
+        if len(completed_bookings) > 1:
+            content += f"\n(You have {len(completed_bookings)} total appointments booked in this session.)"
+    
+    result = {
+        "response": {
+            "content": content,
+            "type": "text",
+            "role": "assistant",
+        }
+    }
+    
+    # Stream the response
+    for char in content:
+        await asyncio.sleep(0.01)
+        yield {"delta": char}, None
+    
     yield result, state.update(**result).append(chat_history=result["response"])
 
 
@@ -641,6 +693,10 @@ async def continue_appointment_booking(
                 await asyncio.sleep(0.05)
                 yield {"delta": word + " "}, None
 
+            # Save the completed booking to session memory
+            completed_bookings = state.get("completed_bookings", [])
+            completed_bookings.append(appointment_data.copy())
+
             result = {
                 "response": {
                     "content": confirmation_message,
@@ -648,6 +704,7 @@ async def continue_appointment_booking(
                     "role": "assistant",
                 },
                 "appointment_data": {},  # Clear appointment data after completion
+                "completed_bookings": completed_bookings,  # Save to session memory
                 "appointment_complete": True,
                 "in_appointment_flow": False,  # Exit appointment flow
                 "awaiting_confirmation": False,
@@ -834,6 +891,7 @@ graph = (
         start_booking=start_appointment_booking,
         continue_booking=continue_appointment_booking,
         what_can_you_do=explain_capabilities,
+        recall_booking=recall_booking,
         prompt_for_more=prompt_for_more,
 
         product_inquiry=chat_response.bind(
@@ -857,6 +915,7 @@ graph = (
         ("decide_mode", "maintenance_tips", when(mode="maintenance_tips")),
         ("decide_mode", "policy_question", when(mode="policy_question")),
         ("decide_mode", "what_can_you_do", when(mode="what_can_you_do")),
+        ("decide_mode", "recall_booking", when(mode="recall_booking")),
         ("decide_mode", "prompt_for_more", default),
         (
             [
@@ -867,6 +926,7 @@ graph = (
                 "maintenance_tips",
                 "policy_question",
                 "what_can_you_do",
+                "recall_booking",
                 "prompt_for_more",
                 "unsafe_response",
             ],
@@ -886,6 +946,7 @@ def application(app_id: Optional[str] = None):
             appointment_data={},
             in_appointment_flow=False,
             awaiting_confirmation=False,
+            completed_bookings=[],
         )
         .with_graph(graph)
         .with_tracker(project="multi_turn_chatbot_eval", use_otel_tracing=True)
@@ -903,6 +964,7 @@ TERMINAL_ACTIONS = [
     "maintenance_tips",
     "policy_question",
     "what_can_you_do",
+    "recall_booking",
     "prompt_for_more",
     "unsafe_response",
 ]
