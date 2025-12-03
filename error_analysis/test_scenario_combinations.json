@@ -1,0 +1,142 @@
+[
+  {
+    "primary_intent": "shop_info",
+    "completeness": "complete_upfront",
+    "interaction_pattern": "single_turn",
+    "user_behavior": "cooperative",
+    "tuple": "(shop_info, complete_upfront, single_turn, cooperative)"
+  },
+  {
+    "primary_intent": "product_inquiry",
+    "completeness": "partial_info",
+    "interaction_pattern": "multi_turn_complex",
+    "user_behavior": "conversational",
+    "tuple": "(product_inquiry, partial_info, multi_turn_complex, conversational)"
+  },
+  {
+    "primary_intent": "book_appointment",
+    "completeness": "minimal_info",
+    "interaction_pattern": "multi_turn_linear",
+    "user_behavior": "cooperative",
+    "tuple": "(book_appointment, minimal_info, multi_turn_linear, cooperative)"
+  },
+  {
+    "primary_intent": "maintenance_tips",
+    "completeness": "no_info",
+    "interaction_pattern": "single_turn",
+    "user_behavior": "corrective",
+    "tuple": "(maintenance_tips, no_info, single_turn, corrective)"
+  },
+  {
+    "primary_intent": "policy_question",
+    "completeness": "complete_upfront",
+    "interaction_pattern": "multi_turn_linear",
+    "user_behavior": "cooperative",
+    "tuple": "(policy_question, complete_upfront, multi_turn_linear, cooperative)"
+  },
+  {
+    "primary_intent": "recall_booking",
+    "completeness": "partial_info",
+    "interaction_pattern": "mixed_intent",
+    "user_behavior": "distracted",
+    "tuple": "(recall_booking, partial_info, mixed_intent, distracted)"
+  },
+  {
+    "primary_intent": "what_can_you_do",
+    "completeness": "minimal_info",
+    "interaction_pattern": "multi_turn_complex",
+    "user_behavior": "cooperative",
+    "tuple": "(what_can_you_do, minimal_info, multi_turn_complex, cooperative)"
+  },
+  {
+    "primary_intent": "book_appointment",
+    "completeness": "partial_info",
+    "interaction_pattern": "multi_turn_complex",
+    "user_behavior": "corrective",
+    "tuple": "(book_appointment, partial_info, multi_turn_complex, corrective)"
+  },
+  {
+    "primary_intent": "product_inquiry",
+    "completeness": "no_info",
+    "interaction_pattern": "multi_turn_linear",
+    "user_behavior": "distracted",
+    "tuple": "(product_inquiry, no_info, multi_turn_linear, distracted)"
+  },
+  {
+    "primary_intent": "shop_info",
+    "completeness": "minimal_info",
+    "interaction_pattern": "multi_turn_complex",
+    "user_behavior": "conversational",
+    "tuple": "(shop_info, minimal_info, multi_turn_complex, conversational)"
+  },
+  {
+    "primary_intent": "book_appointment",
+    "completeness": "complete_upfront",
+    "interaction_pattern": "multi_turn_linear",
+    "user_behavior": "cooperative",
+    "tuple": "(book_appointment, complete_upfront, multi_turn_linear, cooperative)"
+  },
+  {
+    "primary_intent": "maintenance_tips",
+    "completeness": "partial_info",
+    "interaction_pattern": "multi_turn_linear",
+    "user_behavior": "cooperative",
+    "tuple": "(maintenance_tips, partial_info, multi_turn_linear, cooperative)"
+  },
+  {
+    "primary_intent": "policy_question",
+    "completeness": "no_info",
+    "interaction_pattern": "multi_turn_complex",
+    "user_behavior": "corrective",
+    "tuple": "(policy_question, no_info, multi_turn_complex, corrective)"
+  },
+  {
+    "primary_intent": "book_appointment",
+    "completeness": "minimal_info",
+    "interaction_pattern": "mixed_intent",
+    "user_behavior": "canceling",
+    "tuple": "(book_appointment, minimal_info, mixed_intent, canceling)"
+  },
+  {
+    "primary_intent": "recall_booking",
+    "completeness": "complete_upfront",
+    "interaction_pattern": "multi_turn_linear",
+    "user_behavior": "cooperative",
+    "tuple": "(recall_booking, complete_upfront, multi_turn_linear, cooperative)"
+  },
+  {
+    "primary_intent": "what_can_you_do",
+    "completeness": "partial_info",
+    "interaction_pattern": "single_turn",
+    "user_behavior": "cooperative",
+    "tuple": "(what_can_you_do, partial_info, single_turn, cooperative)"
+  },
+  {
+    "primary_intent": "book_appointment",
+    "completeness": "no_info",
+    "interaction_pattern": "multi_turn_complex",
+    "user_behavior": "distracted",
+    "tuple": "(book_appointment, no_info, multi_turn_complex, distracted)"
+  },
+  {
+    "primary_intent": "maintenance_tips",
+    "completeness": "complete_upfront",
+    "interaction_pattern": "single_turn",
+    "user_behavior": "cooperative",
+    "tuple": "(maintenance_tips, complete_upfront, single_turn, cooperative)"
+  },
+  {
+    "primary_intent": "book_appointment",
+    "completeness": "partial_info",
+    "interaction_pattern": "mixed_intent",
+    "user_behavior": "cooperative",
+    "tuple": "(book_appointment, partial_info, mixed_intent, cooperative)"
+  },
+  {
+    "primary_intent": "policy_question",
+    "completeness": "minimal_info",
+    "interaction_pattern": "multi_turn_complex",
+    "user_behavior": "distracted",
+    "tuple": "(policy_question, minimal_info, multi_turn_complex, distracted)"
+  }
+]

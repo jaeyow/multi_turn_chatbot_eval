@@ -1,0 +1,24 @@
+Trace_ID,Phase,Scenario_Tuple,Primary_Intent,Completeness,Interaction_Pattern,User_Behavior,User_Query,Bot_Response_Preview,Action_Taken,Mode_Detected,Success,Error,Open_Code_Notes,Overall_Success
+A001,A,"(shop_info, complete_upfront, single_turn, cooperative)",shop_info,complete_upfront,single_turn,cooperative,"""Hi there! Could you tell me your store's opening hours and location? I'm planning to visit this weekend to check out some new bikes. Thanks!""","Hey there! Thanks for reaching out to JO's Bike Shop - we're excited to help you with your bike needs! 🚲
+
+Our shop is located at 456 Pedal Lane in Portland, Oregon - right at the heart of the city's c",shop_info,shop_info,1,,,
+A002,A,"(shop_info, complete_upfront, single_turn, cooperative)",shop_info,complete_upfront,single_turn,cooperative,"""Hi there! Could you please tell me your store hours and location? I'm planning to visit soon and want to make sure I have the correct details. Thanks!""","Hey there! Thanks for reaching out about visiting JO's Bike Shop! We're thrilled to hear you're planning a visit to our bike haven. 🚲
+
+Our store hours are as follows:
+- Monday to Wednesday: 9:00 AM - ",shop_info,shop_info,1,,,
+A003,A,"(maintenance_tips, no_info, single_turn, corrective)",maintenance_tips,no_info,single_turn,corrective,Hey there! Can you give me some tips on how to keep my bike running smoothly?,"Of course! Here are some helpful bike maintenance tips to keep your bike running smoothly:
+
+1. Keep your bike clean: Regularly clean your bike to prevent the build-up of dirt, grime, and debris. Use a",maintenance_tips,maintenance_tips,1,,,
+A004,A,"(maintenance_tips, no_info, single_turn, corrective)",maintenance_tips,no_info,single_turn,corrective,Hey there! What should I do to keep my bike in good shape?,"1. Regularly clean and lubricate your bike chain to prevent rust and keep it running smoothly.
+2. Check your tire pressure regularly to ensure a smooth and safe ride. Low tire pressure can cause incre",maintenance_tips,maintenance_tips,1,,,
+A005,A,"(what_can_you_do, partial_info, single_turn, cooperative)",what_can_you_do,partial_info,single_turn,cooperative,Hi there! What kind of services do you offer?,"I'm here to help you with JO's Bike Shop! I can assist you with:
+
+• **Shop Information** - Opening hours, location, and contact details
+
+• **Product Inquiries** - Available bikes, accessories, and pro",what_can_you_do,what_can_you_do,1,,,
+A006,A,"(what_can_you_do, partial_info, single_turn, cooperative)",what_can_you_do,partial_info,single_turn,cooperative,"""Hi there! I've heard good things about your shop. Can you tell me what services you offer?""","Hey there! Thanks for reaching out and considering JO's Bike Shop for your cycling needs. We offer a range of services to keep your bike in top shape and ensure you have an awesome riding experience.
+",shop_info,shop_info,1,,,
+A007,A,"(maintenance_tips, complete_upfront, single_turn, cooperative)",maintenance_tips,complete_upfront,single_turn,cooperative,"Hi there! I just got a new road bike, and I'm planning on doing a lot of riding this season. Could you give me some tips on what kind of regular maintenance I should be doing to keep it in top shape? Thanks!","1. Keep your bike clean: Regularly clean your bike with soapy water and a soft brush, especially after riding in wet or muddy conditions. This will help prevent dirt and grime from building up and dam",maintenance_tips,maintenance_tips,1,,,
+A008,A,"(maintenance_tips, complete_upfront, single_turn, cooperative)",maintenance_tips,complete_upfront,single_turn,cooperative,"""Hi! I just bought a road bike and I'm planning on taking it for long rides. Could you give me some maintenance tips to keep it in good condition, especially for things like cleaning the chain and checking tire pressure?""","Of course! Congratulations on your new road bike! Here are some maintenance tips to keep it in good condition:
+
+1. Clean the chain regularly: Use a bicycle-specific chain cleaner and degreaser to remo",maintenance_tips,maintenance_tips,1,,,
