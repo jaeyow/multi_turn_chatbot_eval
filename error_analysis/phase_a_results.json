@@ -2,9 +2,9 @@
   "metadata": {
     "phase": "A",
     "description": "Phase A conversation tests",
-    "timestamp": "2025-12-03T22:50:45.149704",
-    "total_tests": 8,
-    "successful_tests": 8
+    "timestamp": "2025-12-07T00:58:02.733981",
+    "total_tests": 10,
+    "successful_tests": 10
   },
   "results": [
     {
@@ -16,8 +16,8 @@
         "user_behavior": "cooperative",
         "tuple": "(shop_info, complete_upfront, single_turn, cooperative)"
       },
-      "user_query": "\"Hi there! Could you tell me your store's opening hours and location? I'm planning to visit this weekend to check out some new bikes. Thanks!\"",
-      "bot_response": "Hey there! Thanks for reaching out to JO's Bike Shop - we're excited to help you with your bike needs! \ud83d\udeb2\n\nOur shop is located at 456 Pedal Lane in Portland, Oregon - right at the heart of the city's cycling scene! You can give us a call at (503) 555-BIKE if you need any further assistance finding us.\n\nAnd about our store hours, we're open seven days a week to serve you:\n- Monday to Wednesday: 9:00 AM - 6:00 PM\n- Thursday & Friday (late nights!): 9:00 AM - 7:00 PM\n- Saturday: 8:00 AM - 5:00 PM\n- Sunday: 10:00 AM - 4:00 PM\n\nFeel free to drop by this weekend to browse our awesome selection of bikes - whether you're looking for a new ride or just want to chat bikes, our friendly team is here to help! See you soon! \ud83c\udf1f",
+      "user_query": "\"Hi there! Could you please tell me your store hours and location? I'm planning to visit soon and want to make sure I have the details right. Thanks!\"",
+      "bot_response": "Hey there! That's awesome to hear you're planning to visit JO's Bike Shop \u2013 we can't wait to have you roll in! \ud83d\udeb2\ud83d\udd27 Our shop is located at 456 Pedal Lane in beautiful Portland, OR 97201.\n\nAs for our store hours, we're open 7 days a week to serve all your biking needs:\n- Monday to Wednesday: 9:00 AM - 6:00 PM\n- Thursday & Friday (hey, let's pedal into the evening!): 9:00 AM - 7:00 PM\n- Saturday: 8:00 AM - 5:00 PM\n- Sunday: 10:00 AM - 4:00 PM\n\nWe've got your back whether you need a basic tune-up, a full-service overhaul, or even a custom dream bike build! And if you're into expert bike fitting, vintage resto projects, or those zippy e-bikes, we've got specialties for days! \ud83d\udee0\ufe0f\n\nDon't worry about parking \u2013 we've got free spots in our lot and bike racks up front. Plus, our shop is wheelchair accessible to ensure every biking enthusiast feels right at home!\n\nFeel free to swing by whenever suits you best. Whether you're a weekend warrior, a daily commuter, or a competitive racer, JO's has your back and your bike! Pedal on over soon! \ud83c\udf1f\ud83d\udeb4\u200d\u2642\ufe0f",
       "action_taken": "shop_info",
       "state_snapshot": {
         "mode": "shop_info",
@@ -37,8 +37,8 @@
         "user_behavior": "cooperative",
         "tuple": "(shop_info, complete_upfront, single_turn, cooperative)"
       },
-      "user_query": "\"Hi there! Could you please tell me your store hours and location? I'm planning to visit soon and want to make sure I have the correct details. Thanks!\"",
-      "bot_response": "Hey there! Thanks for reaching out about visiting JO's Bike Shop! We're thrilled to hear you're planning a visit to our bike haven. \ud83d\udeb2\n\nOur store hours are as follows:\n- Monday to Wednesday: 9:00 AM - 6:00 PM\n- Thursday & Friday: 9:00 AM - 7:00 PM (extended evening hours!)\n- Saturday: 8:00 AM - 5:00 PM\n- Sunday: 10:00 AM - 4:00 PM\n\nAnd you can find us at 456 Pedal Lane, Portland, OR 97201. We're right in the heart of this bike-friendly city! If you're driving, no worries \u2013 we have free parking available in our lot behind the shop.\n\nLooking forward to welcoming you to JO's Bike Shop \u2013 where we're all about helping you ride happy, whether you're cruising casually or chasing that competitive thrill. If you have any more questions before your visit, feel free to ask! \ud83c\udf1f",
+      "user_query": "\"Hi there! Could you please tell me your store hours and location? I'm planning to visit sometime soon. Thanks!\"",
+      "bot_response": "Absolutely, greetings fellow rider! \ud83d\udeb4\u200d\u2642\ufe0f\ud83c\udf1f JO's Bike Shop is located at 456 Pedal Lane in beautiful Portland, OR 97201. You can easily reach us at (503) 555-BIKE or shoot us an email at info@josbikeshop.com. Our website, www.josbikeshop.com, is also a great resource for all things biking!\n\nWhen you're ready to pedal over, here are our hours:\n- Monday to Wednesday: 9:00 AM - 6:00 PM\n- Thursday to Friday: 9:00 AM - 7:00 PM (extended hours for your after-work needs \ud83c\udf06)\n- Saturday: 8:00 AM - 5:00 PM\n- Sunday: 10:00 AM - 4:00 PM\n\nWe are pumped you're considering stopping by soon! Remember, we're open 7 days a week to keep you rolling smoothly. See you at JO's Bike Shop! \ud83d\udeb2\u2728",
       "action_taken": "shop_info",
       "state_snapshot": {
         "mode": "shop_info",
@@ -52,17 +52,17 @@
     {
       "test_id": "A003",
       "scenario": {
-        "primary_intent": "maintenance_tips",
-        "completeness": "no_info",
+        "primary_intent": "policy_question",
+        "completeness": "complete_upfront",
         "interaction_pattern": "single_turn",
-        "user_behavior": "corrective",
-        "tuple": "(maintenance_tips, no_info, single_turn, corrective)"
+        "user_behavior": "distracted",
+        "tuple": "(policy_question, complete_upfront, single_turn, distracted)"
       },
-      "user_query": "Hey there! Can you give me some tips on how to keep my bike running smoothly?",
-      "bot_response": "Of course! Here are some helpful bike maintenance tips to keep your bike running smoothly:\n\n1. Keep your bike clean: Regularly clean your bike to prevent the build-up of dirt, grime, and debris. Use a mild soap and water to clean the frame, wheels, and components, and dry it thoroughly to prevent rust.\n\n2. Check tire pressure: Make sure your tires are inflated to the recommended pressure. Low tire pressure can lead to increased rolling resistance and potential damage to the tires.\n\n3. Lubricate the chain: Keep your chain well-lubricated to prevent rust and friction. Use a bike-specific lubricant and regularly clean and reapply it to ensure smooth shifting and pedaling.\n\n4. Check brakes and cables: Inspect your brakes and cables for wear and tear, and adjust or replace them as needed. Properly functioning brakes are essential for your safety while riding.\n\n5. Tighten loose bolts: Regularly check and tighten any loose bolts or screws on your bike, including the handlebars, saddle, and pedals. Loose components can affect your bike's performance and safety.\n\n6. Check for wear on gears and chain: Inspect your gears and chain regularly for signs of wear, such as skipping gears or a stretched chain. Replace any worn components to maintain smooth shifting.\n\n7. Maintain suspension and fork: If your bike has suspension or a fork, make sure to keep them clean and properly maintained. Check for any leaks, adjust the settings as needed, and service them according to the manufacturer's recommendations.\n\n8. Store your bike properly: When not in use, store your bike in a dry and secure location to prevent rust and damage. Consider using a bike cover or storing it indoors to protect it from the elements.\n\nBy following these maintenance tips, you can keep your bike running smoothly and extend its lifespan. Remember to schedule regular tune-ups and servicing with a professional bike mechanic to address any issues and keep your bike in top condition.",
-      "action_taken": "maintenance_tips",
+      "user_query": "\"Hey, I was wondering if you could tell me about your return policy on bikes? I got a call, can you hold on a sec?\"",
+      "bot_response": "Of course! Our return policy on bikes is as follows: if you are not satisfied with your purchase, you may return the bike within 30 days for a full refund. The bike must be in its original condition and packaging. We also offer a warranty on all our bikes for any manufacturing defects. As for delivery, we offer free shipping on all bike orders within the continental US. If you have any further questions, feel free to ask once you're ready.",
+      "action_taken": "policy_question",
       "state_snapshot": {
-        "mode": "maintenance_tips",
+        "mode": "policy_question",
         "in_appointment_flow": false,
         "appointment_data": {},
         "safe": true
@@ -73,17 +73,17 @@
     {
       "test_id": "A004",
       "scenario": {
-        "primary_intent": "maintenance_tips",
-        "completeness": "no_info",
+        "primary_intent": "policy_question",
+        "completeness": "complete_upfront",
         "interaction_pattern": "single_turn",
-        "user_behavior": "corrective",
-        "tuple": "(maintenance_tips, no_info, single_turn, corrective)"
+        "user_behavior": "distracted",
+        "tuple": "(policy_question, complete_upfront, single_turn, distracted)"
       },
-      "user_query": "Hey there! What should I do to keep my bike in good shape?",
-      "bot_response": "1. Regularly clean and lubricate your bike chain to prevent rust and keep it running smoothly.\n2. Check your tire pressure regularly to ensure a smooth and safe ride. Low tire pressure can cause increased rolling resistance and potential damage to the rims.\n3. Inspect your brake pads regularly for wear and tear. Replace them if necessary to ensure your brakes work effectively.\n4. Keep your bike clean by wiping it down after rides to prevent dirt and debris build-up, which can cause damage over time.\n5. Check your bike's cables and housing for signs of wear or fraying, and replace them if necessary to maintain proper functionality.\n6. Get regular tune-ups from a professional bike mechanic to keep your bike in top shape and catch any potential issues early on.\n7. Store your bike in a dry and protected area to prevent rust and corrosion. Cover it if storing it outside for an extended period of time.\n8. Regularly inspect your bike for loose nuts and bolts, and tighten them as needed to prevent any parts from coming loose while riding.\n9. Pay attention to any unusual noises or changes in performance while riding, as they could be signs of needed maintenance or repairs.",
-      "action_taken": "maintenance_tips",
+      "user_query": "\"Hey, sorry I might have missed it but could you tell me if there's a return policy for bikes if they're not quite what I expected? Like within a certain timeframe or something?\"",
+      "bot_response": "Of course! Our shop has a 30-day return policy for bikes that are not quite what you expected. Just be sure to keep the original packaging and proof of purchase. If you have any other questions, feel free to ask.",
+      "action_taken": "policy_question",
       "state_snapshot": {
-        "mode": "maintenance_tips",
+        "mode": "policy_question",
         "in_appointment_flow": false,
         "appointment_data": {},
         "safe": true
@@ -94,13 +94,55 @@
     {
       "test_id": "A005",
       "scenario": {
-        "primary_intent": "what_can_you_do",
-        "completeness": "partial_info",
+        "primary_intent": "recall_booking",
+        "completeness": "complete_upfront",
         "interaction_pattern": "single_turn",
         "user_behavior": "cooperative",
-        "tuple": "(what_can_you_do, partial_info, single_turn, cooperative)"
+        "tuple": "(recall_booking, complete_upfront, single_turn, cooperative)"
       },
-      "user_query": "Hi there! What kind of services do you offer?",
+      "user_query": "Hi there! I scheduled a tune-up for my mountain bike under the name Alex Johnson for this Saturday at 10 AM. Could you confirm the booking for me, please?",
+      "bot_response": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?",
+      "action_taken": "recall_booking",
+      "state_snapshot": {
+        "mode": "recall_booking",
+        "in_appointment_flow": false,
+        "appointment_data": {},
+        "safe": true
+      },
+      "success": true,
+      "error": null
+    },
+    {
+      "test_id": "A006",
+      "scenario": {
+        "primary_intent": "recall_booking",
+        "completeness": "complete_upfront",
+        "interaction_pattern": "single_turn",
+        "user_behavior": "cooperative",
+        "tuple": "(recall_booking, complete_upfront, single_turn, cooperative)"
+      },
+      "user_query": "Hi there! I have a bike tune-up appointment booked for this Saturday at 10 AM under the name Sarah Thompson. Can you please confirm the details for me? Thanks!",
+      "bot_response": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?",
+      "action_taken": "recall_booking",
+      "state_snapshot": {
+        "mode": "recall_booking",
+        "in_appointment_flow": false,
+        "appointment_data": {},
+        "safe": true
+      },
+      "success": true,
+      "error": null
+    },
+    {
+      "test_id": "A007",
+      "scenario": {
+        "primary_intent": "what_can_you_do",
+        "completeness": "no_info",
+        "interaction_pattern": "single_turn",
+        "user_behavior": "conversational",
+        "tuple": "(what_can_you_do, no_info, single_turn, conversational)"
+      },
+      "user_query": "Hey there! Could you tell me what you can help with at your bike shop?",
       "bot_response": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?",
       "action_taken": "what_can_you_do",
       "state_snapshot": {
@@ -113,61 +155,61 @@
       "error": null
     },
     {
-      "test_id": "A006",
-      "scenario": {
-        "primary_intent": "what_can_you_do",
-        "completeness": "partial_info",
-        "interaction_pattern": "single_turn",
-        "user_behavior": "cooperative",
-        "tuple": "(what_can_you_do, partial_info, single_turn, cooperative)"
-      },
-      "user_query": "\"Hi there! I've heard good things about your shop. Can you tell me what services you offer?\"",
-      "bot_response": "Hey there! Thanks for reaching out and considering JO's Bike Shop for your cycling needs. We offer a range of services to keep your bike in top shape and ensure you have an awesome riding experience.\n\nOur services include basic tune-ups for $75, full-service maintenance for $150, custom builds starting at $500, wheel truing, brake and gear cable replacement, bearing service, suspension service, frame alignment, and more! Whatever your bike needs, we've got you covered with our expert team of mechanics.\n\nAnd hey, if you're looking for something special like expert bike fitting, race team support, e-bike sales and service, custom frame building, or vintage bike restoration, we've got those covered too!\n\nFeel free to drop by the shop at 456 Pedal Lane, Portland, and chat with us further. We're passionate about bikes and love helping riders like you hit the road with confidence. \ud83d\udeb2\u2728",
-      "action_taken": "shop_info",
-      "state_snapshot": {
-        "mode": "shop_info",
-        "in_appointment_flow": false,
-        "appointment_data": {},
-        "safe": true
-      },
-      "success": true,
-      "error": null
-    },
-    {
-      "test_id": "A007",
-      "scenario": {
-        "primary_intent": "maintenance_tips",
-        "completeness": "complete_upfront",
-        "interaction_pattern": "single_turn",
-        "user_behavior": "cooperative",
-        "tuple": "(maintenance_tips, complete_upfront, single_turn, cooperative)"
-      },
-      "user_query": "Hi there! I just got a new road bike, and I'm planning on doing a lot of riding this season. Could you give me some tips on what kind of regular maintenance I should be doing to keep it in top shape? Thanks!",
-      "bot_response": "1. Keep your bike clean: Regularly clean your bike with soapy water and a soft brush, especially after riding in wet or muddy conditions. This will help prevent dirt and grime from building up and damaging your components.\n\n2. Check tire pressure: Proper tire pressure is crucial for a smooth and efficient ride. Check your tire pressure before each ride and adjust as needed. This will also help prevent flats and extend the life of your tires.\n\n3. Inspect your chain: Keep your chain clean and lubricated to prevent wear and ensure smooth shifting. Wipe down your chain after each ride and apply a good quality bike chain lubricant regularly.\n\n4. Check brakes: Make sure your brakes are working properly and the pads are not worn down. Replace brake pads if necessary and adjust the brake cables if they are loose or worn.\n\n5. Check gears: Keep an eye on your gears and make sure they are shifting smoothly. If you notice any issues such as skipping or chain rub, have your gears adjusted by a professional mechanic.\n\n6. Check bolts and fasteners: Periodically inspect all bolts and fasteners on your bike to make sure they are secure. Loose bolts can cause components to shift or even fall off while riding.\n\n7. Check bearings: Check the bearings on your wheels, bottom bracket, and headset for any signs of wear or play. If you notice any issues, have them serviced by a bike mechanic.\n\n8. Regular tune-ups: Schedule regular tune-ups with a bike mechanic to keep your bike in top shape. They will be able to catch any potential issues before they become major problems and ensure your bike is performing at its best.\n\nBy following these maintenance tips, your road bike should stay in great condition and provide you with many enjoyable rides. Happy cycling!",
-      "action_taken": "maintenance_tips",
-      "state_snapshot": {
-        "mode": "maintenance_tips",
-        "in_appointment_flow": false,
-        "appointment_data": {},
-        "safe": true
-      },
-      "success": true,
-      "error": null
-    },
-    {
       "test_id": "A008",
       "scenario": {
-        "primary_intent": "maintenance_tips",
-        "completeness": "complete_upfront",
+        "primary_intent": "what_can_you_do",
+        "completeness": "no_info",
         "interaction_pattern": "single_turn",
-        "user_behavior": "cooperative",
-        "tuple": "(maintenance_tips, complete_upfront, single_turn, cooperative)"
+        "user_behavior": "conversational",
+        "tuple": "(what_can_you_do, no_info, single_turn, conversational)"
       },
-      "user_query": "\"Hi! I just bought a road bike and I'm planning on taking it for long rides. Could you give me some maintenance tips to keep it in good condition, especially for things like cleaning the chain and checking tire pressure?\"",
-      "bot_response": "Of course! Congratulations on your new road bike! Here are some maintenance tips to keep it in good condition:\n\n1. Clean the chain regularly: Use a bicycle-specific chain cleaner and degreaser to remove built-up dirt and grime. After cleaning, apply a lubricant specifically designed for bike chains to keep it running smoothly.\n\n2. Check tire pressure before each ride: Proper tire pressure is essential for a comfortable and efficient ride. Use a floor pump with a pressure gauge to ensure your tires are inflated to the recommended PSI (pounds per square inch) as indicated on the sidewall of the tire.\n\n3. Inspect your bike before each ride: Before heading out on a long ride, take a few minutes to check your bike for any loose bolts, worn brake pads, or frayed cables. Make sure the wheels are properly secured and spin freely. This will help prevent any unexpected issues while on the road.\n\n4. Keep your bike clean: Dirt and grime can cause premature wear on your bike components. Regularly clean your bike with a mild soap and water, focusing on areas like the frame, wheels, and drivetrain. Avoid using high-pressure water, as this can force water into sensitive areas like bearings and seals.\n\n5. Store your bike properly: When not in use, store your bike in a dry and sheltered location to prevent rust and corrosion. Consider using a bike cover or storing it indoors to protect it from the elements.\n\nBy following these maintenance tips, you can keep your road bike in top condition and enjoy many miles of smooth, enjoyable rides. Happy cycling!",
-      "action_taken": "maintenance_tips",
+      "user_query": "Hey there! What kind of things can you help me with today?",
+      "bot_response": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?",
+      "action_taken": "what_can_you_do",
       "state_snapshot": {
-        "mode": "maintenance_tips",
+        "mode": "what_can_you_do",
+        "in_appointment_flow": false,
+        "appointment_data": {},
+        "safe": true
+      },
+      "success": true,
+      "error": null
+    },
+    {
+      "test_id": "A009",
+      "scenario": {
+        "primary_intent": "policy_question",
+        "completeness": "no_info",
+        "interaction_pattern": "single_turn",
+        "user_behavior": "canceling",
+        "tuple": "(policy_question, no_info, single_turn, canceling)"
+      },
+      "user_query": "Can I cancel my bike order if I've changed my mind?",
+      "bot_response": "Our shop policy allows for cancellations within 24 hours of placing your order. If you have changed your mind after this time period, please contact us as soon as possible to discuss your options. Thank you.",
+      "action_taken": "policy_question",
+      "state_snapshot": {
+        "mode": "policy_question",
+        "in_appointment_flow": false,
+        "appointment_data": {},
+        "safe": true
+      },
+      "success": true,
+      "error": null
+    },
+    {
+      "test_id": "A010",
+      "scenario": {
+        "primary_intent": "policy_question",
+        "completeness": "no_info",
+        "interaction_pattern": "single_turn",
+        "user_behavior": "canceling",
+        "tuple": "(policy_question, no_info, single_turn, canceling)"
+      },
+      "user_query": "Can you tell me about your return policy?",
+      "bot_response": "Certainly! Our return policy allows for returns within 30 days of purchase, as long as the item is in its original condition and packaging. We offer full refunds or exchanges for any defective or damaged items. Please note that return shipping costs may apply. If you have any further questions or concerns, please feel free to reach out to our customer service team.",
+      "action_taken": "policy_question",
+      "state_snapshot": {
+        "mode": "policy_question",
         "in_appointment_flow": false,
         "appointment_data": {},
         "safe": true

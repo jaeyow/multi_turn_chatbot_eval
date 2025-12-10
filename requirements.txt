@@ -2,3 +2,4 @@ burr[streamlit,start]==0.40.2
 openai==1.99.9
 opentelemetry-instrumentation-openai==0.47.5
 python-dotenv==1.1.1
+instructor>=1.13.0
