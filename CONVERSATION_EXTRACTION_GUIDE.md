@@ -43,6 +43,11 @@ python extract_conversations.py --output my_conversations.json
 python extract_conversations.py --project-id YOUR_PROJECT_ID --output project_conversations.json
 ```
 
+**Extract a specific conversation (requires both project-id and app-id):**
+```bash
+python extract_conversations.py --project-id YOUR_PROJECT_ID --app-id YOUR_APP_ID --output single_conversation.json
+```
+
 **Extract with summary:**
 ```bash
 python extract_conversations.py --output conversations.json --summary
@@ -55,6 +60,7 @@ This creates:
 #### Command-Line Options:
 - `--storage-dir`: Path to Burr storage (default: `~/.burr`)
 - `--project-id`: Specific project to extract (default: all)
+- `--app-id`: Specific application ID to extract (requires `--project-id`)
 - `--output`: Output file path (default: `extracted_conversations.json`)
 - `--summary`: Also generate a summary file
 - `--list-projects`: List available projects and exit

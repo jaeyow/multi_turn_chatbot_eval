@@ -185,10 +185,27 @@ class BurrConversationExtractor:
         
         return conversation
     
-    def extract_all_conversations(self, project_id: Optional[str] = None) -> List[Dict]:
-        """Extract all conversations from storage."""
+    def extract_all_conversations(self, project_id: Optional[str] = None, app_id: Optional[str] = None) -> List[Dict]:
+        """Extract all conversations from storage.
+        
+        Args:
+            project_id: Optional specific project ID to extract from
+            app_id: Optional specific application ID to extract (requires project_id)
+        """
         conversations = []
         
+        # If both project_id and app_id are specified, extract only that specific conversation
+        if project_id and app_id:
+            print(f"\nExtracting conversation from project '{project_id}', app '{app_id}'...")
+            conv = self.extract_conversation(project_id, app_id)
+            if conv:
+                conversations.append(conv)
+                print(f"✓ Extracted: {conv['total_turns']} turns")
+            else:
+                print(f"✗ No conversation found for app '{app_id}' in project '{project_id}'")
+            return conversations
+        
+        # Otherwise, extract from all apps in project(s)
         projects = [project_id] if project_id else self.list_projects()
         
         for proj_id in projects:
@@ -200,7 +217,7 @@ class BurrConversationExtractor:
                 conv = self.extract_conversation(proj_id, app["app_id"])
                 if conv:
                     conversations.append(conv)
-                    print(f"    - App {app['app_id'][:8]}...: {conv['total_turns']} turns")
+                    print(f"    - App {app['app_id']}...: {conv['total_turns']} turns")
         
         return conversations
     
@@ -253,6 +270,10 @@ def main():
         help="Specific project ID to extract (default: all projects)"
     )
     parser.add_argument(
+        "--app-id",
+        help="Specific application ID to extract (requires --project-id)"
+    )
+    parser.add_argument(
         "--output",
         default="extracted_conversations.json",
         help="Output JSON file path (default: extracted_conversations.json)"
@@ -270,6 +291,10 @@ def main():
     
     args = parser.parse_args()
     
+    # Validate arguments
+    if args.app_id and not args.project_id:
+        parser.error("--app-id requires --project-id to be specified")
+    
     extractor = BurrConversationExtractor(args.storage_dir)
     
     if args.list_projects:
@@ -278,11 +303,16 @@ def main():
         for proj in projects:
             apps = extractor.list_applications(proj)
             print(f"  - {proj}: {len(apps)} applications")
+            if args.project_id == proj or not args.project_id:
+                for app in apps[:5]:  # Show first 5 apps
+                    print(f"      • {app['app_id']}")
+                if len(apps) > 5:
+                    print(f"      ... and {len(apps) - 5} more")
         return
     
     # Extract conversations
     print("Extracting conversations from Burr tracking files...")
-    conversations = extractor.extract_all_conversations(args.project_id)
+    conversations = extractor.extract_all_conversations(args.project_id, args.app_id)
     
     if not conversations:
         print("No conversations found!")
