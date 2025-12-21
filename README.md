@@ -4,6 +4,17 @@ A sophisticated multi-turn conversational AI chatbot built with Burr and OpenAI,
 
 Built as a realistic example of a multi-turn chatbot for evaluation and demonstration purposes, based on the [Streaming API example in the Burr repository](https://github.com/apache/burr/tree/main/examples/streaming-fastapi).
 
+## 📊 NEW: Conversation Extraction & Evaluation Tools
+
+Extract conversation data from Burr tracking files for multi-turn evaluation:
+
+- **`extract_conversations.py`**: Command-line tool to extract conversations from Burr LocalTrackingClient storage
+- **`conversation_extraction.ipynb`**: Interactive Jupyter notebook for exploration and analysis
+- **`evaluation_helpers.py`**: Helper functions for preparing data for evaluation frameworks
+- **`example_extraction.py`**: Complete example demonstrating the extraction workflow
+
+See [CONVERSATION_EXTRACTION_GUIDE.md](CONVERSATION_EXTRACTION_GUIDE.md) for detailed usage instructions.
+
 ## [Streamlit](https://streamlit.io/) frontend (choose your own UI)
 
 ![Streamlit Chatbot UI](frontend.png)

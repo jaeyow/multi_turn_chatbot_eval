@@ -1,0 +1,2501 @@
+[
+  {
+    "project_id": "multi_turn_chatbot_eval",
+    "app_id": "chat_streaming:074ef2",
+    "turns": [
+      {
+        "turn_number": 1,
+        "messages": [
+          {
+            "role": "user",
+            "content": "can I book a bike service?",
+            "type": "text",
+            "message_index": 0
+          },
+          {
+            "role": "assistant",
+            "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+            "type": "text",
+            "message_index": 1
+          }
+        ]
+      },
+      {
+        "turn_number": 2,
+        "messages": [
+          {
+            "role": "user",
+            "content": "I need to tune-up my bike. ",
+            "type": "text",
+            "message_index": 2
+          },
+          {
+            "role": "assistant",
+            "content": "Great! I have you down for a tune-up. What date works best for you?",
+            "type": "text",
+            "message_index": 3
+          }
+        ]
+      },
+      {
+        "turn_number": 3,
+        "messages": [
+          {
+            "role": "user",
+            "content": "Next Tuesday",
+            "type": "text",
+            "message_index": 4
+          },
+          {
+            "role": "assistant",
+            "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+            "type": "text",
+            "message_index": 5
+          }
+        ]
+      },
+      {
+        "turn_number": 4,
+        "messages": [
+          {
+            "role": "user",
+            "content": "11:30am",
+            "type": "text",
+            "message_index": 6
+          },
+          {
+            "role": "assistant",
+            "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+            "type": "text",
+            "message_index": 7
+          }
+        ]
+      },
+      {
+        "turn_number": 5,
+        "messages": [
+          {
+            "role": "user",
+            "content": "yes",
+            "type": "text",
+            "message_index": 8
+          },
+          {
+            "role": "assistant",
+            "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+            "type": "text",
+            "message_index": 9
+          }
+        ]
+      },
+      {
+        "turn_number": 6,
+        "messages": [
+          {
+            "role": "user",
+            "content": "I'm looking to buy a road bike, can you help me? ",
+            "type": "text",
+            "message_index": 10
+          },
+          {
+            "role": "assistant",
+            "content": "Of course! I'd be happy to help you find the perfect road bike. What specific features or characteristics are you looking for in a road bike? Are you looking for a certain brand or do you have a budget in mind? Feel free to provide any details or preferences to help narrow down the options.",
+            "type": "text",
+            "message_index": 11
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "total_actions": 20,
+      "total_messages": 12,
+      "extracted_at": "2025-12-21T18:07:46.436752"
+    },
+    "state_history": [
+      {
+        "sequence_id": 1,
+        "action": "check_safety",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": false,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 1,
+          "query": "can I book a bike service?",
+          "__PRIOR_STEP": "query"
+        },
+        "timestamp": "2025-11-09T23:07:51.857771"
+      },
+      {
+        "sequence_id": 2,
+        "action": "decide_mode",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": false,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 2,
+          "query": "can I book a bike service?",
+          "__PRIOR_STEP": "decide_mode",
+          "safe": true,
+          "mode": "book_appointment"
+        },
+        "timestamp": "2025-11-09T23:07:54.546079"
+      },
+      {
+        "sequence_id": 3,
+        "action": "start_booking",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 3,
+          "query": "can I book a bike service?",
+          "__PRIOR_STEP": "start_booking",
+          "safe": true,
+          "mode": "book_appointment",
+          "response": {
+            "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+            "type": "text",
+            "role": "assistant"
+          }
+        },
+        "timestamp": "2025-11-09T23:07:56.962267"
+      },
+      {
+        "sequence_id": 4,
+        "action": "query",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 4,
+          "query": "can I book a bike service?",
+          "__PRIOR_STEP": "start_booking",
+          "safe": true,
+          "mode": "book_appointment",
+          "response": {
+            "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+            "type": "text",
+            "role": "assistant"
+          }
+        },
+        "timestamp": "2025-11-09T23:08:09.533467"
+      },
+      {
+        "sequence_id": 5,
+        "action": "check_safety",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 5,
+          "query": "I need to tune-up my bike. ",
+          "__PRIOR_STEP": "query"
+        },
+        "timestamp": "2025-11-09T23:08:09.534207"
+      },
+      {
+        "sequence_id": 6,
+        "action": "continue_booking",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 6,
+          "query": "I need to tune-up my bike. ",
+          "__PRIOR_STEP": "continue_booking",
+          "safe": true,
+          "response": {
+            "content": "Great! I have you down for a tune-up. What date works best for you?",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_complete": false
+        },
+        "timestamp": "2025-11-09T23:08:11.179440"
+      },
+      {
+        "sequence_id": 7,
+        "action": "query",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 7,
+          "query": "I need to tune-up my bike. ",
+          "__PRIOR_STEP": "continue_booking",
+          "safe": true,
+          "response": {
+            "content": "Great! I have you down for a tune-up. What date works best for you?",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_complete": false
+        },
+        "timestamp": "2025-11-09T23:08:19.772165"
+      },
+      {
+        "sequence_id": 8,
+        "action": "check_safety",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 8,
+          "query": "Next Tuesday",
+          "__PRIOR_STEP": "query"
+        },
+        "timestamp": "2025-11-09T23:08:19.772776"
+      },
+      {
+        "sequence_id": 9,
+        "action": "continue_booking",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up",
+            "preferred_date": "next Tuesday"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 9,
+          "query": "Next Tuesday",
+          "__PRIOR_STEP": "continue_booking",
+          "safe": true,
+          "response": {
+            "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_complete": false
+        },
+        "timestamp": "2025-11-09T23:08:21.812534"
+      },
+      {
+        "sequence_id": 10,
+        "action": "query",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up",
+            "preferred_date": "next Tuesday"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 10,
+          "query": "Next Tuesday",
+          "__PRIOR_STEP": "continue_booking",
+          "safe": true,
+          "response": {
+            "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_complete": false
+        },
+        "timestamp": "2025-11-09T23:08:26.785032"
+      },
+      {
+        "sequence_id": 11,
+        "action": "check_safety",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up",
+            "preferred_date": "next Tuesday"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 11,
+          "query": "11:30am",
+          "__PRIOR_STEP": "query"
+        },
+        "timestamp": "2025-11-09T23:08:26.785910"
+      },
+      {
+        "sequence_id": 12,
+        "action": "continue_booking",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up",
+            "preferred_date": "next Tuesday",
+            "preferred_time": "11:30am"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": true,
+          "__SEQUENCE_ID": 12,
+          "query": "11:30am",
+          "__PRIOR_STEP": "continue_booking",
+          "safe": true,
+          "response": {
+            "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_complete": false
+        },
+        "timestamp": "2025-11-09T23:08:29.180452"
+      },
+      {
+        "sequence_id": 13,
+        "action": "query",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up",
+            "preferred_date": "next Tuesday",
+            "preferred_time": "11:30am"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": true,
+          "__SEQUENCE_ID": 13,
+          "query": "11:30am",
+          "__PRIOR_STEP": "continue_booking",
+          "safe": true,
+          "response": {
+            "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_complete": false
+        },
+        "timestamp": "2025-11-09T23:08:31.440976"
+      },
+      {
+        "sequence_id": 14,
+        "action": "check_safety",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "yes",
+              "type": "text"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up",
+            "preferred_date": "next Tuesday",
+            "preferred_time": "11:30am"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": true,
+          "__SEQUENCE_ID": 14,
+          "query": "yes",
+          "__PRIOR_STEP": "query"
+        },
+        "timestamp": "2025-11-09T23:08:31.441732"
+      },
+      {
+        "sequence_id": 15,
+        "action": "continue_booking",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "yes",
+              "type": "text"
+            },
+            {
+              "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": false,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 15,
+          "query": "yes",
+          "__PRIOR_STEP": "continue_booking",
+          "safe": true,
+          "response": {
+            "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_complete": true
+        },
+        "timestamp": "2025-11-09T23:08:32.424149"
+      },
+      {
+        "sequence_id": 16,
+        "action": "query",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "yes",
+              "type": "text"
+            },
+            {
+              "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": false,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 16,
+          "query": "yes",
+          "__PRIOR_STEP": "continue_booking",
+          "safe": true,
+          "response": {
+            "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_complete": true
+        },
+        "timestamp": "2025-11-09T23:09:10.970735"
+      },
+      {
+        "sequence_id": 17,
+        "action": "check_safety",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "yes",
+              "type": "text"
+            },
+            {
+              "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I'm looking to buy a road bike, can you help me? ",
+              "type": "text"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": false,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 17,
+          "query": "I'm looking to buy a road bike, can you help me? ",
+          "__PRIOR_STEP": "query"
+        },
+        "timestamp": "2025-11-09T23:09:10.971636"
+      },
+      {
+        "sequence_id": 18,
+        "action": "decide_mode",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "yes",
+              "type": "text"
+            },
+            {
+              "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I'm looking to buy a road bike, can you help me? ",
+              "type": "text"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": false,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 18,
+          "query": "I'm looking to buy a road bike, can you help me? ",
+          "__PRIOR_STEP": "decide_mode",
+          "safe": true,
+          "mode": "product_inquiry"
+        },
+        "timestamp": "2025-11-09T23:09:11.701654"
+      },
+      {
+        "sequence_id": 19,
+        "action": "product_inquiry",
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "yes",
+              "type": "text"
+            },
+            {
+              "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I'm looking to buy a road bike, can you help me? ",
+              "type": "text"
+            },
+            {
+              "content": "Of course! I'd be happy to help you find the perfect road bike. What specific features or characteristics are you looking for in a road bike? Are you looking for a certain brand or do you have a budget in mind? Feel free to provide any details or preferences to help narrow down the options.",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": false,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 19,
+          "query": "I'm looking to buy a road bike, can you help me? ",
+          "__PRIOR_STEP": "product_inquiry",
+          "safe": true,
+          "mode": "product_inquiry",
+          "response": {
+            "content": "Of course! I'd be happy to help you find the perfect road bike. What specific features or characteristics are you looking for in a road bike? Are you looking for a certain brand or do you have a budget in mind? Feel free to provide any details or preferences to help narrow down the options.",
+            "type": "text",
+            "role": "assistant"
+          },
+          "modified_chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "yes",
+              "type": "text"
+            },
+            {
+              "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Please help the customer with their product inquiry about bikes or accessories: I'm looking to buy a road bike, can you help me? ",
+              "type": "text"
+            }
+          ]
+        },
+        "timestamp": "2025-11-09T23:09:12.797761"
+      }
+    ],
+    "actions": [
+      {
+        "action": "query",
+        "start_time": "2025-11-09T23:07:51.853178",
+        "sequence_id": 0,
+        "inputs": {
+          "query": "can I book a bike service?"
+        },
+        "end_time": "2025-11-09T23:07:51.855731",
+        "result": null,
+        "state": {
+          "chat_history": [],
+          "appointment_data": {},
+          "in_appointment_flow": false,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 0
+        },
+        "exception": null
+      },
+      {
+        "action": "check_safety",
+        "start_time": "2025-11-09T23:07:51.857154",
+        "sequence_id": 1,
+        "inputs": {
+          "query": "can I book a bike service?"
+        },
+        "end_time": "2025-11-09T23:07:51.857771",
+        "result": null,
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": false,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 1,
+          "query": "can I book a bike service?",
+          "__PRIOR_STEP": "query"
+        },
+        "exception": null
+      },
+      {
+        "action": "decide_mode",
+        "start_time": "2025-11-09T23:07:51.858883",
+        "sequence_id": 2,
+        "inputs": {
+          "query": "can I book a bike service?"
+        },
+        "end_time": "2025-11-09T23:07:54.546079",
+        "result": {
+          "mode": "book_appointment"
+        },
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": false,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 2,
+          "query": "can I book a bike service?",
+          "__PRIOR_STEP": "decide_mode",
+          "safe": true,
+          "mode": "book_appointment"
+        },
+        "exception": null
+      },
+      {
+        "action": "start_booking",
+        "start_time": "2025-11-09T23:07:54.546886",
+        "sequence_id": 3,
+        "inputs": {
+          "query": "can I book a bike service?"
+        },
+        "streaming": true,
+        "stream_start": "2025-11-09T12:07:54.547008Z",
+        "end_time": "2025-11-09T23:07:56.962267",
+        "result": {
+          "response": {
+            "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_data": {},
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false
+        },
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 3,
+          "query": "can I book a bike service?",
+          "__PRIOR_STEP": "start_booking",
+          "safe": true,
+          "mode": "book_appointment",
+          "response": {
+            "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+            "type": "text",
+            "role": "assistant"
+          }
+        },
+        "exception": null,
+        "stream_end": "2025-11-09T12:07:56.962898Z",
+        "items_streamed": 16
+      },
+      {
+        "action": "query",
+        "start_time": "2025-11-09T23:08:09.532273",
+        "sequence_id": 4,
+        "inputs": {
+          "query": "I need to tune-up my bike. "
+        },
+        "end_time": "2025-11-09T23:08:09.533467",
+        "result": null,
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 4,
+          "query": "can I book a bike service?",
+          "__PRIOR_STEP": "start_booking",
+          "safe": true,
+          "mode": "book_appointment",
+          "response": {
+            "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+            "type": "text",
+            "role": "assistant"
+          }
+        },
+        "exception": null
+      },
+      {
+        "action": "check_safety",
+        "start_time": "2025-11-09T23:08:09.533875",
+        "sequence_id": 5,
+        "inputs": {
+          "query": "I need to tune-up my bike. "
+        },
+        "end_time": "2025-11-09T23:08:09.534207",
+        "result": null,
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 5,
+          "query": "I need to tune-up my bike. ",
+          "__PRIOR_STEP": "query"
+        },
+        "exception": null
+      },
+      {
+        "action": "continue_booking",
+        "start_time": "2025-11-09T23:08:09.534830",
+        "sequence_id": 6,
+        "inputs": {
+          "query": "I need to tune-up my bike. "
+        },
+        "streaming": true,
+        "stream_start": "2025-11-09T12:08:09.535360Z",
+        "end_time": "2025-11-09T23:08:11.179440",
+        "result": {
+          "response": {
+            "content": "Great! I have you down for a tune-up. What date works best for you?",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_data": {
+            "service_type": "tune-up"
+          },
+          "appointment_complete": false,
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false
+        },
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 6,
+          "query": "I need to tune-up my bike. ",
+          "__PRIOR_STEP": "continue_booking",
+          "safe": true,
+          "response": {
+            "content": "Great! I have you down for a tune-up. What date works best for you?",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_complete": false
+        },
+        "exception": null,
+        "stream_end": "2025-11-09T12:08:11.180720Z",
+        "items_streamed": 14
+      },
+      {
+        "action": "query",
+        "start_time": "2025-11-09T23:08:19.771761",
+        "sequence_id": 7,
+        "inputs": {
+          "query": "Next Tuesday"
+        },
+        "end_time": "2025-11-09T23:08:19.772165",
+        "result": null,
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 7,
+          "query": "I need to tune-up my bike. ",
+          "__PRIOR_STEP": "continue_booking",
+          "safe": true,
+          "response": {
+            "content": "Great! I have you down for a tune-up. What date works best for you?",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_complete": false
+        },
+        "exception": null
+      },
+      {
+        "action": "check_safety",
+        "start_time": "2025-11-09T23:08:19.772447",
+        "sequence_id": 8,
+        "inputs": {
+          "query": "Next Tuesday"
+        },
+        "end_time": "2025-11-09T23:08:19.772776",
+        "result": null,
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 8,
+          "query": "Next Tuesday",
+          "__PRIOR_STEP": "query"
+        },
+        "exception": null
+      },
+      {
+        "action": "continue_booking",
+        "start_time": "2025-11-09T23:08:19.773351",
+        "sequence_id": 9,
+        "inputs": {
+          "query": "Next Tuesday"
+        },
+        "streaming": true,
+        "stream_start": "2025-11-09T12:08:19.773748Z",
+        "end_time": "2025-11-09T23:08:21.812534",
+        "result": {
+          "response": {
+            "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_data": {
+            "service_type": "tune-up",
+            "preferred_date": "next Tuesday"
+          },
+          "appointment_complete": false,
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false
+        },
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up",
+            "preferred_date": "next Tuesday"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 9,
+          "query": "Next Tuesday",
+          "__PRIOR_STEP": "continue_booking",
+          "safe": true,
+          "response": {
+            "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_complete": false
+        },
+        "exception": null,
+        "stream_end": "2025-11-09T12:08:21.813423Z",
+        "items_streamed": 22
+      },
+      {
+        "action": "query",
+        "start_time": "2025-11-09T23:08:26.783889",
+        "sequence_id": 10,
+        "inputs": {
+          "query": "11:30am"
+        },
+        "end_time": "2025-11-09T23:08:26.785032",
+        "result": null,
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up",
+            "preferred_date": "next Tuesday"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 10,
+          "query": "Next Tuesday",
+          "__PRIOR_STEP": "continue_booking",
+          "safe": true,
+          "response": {
+            "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_complete": false
+        },
+        "exception": null
+      },
+      {
+        "action": "check_safety",
+        "start_time": "2025-11-09T23:08:26.785442",
+        "sequence_id": 11,
+        "inputs": {
+          "query": "11:30am"
+        },
+        "end_time": "2025-11-09T23:08:26.785910",
+        "result": null,
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up",
+            "preferred_date": "next Tuesday"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 11,
+          "query": "11:30am",
+          "__PRIOR_STEP": "query"
+        },
+        "exception": null
+      },
+      {
+        "action": "continue_booking",
+        "start_time": "2025-11-09T23:08:26.786448",
+        "sequence_id": 12,
+        "inputs": {
+          "query": "11:30am"
+        },
+        "streaming": true,
+        "stream_start": "2025-11-09T12:08:26.786746Z",
+        "end_time": "2025-11-09T23:08:29.180452",
+        "result": {
+          "response": {
+            "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_data": {
+            "service_type": "tune-up",
+            "preferred_date": "next Tuesday",
+            "preferred_time": "11:30am"
+          },
+          "appointment_complete": false,
+          "in_appointment_flow": true,
+          "awaiting_confirmation": true
+        },
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up",
+            "preferred_date": "next Tuesday",
+            "preferred_time": "11:30am"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": true,
+          "__SEQUENCE_ID": 12,
+          "query": "11:30am",
+          "__PRIOR_STEP": "continue_booking",
+          "safe": true,
+          "response": {
+            "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_complete": false
+        },
+        "exception": null,
+        "stream_end": "2025-11-09T12:08:29.181191Z",
+        "items_streamed": 27
+      },
+      {
+        "action": "query",
+        "start_time": "2025-11-09T23:08:31.439912",
+        "sequence_id": 13,
+        "inputs": {
+          "query": "yes"
+        },
+        "end_time": "2025-11-09T23:08:31.440976",
+        "result": null,
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up",
+            "preferred_date": "next Tuesday",
+            "preferred_time": "11:30am"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": true,
+          "__SEQUENCE_ID": 13,
+          "query": "11:30am",
+          "__PRIOR_STEP": "continue_booking",
+          "safe": true,
+          "response": {
+            "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_complete": false
+        },
+        "exception": null
+      },
+      {
+        "action": "check_safety",
+        "start_time": "2025-11-09T23:08:31.441434",
+        "sequence_id": 14,
+        "inputs": {
+          "query": "yes"
+        },
+        "end_time": "2025-11-09T23:08:31.441732",
+        "result": null,
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "yes",
+              "type": "text"
+            }
+          ],
+          "appointment_data": {
+            "service_type": "tune-up",
+            "preferred_date": "next Tuesday",
+            "preferred_time": "11:30am"
+          },
+          "in_appointment_flow": true,
+          "awaiting_confirmation": true,
+          "__SEQUENCE_ID": 14,
+          "query": "yes",
+          "__PRIOR_STEP": "query"
+        },
+        "exception": null
+      },
+      {
+        "action": "continue_booking",
+        "start_time": "2025-11-09T23:08:31.442077",
+        "sequence_id": 15,
+        "inputs": {
+          "query": "yes"
+        },
+        "streaming": true,
+        "stream_start": "2025-11-09T12:08:31.442207Z",
+        "end_time": "2025-11-09T23:08:32.424149",
+        "result": {
+          "response": {
+            "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_data": {},
+          "appointment_complete": true,
+          "in_appointment_flow": false,
+          "awaiting_confirmation": false
+        },
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "yes",
+              "type": "text"
+            },
+            {
+              "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": false,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 15,
+          "query": "yes",
+          "__PRIOR_STEP": "continue_booking",
+          "safe": true,
+          "response": {
+            "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_complete": true
+        },
+        "exception": null,
+        "stream_end": "2025-11-09T12:08:32.424644Z",
+        "items_streamed": 19
+      },
+      {
+        "action": "query",
+        "start_time": "2025-11-09T23:09:10.969169",
+        "sequence_id": 16,
+        "inputs": {
+          "query": "I'm looking to buy a road bike, can you help me? "
+        },
+        "end_time": "2025-11-09T23:09:10.970735",
+        "result": null,
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "yes",
+              "type": "text"
+            },
+            {
+              "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": false,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 16,
+          "query": "yes",
+          "__PRIOR_STEP": "continue_booking",
+          "safe": true,
+          "response": {
+            "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+            "type": "text",
+            "role": "assistant"
+          },
+          "appointment_complete": true
+        },
+        "exception": null
+      },
+      {
+        "action": "check_safety",
+        "start_time": "2025-11-09T23:09:10.971318",
+        "sequence_id": 17,
+        "inputs": {
+          "query": "I'm looking to buy a road bike, can you help me? "
+        },
+        "end_time": "2025-11-09T23:09:10.971636",
+        "result": null,
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "yes",
+              "type": "text"
+            },
+            {
+              "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I'm looking to buy a road bike, can you help me? ",
+              "type": "text"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": false,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 17,
+          "query": "I'm looking to buy a road bike, can you help me? ",
+          "__PRIOR_STEP": "query"
+        },
+        "exception": null
+      },
+      {
+        "action": "decide_mode",
+        "start_time": "2025-11-09T23:09:10.972261",
+        "sequence_id": 18,
+        "inputs": {
+          "query": "I'm looking to buy a road bike, can you help me? "
+        },
+        "end_time": "2025-11-09T23:09:11.701654",
+        "result": {
+          "mode": "product_inquiry"
+        },
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "yes",
+              "type": "text"
+            },
+            {
+              "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I'm looking to buy a road bike, can you help me? ",
+              "type": "text"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": false,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 18,
+          "query": "I'm looking to buy a road bike, can you help me? ",
+          "__PRIOR_STEP": "decide_mode",
+          "safe": true,
+          "mode": "product_inquiry"
+        },
+        "exception": null
+      },
+      {
+        "action": "product_inquiry",
+        "start_time": "2025-11-09T23:09:11.701920",
+        "sequence_id": 19,
+        "inputs": {
+          "query": "I'm looking to buy a road bike, can you help me? "
+        },
+        "streaming": true,
+        "stream_start": "2025-11-09T12:09:11.701977Z",
+        "end_time": "2025-11-09T23:09:12.797761",
+        "result": {
+          "response": {
+            "content": "Of course! I'd be happy to help you find the perfect road bike. What specific features or characteristics are you looking for in a road bike? Are you looking for a certain brand or do you have a budget in mind? Feel free to provide any details or preferences to help narrow down the options.",
+            "type": "text",
+            "role": "assistant"
+          },
+          "modified_chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "yes",
+              "type": "text"
+            },
+            {
+              "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Please help the customer with their product inquiry about bikes or accessories: I'm looking to buy a road bike, can you help me? ",
+              "type": "text"
+            }
+          ]
+        },
+        "state": {
+          "chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "yes",
+              "type": "text"
+            },
+            {
+              "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I'm looking to buy a road bike, can you help me? ",
+              "type": "text"
+            },
+            {
+              "content": "Of course! I'd be happy to help you find the perfect road bike. What specific features or characteristics are you looking for in a road bike? Are you looking for a certain brand or do you have a budget in mind? Feel free to provide any details or preferences to help narrow down the options.",
+              "type": "text",
+              "role": "assistant"
+            }
+          ],
+          "appointment_data": {},
+          "in_appointment_flow": false,
+          "awaiting_confirmation": false,
+          "__SEQUENCE_ID": 19,
+          "query": "I'm looking to buy a road bike, can you help me? ",
+          "__PRIOR_STEP": "product_inquiry",
+          "safe": true,
+          "mode": "product_inquiry",
+          "response": {
+            "content": "Of course! I'd be happy to help you find the perfect road bike. What specific features or characteristics are you looking for in a road bike? Are you looking for a certain brand or do you have a budget in mind? Feel free to provide any details or preferences to help narrow down the options.",
+            "type": "text",
+            "role": "assistant"
+          },
+          "modified_chat_history": [
+            {
+              "role": "user",
+              "content": "can I book a bike service?",
+              "type": "text"
+            },
+            {
+              "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "I need to tune-up my bike. ",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What date works best for you?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Next Tuesday",
+              "type": "text"
+            },
+            {
+              "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available.",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "11:30am",
+              "type": "text"
+            },
+            {
+              "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: 11:30am\n\nDoes this look correct? I can book this for you now!",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "yes",
+              "type": "text"
+            },
+            {
+              "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?",
+              "type": "text",
+              "role": "assistant"
+            },
+            {
+              "role": "user",
+              "content": "Please help the customer with their product inquiry about bikes or accessories: I'm looking to buy a road bike, can you help me? ",
+              "type": "text"
+            }
+          ]
+        },
+        "exception": null,
+        "stream_end": "2025-11-09T12:09:12.798443Z",
+        "items_streamed": 62
+      }
+    ],
+    "total_turns": 6
+  }
+]

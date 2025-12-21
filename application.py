@@ -1,9 +1,11 @@
 import asyncio
 import copy
 import json
-from typing import AsyncGenerator, Optional, Tuple
+from typing import AsyncGenerator, Optional, Tuple, Literal
 
 import openai
+import instructor
+from pydantic import BaseModel, Field
 
 from burr.core import ApplicationBuilder, State, default, when
 from burr.core.action import action, streaming_action
@@ -24,6 +26,7 @@ MODES = [
     "policy_question",  # Returns, warranties, delivery FAQs
     "what_can_you_do",  # Explain chatbot capabilities
     "recall_booking",  # Remember and recall previous bookings in this session
+    "generic_question",  # General bicycle or bicycle care questions
     "unknown",
 ]
 
@@ -67,8 +70,8 @@ SHOP_INFO = {
         "description": "Open 7 days a week! Extended hours Thursday and Friday evenings.",
     },
     "services": [
-        "Basic Tune-ups ($75 - includes brake and gear adjustments, chain cleaning)",
-        "Full Service ($150 - complete inspection and maintenance)",
+        "Basic Tune-ups ($75 - includes brake and gear adjustments, chain cleaning) - must be booked in advance",
+        "Full Service ($150 - complete inspection and maintenance) - must be booked in advance",
         "Custom Builds (starting at $500 - we'll build your dream bike)",
         "Wheel Truing and Spoke Replacement",
         "Brake and Gear Cable Replacement",
@@ -123,35 +126,93 @@ def _get_openai_client():
     return openai.AsyncOpenAI()
 
 
-@action(reads=["query"], writes=["mode"])
-async def choose_mode(state: State) -> Tuple[dict, State]:
-    prompt = (
-        f"You are a chatbot for JO's Bike Shop. You've been prompted this: {state['query']}. "
-        f"You have the capability of responding in the following modes: {', '.join(MODES)}. "
-        "Please respond with *only* a single word representing the mode that most accurately "
-        "corresponds to the prompt. For instance:\n"
-        "- If the prompt is something along the lines of 'what are your opening hours?' or 'where are you located?', the mode would be 'shop_info'.\n"
-        "- If the prompt is something along the lines of 'what bikes do you have for sale?' or 'do you have mountain bikes in stock?', the mode would be 'product_inquiry'.\n"
-        "- If the prompt is something along the lines of 'I need to book a service, or repair' or 'can I make an appointment?', the mode would be 'book_appointment'.\n"
-        "- If the prompt is something along the lines of 'how do I maintain my bike?' or 'chain maintenance tips?', the mode would be 'maintenance_tips'.\n"
-        "- If the prompt is something along the lines of 'what is your return policy?' or 'do you offer warranties?', the mode would be 'policy_question'.\n"
-        "- If the customer is asking about what the chatbot can help with, the mode should be 'what_can_you_do'.\n"
-        "- If the customer is asking about a booking they already made in this session (e.g., 'what was my booking?', 'remind me about my appointment', 'when is my appointment?'), the mode should be 'recall_booking'.\n"
-        "If none of these modes apply, please respond with 'unknown'."
+def _get_instructor_client():
+    """Get an instructor-patched OpenAI client for structured outputs."""
+    return instructor.from_openai(openai.AsyncOpenAI())
+
+
+class ModeClassification(BaseModel):
+    """Structured classification of user intent into chatbot modes."""
+    
+    mode: Literal[
+        "shop_info",
+        "product_inquiry",
+        "book_appointment",
+        "maintenance_tips",
+        "policy_question",
+        "what_can_you_do",
+        "recall_booking",
+        "generic_question",
+        "unknown"
+    ] = Field(
+        ...,
+        description="The mode that best matches the user's intent"
+    )
+    
+    reasoning: str = Field(
+        ...,
+        description="Brief explanation of why this mode was chosen"
     )
 
-    result = await _get_openai_client().chat.completions.create(
-        model="gpt-4o", # Pick a more capable model for classification, or fine-tune a smaller one
+
+@action(reads=["query"], writes=["mode"])
+async def decide_mode(state: State) -> Tuple[dict, State]:
+    """Classify user query into one of the supported chatbot modes using structured output."""
+    
+    client = _get_instructor_client()
+    
+    classification = await client.chat.completions.create(
+        model="gpt-4o",
+        response_model=ModeClassification,
         messages=[
-            {"role": "system", "content": "You are a helpful assistant"},
-            {"role": "user", "content": prompt},
+            {
+                "role": "system",
+                "content": """You are an intent classifier for JO's Bike Shop chatbot.
+
+IMPORTANT: Only provide pricing information of only the data in the shop_info page. If asked about prices,
+costs, or fees, direct them to contact the shop directly using the provided contact details. Avoid repeating
+any information already given in prvious responses if it makes sense. 
+                
+Classify user queries into one of these modes:
+
+- shop_info: Questions about hours, location, contact info, services offered (but NOT pricing),
+  or if there are any questions about specific service, tune-up, or repair offerings.
+  Examples: "What are your opening hours?", "Where are you located?", "What services do you offer?"
+
+- product_inquiry: Questions about bike brands and models, accessories, or product availability (but NOT pricing)
+  Examples: "What bikes do you have for sale?", "Do you have mountain bikes in stock?"
+
+- book_appointment: Requests to schedule service appointments or repairs
+  Examples: "I need to book a service", "Can I make an appointment?", "I'd like to schedule a repair"
+
+- maintenance_tips: Requests for bike maintenance advice or tips
+  Examples: "How do I maintain my bike?", "Chain maintenance tips?", "How often should I tune up my bike?"
+
+- policy_question: Questions about returns, warranties, delivery, or shop policies (but NOT pricing)
+  Examples: "What is your return policy?", "Do you offer warranties?", "How does delivery work?"
+
+- what_can_you_do: Questions about chatbot capabilities or what help is available
+  Examples: "What can you help me with?", "What do you do?", "How can you assist me?"
+
+- recall_booking: Questions about appointments already made in this session
+  Examples: "What was my booking?", "Remind me about my appointment", "When is my appointment?"
+
+- generic_question: General questions about bicycles, cycling, bike care, or cycling-related topics that don't fit other categories
+  Examples: "What's the best bike for commuting?", "How do I choose the right bike size?", "What are the benefits of disc brakes?", "How often should I replace my tires?", "What's the difference between road and mountain bikes?"
+
+- unknown: Queries that don't fit any of the above categories, including pricing questions
+  Examples: Off-topic questions, unclear requests, "How much does a tune-up cost?", "What are your prices?"
+
+Choose the most appropriate mode based on the user's primary intent. Remember: pricing questions should be classified as 'unknown' so customers are directed to contact the shop."""
+            },
+            {
+                "role": "user",
+                "content": f"Classify this customer query: {state['query']}"
+            }
         ],
     )
-    content = result.choices[0].message.content
-    mode = content.lower()
-    if mode not in MODES:
-        mode = "unknown"
-    result = {"mode": mode}
+    
+    result = {"mode": classification.mode}
     return result, state.update(**result)
 
 
@@ -172,13 +233,21 @@ Your capabilities include:
 - Maintenance tips
 - Shop policies (returns, warranties, delivery)
 
+IMPORTANT: Do NOT provide any pricing information, costs, or quotes. If the customer is asking about prices, politely direct them to contact the shop directly.
+
+Shop contact details:
+- Phone: (503) 555-BIKE
+- Email: info@josbikeshop.com
+- Website: www.josbikeshop.com
+- Address: 456 Pedal Lane, Portland, OR 97201
+
 Please provide a helpful, friendly response that:
 1. Acknowledges their question with empathy
-2. Provides any general guidance or information you can (if applicable)
-3. Politely explains that this specific topic is outside your area of expertise
+2. If asking about pricing: Politely explain that for accurate pricing information, they should contact the shop directly using the contact details above
+3. If asking about something else: Provides any general guidance or information you can (if applicable) and politely explains that this specific topic is outside your area of expertise
 4. Suggests what you CAN help them with or recommends they contact the shop directly
 
-Be warm, conversational, and helpful - not robotic. Keep the response concise (2-3 sentences)."""
+Be warm, conversational, and helpful - not robotic. Keep the response concise: maximum 2-3 sentences."""
 
     chat_history_api_format = [
         {"role": "system", "content": "You are a helpful, friendly assistant for JO's Bike Shop."},
@@ -374,6 +443,7 @@ PARKING & ACCESSIBILITY:
 Customer's question: {state['query']}
 
 Provide a friendly, helpful answer using the information above. Be conversational and enthusiastic about bikes!
+IMPORTANT: Keep your response concise - maximum 2-3 sentences. Provide only the most relevant information.
 """
 
     chat_history_api_format = [
@@ -886,7 +956,7 @@ graph = (
         query=process_query,
         check_safety=check_safety,
         unsafe_response=unsafe_response,
-        decide_mode=choose_mode,
+        decide_mode=decide_mode,
         shop_info=shop_info_response,
         start_booking=start_appointment_booking,
         continue_booking=continue_appointment_booking,
@@ -895,13 +965,16 @@ graph = (
         prompt_for_more=prompt_for_more,
 
         product_inquiry=chat_response.bind(
-            prepend_prompt="Please help the customer with their product inquiry about bikes or accessories",
+            prepend_prompt="Please help the customer with their product inquiry about bikes or accessories. IMPORTANT: Do not provide any pricing information - if asked about prices, direct them to contact the shop at (503) 555-BIKE or info@josbikeshop.com. Keep your response concise: maximum 2-3 sentences",
         ),
         maintenance_tips=chat_response.bind(
-            prepend_prompt="Please provide helpful bike maintenance tips for the following",
+            prepend_prompt="Please provide helpful bike maintenance tips for the following. IMPORTANT: Do not provide any pricing information - if asked about service costs, direct them to contact the shop at (503) 555-BIKE or info@josbikeshop.com. Keep your response concise: maximum 2-3 sentences",
         ),
         policy_question=chat_response.bind(
-            prepend_prompt="Please answer the customer's question about shop policies (returns, warranties, delivery)",
+            prepend_prompt="Please answer the customer's question about shop policies (returns, warranties, delivery). IMPORTANT: Do not provide any pricing information - if asked about costs or fees, direct them to contact the shop at (503) 555-BIKE or info@josbikeshop.com. Keep your response concise: maximum 2-3 sentences",
+        ),
+        generic_question=chat_response.bind(
+            prepend_prompt="Please answer this general bicycle or cycling question with helpful, accurate information. IMPORTANT: Do not provide any pricing information - if asked about costs, direct them to contact the shop at (503) 555-BIKE or info@josbikeshop.com. Keep your response concise: maximum 2-3 sentences",
         ),
     )
     .with_transitions(
@@ -916,6 +989,7 @@ graph = (
         ("decide_mode", "policy_question", when(mode="policy_question")),
         ("decide_mode", "what_can_you_do", when(mode="what_can_you_do")),
         ("decide_mode", "recall_booking", when(mode="recall_booking")),
+        ("decide_mode", "generic_question", when(mode="generic_question")),
         ("decide_mode", "prompt_for_more", default),
         (
             [
@@ -927,6 +1001,7 @@ graph = (
                 "policy_question",
                 "what_can_you_do",
                 "recall_booking",
+                "generic_question",
                 "prompt_for_more",
                 "unsafe_response",
             ],
@@ -965,6 +1040,7 @@ TERMINAL_ACTIONS = [
     "policy_question",
     "what_can_you_do",
     "recall_booking",
+    "generic_question",
     "prompt_for_more",
     "unsafe_response",
 ]
