@@ -1,4 +1,3 @@
-import asyncio
 import sys
 from pathlib import Path
 from typing import List
@@ -10,11 +9,20 @@ from deepeval.test_case import Turn
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from application import application, TERMINAL_ACTIONS
 
+# Cache Burr application instances by thread_id to maintain conversation state
+_app_cache = {}
+
+# Foundation for a multi-turn chatbot evaluation simulation using Burr
 async def burr_model_callback(input: str, turns: List[Turn], thread_id: str) -> Turn:
     """
     This function wraps the Burr application so DeepEval can 'talk' to it.
+    Reuses the same Burr app instance for all turns in the same conversation.
     """
-    app = application(app_id=thread_id) 
+    # Reuse existing app for this conversation or create new one
+    if thread_id not in _app_cache:
+        _app_cache[thread_id] = application(app_id=thread_id)
+    
+    app = _app_cache[thread_id] 
     
     _, streaming_container = await app.astream_result(
         halt_after=TERMINAL_ACTIONS, 
@@ -42,6 +50,10 @@ goldens = [
 ]
 
 def run_simulation():
+    # Clear the cache before starting new simulations
+    global _app_cache
+    _app_cache = {}
+    
     simulator = ConversationSimulator(
         model_callback=burr_model_callback
     )
