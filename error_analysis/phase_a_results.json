@@ -2,9 +2,9 @@
   "metadata": {
     "phase": "A",
     "description": "Phase A conversation tests",
-    "timestamp": "2025-12-07T00:58:02.733981",
-    "total_tests": 10,
-    "successful_tests": 10
+    "timestamp": "2026-01-07T23:48:44.247656",
+    "total_tests": 6,
+    "successful_tests": 6
   },
   "results": [
     {
@@ -16,8 +16,8 @@
         "user_behavior": "cooperative",
         "tuple": "(shop_info, complete_upfront, single_turn, cooperative)"
       },
-      "user_query": "\"Hi there! Could you please tell me your store hours and location? I'm planning to visit soon and want to make sure I have the details right. Thanks!\"",
-      "bot_response": "Hey there! That's awesome to hear you're planning to visit JO's Bike Shop \u2013 we can't wait to have you roll in! \ud83d\udeb2\ud83d\udd27 Our shop is located at 456 Pedal Lane in beautiful Portland, OR 97201.\n\nAs for our store hours, we're open 7 days a week to serve all your biking needs:\n- Monday to Wednesday: 9:00 AM - 6:00 PM\n- Thursday & Friday (hey, let's pedal into the evening!): 9:00 AM - 7:00 PM\n- Saturday: 8:00 AM - 5:00 PM\n- Sunday: 10:00 AM - 4:00 PM\n\nWe've got your back whether you need a basic tune-up, a full-service overhaul, or even a custom dream bike build! And if you're into expert bike fitting, vintage resto projects, or those zippy e-bikes, we've got specialties for days! \ud83d\udee0\ufe0f\n\nDon't worry about parking \u2013 we've got free spots in our lot and bike racks up front. Plus, our shop is wheelchair accessible to ensure every biking enthusiast feels right at home!\n\nFeel free to swing by whenever suits you best. Whether you're a weekend warrior, a daily commuter, or a competitive racer, JO's has your back and your bike! Pedal on over soon! \ud83c\udf1f\ud83d\udeb4\u200d\u2642\ufe0f",
+      "user_query": "\"Hi there! Could you please tell me your store hours and location? I'm planning to visit soon and want to make sure I have the right details. Thanks!\"",
+      "bot_response": "Absolutely! JO's Bike Shop is located at 456 Pedal Lane, Portland, OR 97201. We're open 7 days a week with hours ranging from 9:00 AM to 7:00 PM on weekdays and extended hours on Thursdays and Fridays. Can't wait to have you visit us and chat about all things bikes! \ud83d\udeb4\u200d\u2642\ufe0f",
       "action_taken": "shop_info",
       "state_snapshot": {
         "mode": "shop_info",
@@ -37,8 +37,8 @@
         "user_behavior": "cooperative",
         "tuple": "(shop_info, complete_upfront, single_turn, cooperative)"
       },
-      "user_query": "\"Hi there! Could you please tell me your store hours and location? I'm planning to visit sometime soon. Thanks!\"",
-      "bot_response": "Absolutely, greetings fellow rider! \ud83d\udeb4\u200d\u2642\ufe0f\ud83c\udf1f JO's Bike Shop is located at 456 Pedal Lane in beautiful Portland, OR 97201. You can easily reach us at (503) 555-BIKE or shoot us an email at info@josbikeshop.com. Our website, www.josbikeshop.com, is also a great resource for all things biking!\n\nWhen you're ready to pedal over, here are our hours:\n- Monday to Wednesday: 9:00 AM - 6:00 PM\n- Thursday to Friday: 9:00 AM - 7:00 PM (extended hours for your after-work needs \ud83c\udf06)\n- Saturday: 8:00 AM - 5:00 PM\n- Sunday: 10:00 AM - 4:00 PM\n\nWe are pumped you're considering stopping by soon! Remember, we're open 7 days a week to keep you rolling smoothly. See you at JO's Bike Shop! \ud83d\udeb2\u2728",
+      "user_query": "\"Hi there! Could you please tell me your store hours and if you're open on weekends? I'm planning a visit soon. Thanks!\"",
+      "bot_response": "Absolutely, we'd love to have you visit JO's Bike Shop! We're open 7 days a week. Our hours are Monday to Wednesday 9:00 AM - 6:00 PM, Thursday and Friday 9:00 AM - 7:00 PM, Saturday 8:00 AM - 5:00 PM, and Sunday 10:00 AM - 4:00 PM. Can't wait to see you roll in! \ud83d\udeb4\u200d\u2642\ufe0f",
       "action_taken": "shop_info",
       "state_snapshot": {
         "mode": "shop_info",
@@ -52,17 +52,17 @@
     {
       "test_id": "A003",
       "scenario": {
-        "primary_intent": "policy_question",
-        "completeness": "complete_upfront",
+        "primary_intent": "what_can_you_do",
+        "completeness": "no_info",
         "interaction_pattern": "single_turn",
-        "user_behavior": "distracted",
-        "tuple": "(policy_question, complete_upfront, single_turn, distracted)"
+        "user_behavior": "conversational",
+        "tuple": "(what_can_you_do, no_info, single_turn, conversational)"
       },
-      "user_query": "\"Hey, I was wondering if you could tell me about your return policy on bikes? I got a call, can you hold on a sec?\"",
-      "bot_response": "Of course! Our return policy on bikes is as follows: if you are not satisfied with your purchase, you may return the bike within 30 days for a full refund. The bike must be in its original condition and packaging. We also offer a warranty on all our bikes for any manufacturing defects. As for delivery, we offer free shipping on all bike orders within the continental US. If you have any further questions, feel free to ask once you're ready.",
-      "action_taken": "policy_question",
+      "user_query": "Hey there! What kind of things can you help me with?",
+      "bot_response": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?",
+      "action_taken": "what_can_you_do",
       "state_snapshot": {
-        "mode": "policy_question",
+        "mode": "what_can_you_do",
         "in_appointment_flow": false,
         "appointment_data": {},
         "safe": true
@@ -73,17 +73,17 @@
     {
       "test_id": "A004",
       "scenario": {
-        "primary_intent": "policy_question",
-        "completeness": "complete_upfront",
+        "primary_intent": "what_can_you_do",
+        "completeness": "no_info",
         "interaction_pattern": "single_turn",
-        "user_behavior": "distracted",
-        "tuple": "(policy_question, complete_upfront, single_turn, distracted)"
+        "user_behavior": "conversational",
+        "tuple": "(what_can_you_do, no_info, single_turn, conversational)"
       },
-      "user_query": "\"Hey, sorry I might have missed it but could you tell me if there's a return policy for bikes if they're not quite what I expected? Like within a certain timeframe or something?\"",
-      "bot_response": "Of course! Our shop has a 30-day return policy for bikes that are not quite what you expected. Just be sure to keep the original packaging and proof of purchase. If you have any other questions, feel free to ask.",
-      "action_taken": "policy_question",
+      "user_query": "Hey there! What all can you help me with?",
+      "bot_response": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?",
+      "action_taken": "what_can_you_do",
       "state_snapshot": {
-        "mode": "policy_question",
+        "mode": "what_can_you_do",
         "in_appointment_flow": false,
         "appointment_data": {},
         "safe": true
@@ -94,17 +94,17 @@
     {
       "test_id": "A005",
       "scenario": {
-        "primary_intent": "recall_booking",
+        "primary_intent": "maintenance_tips",
         "completeness": "complete_upfront",
         "interaction_pattern": "single_turn",
         "user_behavior": "cooperative",
-        "tuple": "(recall_booking, complete_upfront, single_turn, cooperative)"
+        "tuple": "(maintenance_tips, complete_upfront, single_turn, cooperative)"
       },
-      "user_query": "Hi there! I scheduled a tune-up for my mountain bike under the name Alex Johnson for this Saturday at 10 AM. Could you confirm the booking for me, please?",
-      "bot_response": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?",
-      "action_taken": "recall_booking",
+      "user_query": "\"Hi there! I'm planning to tune up my bike this weekend and could really use some tips on how to properly clean and lubricate the chain. Could you guide me through the process or provide any other maintenance advice to keep my bike running smoothly?\"",
+      "bot_response": "Sure! To clean and lubricate your chain, start by wiping it down with a rag to remove dirt and debris. Then, apply chain lubricant and wipe off any excess. Additionally, regularly check tire pressure, brake pads, and overall cleanliness to ensure your bike runs smoothly.",
+      "action_taken": "maintenance_tips",
       "state_snapshot": {
-        "mode": "recall_booking",
+        "mode": "maintenance_tips",
         "in_appointment_flow": false,
         "appointment_data": {},
         "safe": true
@@ -115,101 +115,17 @@
     {
       "test_id": "A006",
       "scenario": {
-        "primary_intent": "recall_booking",
+        "primary_intent": "maintenance_tips",
         "completeness": "complete_upfront",
         "interaction_pattern": "single_turn",
         "user_behavior": "cooperative",
-        "tuple": "(recall_booking, complete_upfront, single_turn, cooperative)"
+        "tuple": "(maintenance_tips, complete_upfront, single_turn, cooperative)"
       },
-      "user_query": "Hi there! I have a bike tune-up appointment booked for this Saturday at 10 AM under the name Sarah Thompson. Can you please confirm the details for me? Thanks!",
-      "bot_response": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?",
-      "action_taken": "recall_booking",
+      "user_query": "Hi there! I'm planning to do some maintenance on my road bike this weekend. Can you give me some tips on how to properly clean and lubricate the chain, and check the tire pressure? Thanks!",
+      "bot_response": "Sure! To clean your chain, use a degreaser and a chain cleaning tool before applying a lubricant. Check your tire pressure with a pump and gauge, and ensure it matches the manufacturer's recommendations for optimal performance.",
+      "action_taken": "maintenance_tips",
       "state_snapshot": {
-        "mode": "recall_booking",
-        "in_appointment_flow": false,
-        "appointment_data": {},
-        "safe": true
-      },
-      "success": true,
-      "error": null
-    },
-    {
-      "test_id": "A007",
-      "scenario": {
-        "primary_intent": "what_can_you_do",
-        "completeness": "no_info",
-        "interaction_pattern": "single_turn",
-        "user_behavior": "conversational",
-        "tuple": "(what_can_you_do, no_info, single_turn, conversational)"
-      },
-      "user_query": "Hey there! Could you tell me what you can help with at your bike shop?",
-      "bot_response": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?",
-      "action_taken": "what_can_you_do",
-      "state_snapshot": {
-        "mode": "what_can_you_do",
-        "in_appointment_flow": false,
-        "appointment_data": {},
-        "safe": true
-      },
-      "success": true,
-      "error": null
-    },
-    {
-      "test_id": "A008",
-      "scenario": {
-        "primary_intent": "what_can_you_do",
-        "completeness": "no_info",
-        "interaction_pattern": "single_turn",
-        "user_behavior": "conversational",
-        "tuple": "(what_can_you_do, no_info, single_turn, conversational)"
-      },
-      "user_query": "Hey there! What kind of things can you help me with today?",
-      "bot_response": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?",
-      "action_taken": "what_can_you_do",
-      "state_snapshot": {
-        "mode": "what_can_you_do",
-        "in_appointment_flow": false,
-        "appointment_data": {},
-        "safe": true
-      },
-      "success": true,
-      "error": null
-    },
-    {
-      "test_id": "A009",
-      "scenario": {
-        "primary_intent": "policy_question",
-        "completeness": "no_info",
-        "interaction_pattern": "single_turn",
-        "user_behavior": "canceling",
-        "tuple": "(policy_question, no_info, single_turn, canceling)"
-      },
-      "user_query": "Can I cancel my bike order if I've changed my mind?",
-      "bot_response": "Our shop policy allows for cancellations within 24 hours of placing your order. If you have changed your mind after this time period, please contact us as soon as possible to discuss your options. Thank you.",
-      "action_taken": "policy_question",
-      "state_snapshot": {
-        "mode": "policy_question",
-        "in_appointment_flow": false,
-        "appointment_data": {},
-        "safe": true
-      },
-      "success": true,
-      "error": null
-    },
-    {
-      "test_id": "A010",
-      "scenario": {
-        "primary_intent": "policy_question",
-        "completeness": "no_info",
-        "interaction_pattern": "single_turn",
-        "user_behavior": "canceling",
-        "tuple": "(policy_question, no_info, single_turn, canceling)"
-      },
-      "user_query": "Can you tell me about your return policy?",
-      "bot_response": "Certainly! Our return policy allows for returns within 30 days of purchase, as long as the item is in its original condition and packaging. We offer full refunds or exchanges for any defective or damaged items. Please note that return shipping costs may apply. If you have any further questions or concerns, please feel free to reach out to our customer service team.",
-      "action_taken": "policy_question",
-      "state_snapshot": {
-        "mode": "policy_question",
+        "mode": "maintenance_tips",
         "in_appointment_flow": false,
         "appointment_data": {},
         "safe": true

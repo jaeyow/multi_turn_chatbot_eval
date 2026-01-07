@@ -1,0 +1,227 @@
+{
+  "phase": "B",
+  "count": 17,
+  "examples": [
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "product_inquiry",
+        "completeness": "partial_info",
+        "interaction_pattern": "multi_turn_linear",
+        "user_behavior": "conversational",
+        "tuple": "(product_inquiry, partial_info, multi_turn_linear, conversational)"
+      },
+      "user_goal": "Learn about specific bikes or accessories and their availability",
+      "initial_query": "Hi there! I'm looking to find out more about mountain bikes, specifically those suitable for beginners. Do you have any models in stock?",
+      "expected_mode": "product_inquiry"
+    },
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "book_appointment",
+        "completeness": "minimal_info",
+        "interaction_pattern": "multi_turn_complex",
+        "user_behavior": "cooperative",
+        "tuple": "(book_appointment, minimal_info, multi_turn_complex, cooperative)"
+      },
+      "user_goal": "Successfully book a service appointment by providing service type, date, and time",
+      "initial_query": "\"Hi, I'd like to book an appointment for my bike. Can you help with that?\"",
+      "expected_mode": "book_appointment"
+    },
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "maintenance_tips",
+        "completeness": "no_info",
+        "interaction_pattern": "multi_turn_complex",
+        "user_behavior": "distracted",
+        "tuple": "(maintenance_tips, no_info, multi_turn_complex, distracted)"
+      },
+      "user_goal": "Get practical advice on bike maintenance or care",
+      "initial_query": "Hey there! I'm thinking about doing some maintenance on my bike but not really sure where to start. Any tips or advice you could share?",
+      "expected_mode": "maintenance_tips"
+    },
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "policy_question",
+        "completeness": "complete_upfront",
+        "interaction_pattern": "multi_turn_linear",
+        "user_behavior": "cooperative",
+        "tuple": "(policy_question, complete_upfront, multi_turn_linear, cooperative)"
+      },
+      "user_goal": "Understand store policies regarding returns, warranties, or delivery",
+      "initial_query": "Hi there! I'm planning to purchase a bike from your shop and would like to understand your store policies. Could you please provide detailed information on your return policy, warranty terms, and delivery options? Thanks!",
+      "expected_mode": "policy_question"
+    },
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "recall_booking",
+        "completeness": "partial_info",
+        "interaction_pattern": "multi_turn_linear",
+        "user_behavior": "corrective",
+        "tuple": "(recall_booking, partial_info, multi_turn_linear, corrective)"
+      },
+      "user_goal": "Successfully recall or reference a previously made booking",
+      "initial_query": "Hi, I made a booking for a bike tune-up a while ago, but I can't remember the exact date. Can you help me find the details with just my last name?",
+      "expected_mode": "recall_booking"
+    },
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "book_appointment",
+        "completeness": "complete_upfront",
+        "interaction_pattern": "multi_turn_linear",
+        "user_behavior": "cooperative",
+        "tuple": "(book_appointment, complete_upfront, multi_turn_linear, cooperative)"
+      },
+      "user_goal": "Successfully book a service appointment by providing service type, date, and time",
+      "initial_query": "Hi there! I'd like to book a service appointment for my bike. I'm looking for a tune-up on Wednesday, October 25th, preferably in the morning. Can you help me with that?",
+      "expected_mode": "book_appointment"
+    },
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "product_inquiry",
+        "completeness": "partial_info",
+        "interaction_pattern": "mixed_intent",
+        "user_behavior": "distracted",
+        "tuple": "(product_inquiry, partial_info, mixed_intent, distracted)"
+      },
+      "user_goal": "Learn about specific bikes or accessories and their availability",
+      "initial_query": "Hey, I'm interested in a new bike or maybe just some accessories, but I can't remember the specific names right now. Can you help me figure out what's available?",
+      "expected_mode": "product_inquiry"
+    },
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "book_appointment",
+        "completeness": "partial_info",
+        "interaction_pattern": "mixed_intent",
+        "user_behavior": "distracted",
+        "tuple": "(book_appointment, partial_info, mixed_intent, distracted)"
+      },
+      "user_goal": "Successfully book a service appointment by providing service type, date, and time",
+      "initial_query": "Hey, can I schedule a bike tune-up? I think I need it done soon, maybe this week...?",
+      "expected_mode": "book_appointment"
+    },
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "policy_question",
+        "completeness": "minimal_info",
+        "interaction_pattern": "multi_turn_complex",
+        "user_behavior": "cooperative",
+        "tuple": "(policy_question, minimal_info, multi_turn_complex, cooperative)"
+      },
+      "user_goal": "Understand store policies regarding returns, warranties, or delivery",
+      "initial_query": "Hi there! Can you tell me about your store's return policy for bikes?",
+      "expected_mode": "policy_question"
+    },
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "recall_booking",
+        "completeness": "no_info",
+        "interaction_pattern": "multi_turn_complex",
+        "user_behavior": "cooperative",
+        "tuple": "(recall_booking, no_info, multi_turn_complex, cooperative)"
+      },
+      "user_goal": "Successfully recall or reference a previously made booking",
+      "initial_query": "Hi! I made a bike service booking with you recently, but I can't remember the details. Could you help me find it?",
+      "expected_mode": "recall_booking"
+    },
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "book_appointment",
+        "completeness": "no_info",
+        "interaction_pattern": "multi_turn_linear",
+        "user_behavior": "cooperative",
+        "tuple": "(book_appointment, no_info, multi_turn_linear, cooperative)"
+      },
+      "user_goal": "Successfully book a service appointment by providing service type, date, and time",
+      "initial_query": "Hi there! I'm looking to book a service appointment for my bike. Can you help me with that?",
+      "expected_mode": "book_appointment"
+    },
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "what_can_you_do",
+        "completeness": "partial_info",
+        "interaction_pattern": "mixed_intent",
+        "user_behavior": "corrective",
+        "tuple": "(what_can_you_do, partial_info, mixed_intent, corrective)"
+      },
+      "user_goal": "Complete a what_can_you_do interaction successfully",
+      "initial_query": "Hi there! I'm interested in learning more about what your bike shop offers. Can you tell me a bit about your services?",
+      "expected_mode": "what_can_you_do"
+    },
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "shop_info",
+        "completeness": "minimal_info",
+        "interaction_pattern": "multi_turn_linear",
+        "user_behavior": "cooperative",
+        "tuple": "(shop_info, minimal_info, multi_turn_linear, cooperative)"
+      },
+      "user_goal": "Get specific information about shop hours, location, or services",
+      "initial_query": "\"Hi there! Can you tell me what your opening hours are and where you're located?\"",
+      "expected_mode": "shop_info"
+    },
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "book_appointment",
+        "completeness": "partial_info",
+        "interaction_pattern": "multi_turn_complex",
+        "user_behavior": "canceling",
+        "tuple": "(book_appointment, partial_info, multi_turn_complex, canceling)"
+      },
+      "user_goal": "Successfully book a service appointment by providing service type, date, and time",
+      "initial_query": "Hi! I need to book a service appointment for my bike, but I\u2019m not sure about the available dates. Could you help me with that?",
+      "expected_mode": "book_appointment"
+    },
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "product_inquiry",
+        "completeness": "complete_upfront",
+        "interaction_pattern": "multi_turn_complex",
+        "user_behavior": "cooperative",
+        "tuple": "(product_inquiry, complete_upfront, multi_turn_complex, cooperative)"
+      },
+      "user_goal": "Learn about specific bikes or accessories and their availability",
+      "initial_query": "Hello! I'm interested in exploring some hybrid bikes and also looking for a sturdy bike lock. Could you provide information on what's currently available in your shop?",
+      "expected_mode": "product_inquiry"
+    },
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "recall_booking",
+        "completeness": "minimal_info",
+        "interaction_pattern": "mixed_intent",
+        "user_behavior": "conversational",
+        "tuple": "(recall_booking, minimal_info, mixed_intent, conversational)"
+      },
+      "user_goal": "Successfully recall or reference a previously made booking",
+      "initial_query": "\"Hi, I made a booking for a bike service recently, but I can\u2019t find the confirmation details. Can you help me with that?\"",
+      "expected_mode": "recall_booking"
+    },
+    {
+      "phase": "B",
+      "scenario": {
+        "primary_intent": "book_appointment",
+        "completeness": "complete_upfront",
+        "interaction_pattern": "multi_turn_complex",
+        "user_behavior": "cooperative",
+        "tuple": "(book_appointment, complete_upfront, multi_turn_complex, cooperative)"
+      },
+      "user_goal": "Successfully book a service appointment by providing service type, date, and time",
+      "initial_query": "Hello! I'd like to book a service appointment for a tune-up on my bike. Could we schedule it for next Wednesday at 10 AM?",
+      "expected_mode": "book_appointment"
+    }
+  ]
+}

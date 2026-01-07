@@ -1,0 +1,373 @@
+{
+  "metadata": {
+    "test_type": "multi_turn_deepeval",
+    "description": "Multi-turn conversation tests using DeepEval simulation",
+    "timestamp": "2026-01-07T22:06:11.004134",
+    "total_tests": 5,
+    "successful_tests": 5
+  },
+  "results": [
+    {
+      "test_id": "MT001",
+      "scenario": {
+        "primary_intent": "book_appointment",
+        "completeness": "minimal_info",
+        "interaction_pattern": "multi_turn_complex",
+        "user_behavior": "distracted",
+        "tuple": "(book_appointment, minimal_info, multi_turn_complex, distracted)"
+      },
+      "user_goal": "Successfully book a service appointment by providing service type, date, and time",
+      "initial_query": "Hi, um... I need to, like, set up an appointment for my bike. Can you help with that?",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Hey, sorry, I keep getting sidetracked\u2014could you help me book an appointment? I just want to get it done before I forget again."
+        },
+        {
+          "role": "assistant",
+          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
+        },
+        {
+          "role": "user",
+          "content": "Oh right, I need a tune-up\u2014sorry, my mind keeps wandering! What times do you have available?"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! I have you down for a tune-up. What date works best for you?"
+        },
+        {
+          "role": "user",
+          "content": "Uh, sorry, let me check my calendar\u2014maybe next Thursday afternoon? Or is there something sooner?"
+        },
+        {
+          "role": "assistant",
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Thursday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
+        },
+        {
+          "role": "user",
+          "content": "Yes, that looks good\u2014please go ahead and book it before I get distracted again!"
+        },
+        {
+          "role": "assistant",
+          "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
+        }
+      ],
+      "conversation": [
+        {
+          "role": "user",
+          "content": "Hey, sorry, I keep getting sidetracked\u2014could you help me book an appointment? I just want to get it done before I forget again."
+        },
+        {
+          "role": "assistant",
+          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
+        },
+        {
+          "role": "user",
+          "content": "Oh right, I need a tune-up\u2014sorry, my mind keeps wandering! What times do you have available?"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! I have you down for a tune-up. What date works best for you?"
+        },
+        {
+          "role": "user",
+          "content": "Uh, sorry, let me check my calendar\u2014maybe next Thursday afternoon? Or is there something sooner?"
+        },
+        {
+          "role": "assistant",
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Thursday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
+        },
+        {
+          "role": "user",
+          "content": "Yes, that looks good\u2014please go ahead and book it before I get distracted again!"
+        },
+        {
+          "role": "assistant",
+          "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
+        }
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "test_id": "MT002",
+      "scenario": {
+        "primary_intent": "product_inquiry",
+        "completeness": "partial_info",
+        "interaction_pattern": "multi_turn_linear",
+        "user_behavior": "cooperative",
+        "tuple": "(product_inquiry, partial_info, multi_turn_linear, cooperative)"
+      },
+      "user_goal": "Learn about specific bikes or accessories and decide on a purchase",
+      "initial_query": "Hi there! I'm looking into getting a new road bike and possibly some accessories, but I'm not entirely sure what would be the best fit for me. Could you help me with some recommendations?",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Hi there! I\u2019m interested in learning more about one of your products and was hoping you could help me with some details."
+        },
+        {
+          "role": "assistant",
+          "content": "Of course! I'd be happy to help. What specific product are you interested in learning more about \u2013 bikes or accessories? Let me know, and I can provide you with more information."
+        },
+        {
+          "role": "user",
+          "content": "I'm interested in your mountain bikes\u2014could you tell me more about the models you offer?"
+        },
+        {
+          "role": "assistant",
+          "content": "Sure! We offer a range of mountain bikes, including hardtail and full-suspension options. Our models are designed for various terrains and skill levels, providing a comfortable and enjoyable riding experience. Feel free to contact us for more details or to schedule a test ride."
+        },
+        {
+          "role": "user",
+          "content": "Thanks! Could you share the main differences between your hardtail and full-suspension models?"
+        },
+        {
+          "role": "assistant",
+          "content": "Certainly! The main difference between hardtail and full-suspension mountain bikes is the presence of rear suspension on full-suspension models, offering a smoother ride over rough terrain. Hardtail bikes are generally lighter and more efficient for climbing, while full-suspension bikes provide better control and comfort on descents and challenging trails."
+        },
+        {
+          "role": "user",
+          "content": "That\u2019s helpful, thank you! Could you recommend a model for someone who\u2019s new to mountain biking?"
+        },
+        {
+          "role": "assistant",
+          "content": "For beginners to mountain biking, I would recommend starting with a hardtail mountain bike. They are typically more affordable, easier to maintain, and offer a good balance of performance and comfort for new riders on a variety of terrains."
+        },
+        {
+          "role": "user",
+          "content": "Great, could you suggest a specific hardtail model and let me know its price?"
+        },
+        {
+          "role": "assistant",
+          "content": "I'm glad you're interested in a hardtail model! For specific pricing information and to learn more about our available models, feel free to contact us directly at (503) 555-BIKE or email us at info@josbikeshop.com. Is there anything else I can assist you with today?"
+        }
+      ],
+      "conversation": [
+        {
+          "role": "user",
+          "content": "Hi there! I\u2019m interested in learning more about one of your products and was hoping you could help me with some details."
+        },
+        {
+          "role": "assistant",
+          "content": "Of course! I'd be happy to help. What specific product are you interested in learning more about \u2013 bikes or accessories? Let me know, and I can provide you with more information."
+        },
+        {
+          "role": "user",
+          "content": "I'm interested in your mountain bikes\u2014could you tell me more about the models you offer?"
+        },
+        {
+          "role": "assistant",
+          "content": "Sure! We offer a range of mountain bikes, including hardtail and full-suspension options. Our models are designed for various terrains and skill levels, providing a comfortable and enjoyable riding experience. Feel free to contact us for more details or to schedule a test ride."
+        },
+        {
+          "role": "user",
+          "content": "Thanks! Could you share the main differences between your hardtail and full-suspension models?"
+        },
+        {
+          "role": "assistant",
+          "content": "Certainly! The main difference between hardtail and full-suspension mountain bikes is the presence of rear suspension on full-suspension models, offering a smoother ride over rough terrain. Hardtail bikes are generally lighter and more efficient for climbing, while full-suspension bikes provide better control and comfort on descents and challenging trails."
+        },
+        {
+          "role": "user",
+          "content": "That\u2019s helpful, thank you! Could you recommend a model for someone who\u2019s new to mountain biking?"
+        },
+        {
+          "role": "assistant",
+          "content": "For beginners to mountain biking, I would recommend starting with a hardtail mountain bike. They are typically more affordable, easier to maintain, and offer a good balance of performance and comfort for new riders on a variety of terrains."
+        },
+        {
+          "role": "user",
+          "content": "Great, could you suggest a specific hardtail model and let me know its price?"
+        },
+        {
+          "role": "assistant",
+          "content": "I'm glad you're interested in a hardtail model! For specific pricing information and to learn more about our available models, feel free to contact us directly at (503) 555-BIKE or email us at info@josbikeshop.com. Is there anything else I can assist you with today?"
+        }
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "test_id": "MT003",
+      "scenario": {
+        "primary_intent": "maintenance_tips",
+        "completeness": "no_info",
+        "interaction_pattern": "multi_turn_complex",
+        "user_behavior": "corrective",
+        "tuple": "(maintenance_tips, no_info, multi_turn_complex, corrective)"
+      },
+      "user_goal": "Get comprehensive advice on bike maintenance",
+      "initial_query": "Hi there! I'm looking for some advice on how to properly maintain my bike to keep it in great condition. Could you help me with some tips?",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Hi there! I\u2019m always looking for ways to improve and keep things running smoothly\u2014could you share some good maintenance tips with me?"
+        },
+        {
+          "role": "assistant",
+          "content": "Sure! Here are some helpful bike maintenance tips:\n1. Keep your chain clean and lubricated regularly to prevent rust and friction.\n2. Check your tire pressure regularly and inflate them to the recommended pressure for a smoother ride and to prevent flats."
+        }
+      ],
+      "conversation": [
+        {
+          "role": "user",
+          "content": "Hi there! I\u2019m always looking for ways to improve and keep things running smoothly\u2014could you share some good maintenance tips with me?"
+        },
+        {
+          "role": "assistant",
+          "content": "Sure! Here are some helpful bike maintenance tips:\n1. Keep your chain clean and lubricated regularly to prevent rust and friction.\n2. Check your tire pressure regularly and inflate them to the recommended pressure for a smoother ride and to prevent flats."
+        }
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "test_id": "MT004",
+      "scenario": {
+        "primary_intent": "policy_question",
+        "completeness": "minimal_info",
+        "interaction_pattern": "multi_turn_linear",
+        "user_behavior": "conversational",
+        "tuple": "(policy_question, minimal_info, multi_turn_linear, conversational)"
+      },
+      "user_goal": "Understand store policies through natural conversation",
+      "initial_query": "\"Hey there! I'm curious about your store policies. Could you help me out with that?\"",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Hi there! I have a question about a policy and was hoping you could help clarify something for me."
+        },
+        {
+          "role": "assistant",
+          "content": "Of course! Please let us know which policy you have a question about - whether it's regarding returns, warranties, or delivery. Feel free to contact us directly at (503) 555-BIKE or info@josbikeshop.com for more specific information."
+        },
+        {
+          "role": "user",
+          "content": "Thanks! I wanted to ask about your return policy\u2014how long do I have to return an item if it doesn't work out?"
+        },
+        {
+          "role": "assistant",
+          "content": "Our return policy allows for returns within 30 days of purchase as long as the item is in its original condition. If you have any further questions or need assistance with a return, please contact us directly at (503) 555-BIKE or info@josbikeshop.com."
+        }
+      ],
+      "conversation": [
+        {
+          "role": "user",
+          "content": "Hi there! I have a question about a policy and was hoping you could help clarify something for me."
+        },
+        {
+          "role": "assistant",
+          "content": "Of course! Please let us know which policy you have a question about - whether it's regarding returns, warranties, or delivery. Feel free to contact us directly at (503) 555-BIKE or info@josbikeshop.com for more specific information."
+        },
+        {
+          "role": "user",
+          "content": "Thanks! I wanted to ask about your return policy\u2014how long do I have to return an item if it doesn't work out?"
+        },
+        {
+          "role": "assistant",
+          "content": "Our return policy allows for returns within 30 days of purchase as long as the item is in its original condition. If you have any further questions or need assistance with a return, please contact us directly at (503) 555-BIKE or info@josbikeshop.com."
+        }
+      ],
+      "success": true,
+      "error": null
+    },
+    {
+      "test_id": "MT005",
+      "scenario": {
+        "primary_intent": "recall_booking",
+        "completeness": "partial_info",
+        "interaction_pattern": "multi_turn_complex",
+        "user_behavior": "cooperative",
+        "tuple": "(recall_booking, partial_info, multi_turn_complex, cooperative)"
+      },
+      "user_goal": "Successfully recall or modify a previously made booking",
+      "initial_query": "Hi! I made a service booking for my bike a few weeks ago, but I can't remember the exact date. Could you help me find the details? I think it might be under my name, Alex, or my phone number.",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Hi there! I\u2019d like to check the details of a booking I made earlier. Could you help me with that?"
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "I actually made the booking a few days ago\u2014could you check if you have it on file under my name?"
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "Could you please check using my full name or email address? Maybe it was booked under those details."
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "Yes, let's go ahead and book an appointment then. What information do you need from me?"
+        },
+        {
+          "role": "assistant",
+          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
+        },
+        {
+          "role": "user",
+          "content": "I\u2019d like to book a tune-up, please\u2014what dates and times are available?"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! I have you down for a tune-up. What date works best for you?"
+        }
+      ],
+      "conversation": [
+        {
+          "role": "user",
+          "content": "Hi there! I\u2019d like to check the details of a booking I made earlier. Could you help me with that?"
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "I actually made the booking a few days ago\u2014could you check if you have it on file under my name?"
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "Could you please check using my full name or email address? Maybe it was booked under those details."
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "Yes, let's go ahead and book an appointment then. What information do you need from me?"
+        },
+        {
+          "role": "assistant",
+          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
+        },
+        {
+          "role": "user",
+          "content": "I\u2019d like to book a tune-up, please\u2014what dates and times are available?"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! I have you down for a tune-up. What date works best for you?"
+        }
+      ],
+      "success": true,
+      "error": null
+    }
+  ]
+}

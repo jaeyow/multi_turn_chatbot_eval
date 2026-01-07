@@ -1,6 +1,6 @@
 {
   "phase": "A",
-  "count": 10,
+  "count": 6,
   "examples": [
     {
       "phase": "A",
@@ -11,7 +11,7 @@
         "user_behavior": "cooperative",
         "tuple": "(shop_info, complete_upfront, single_turn, cooperative)"
       },
-      "user_query": "\"Hi there! Could you please tell me your store hours and location? I'm planning to visit soon and want to make sure I have the details right. Thanks!\"",
+      "user_query": "\"Hi there! Could you please tell me your store hours and location? I'm planning to visit soon and want to make sure I have the right details. Thanks!\"",
       "expected_mode": "shop_info"
     },
     {
@@ -23,67 +23,19 @@
         "user_behavior": "cooperative",
         "tuple": "(shop_info, complete_upfront, single_turn, cooperative)"
       },
-      "user_query": "\"Hi there! Could you please tell me your store hours and location? I'm planning to visit sometime soon. Thanks!\"",
+      "user_query": "\"Hi there! Could you please tell me your store hours and if you're open on weekends? I'm planning a visit soon. Thanks!\"",
       "expected_mode": "shop_info"
     },
     {
       "phase": "A",
       "scenario": {
-        "primary_intent": "policy_question",
-        "completeness": "complete_upfront",
-        "interaction_pattern": "single_turn",
-        "user_behavior": "distracted",
-        "tuple": "(policy_question, complete_upfront, single_turn, distracted)"
-      },
-      "user_query": "\"Hey, I was wondering if you could tell me about your return policy on bikes? I got a call, can you hold on a sec?\"",
-      "expected_mode": "policy_question"
-    },
-    {
-      "phase": "A",
-      "scenario": {
-        "primary_intent": "policy_question",
-        "completeness": "complete_upfront",
-        "interaction_pattern": "single_turn",
-        "user_behavior": "distracted",
-        "tuple": "(policy_question, complete_upfront, single_turn, distracted)"
-      },
-      "user_query": "\"Hey, sorry I might have missed it but could you tell me if there's a return policy for bikes if they're not quite what I expected? Like within a certain timeframe or something?\"",
-      "expected_mode": "policy_question"
-    },
-    {
-      "phase": "A",
-      "scenario": {
-        "primary_intent": "recall_booking",
-        "completeness": "complete_upfront",
-        "interaction_pattern": "single_turn",
-        "user_behavior": "cooperative",
-        "tuple": "(recall_booking, complete_upfront, single_turn, cooperative)"
-      },
-      "user_query": "Hi there! I scheduled a tune-up for my mountain bike under the name Alex Johnson for this Saturday at 10 AM. Could you confirm the booking for me, please?",
-      "expected_mode": "recall_booking"
-    },
-    {
-      "phase": "A",
-      "scenario": {
-        "primary_intent": "recall_booking",
-        "completeness": "complete_upfront",
-        "interaction_pattern": "single_turn",
-        "user_behavior": "cooperative",
-        "tuple": "(recall_booking, complete_upfront, single_turn, cooperative)"
-      },
-      "user_query": "Hi there! I have a bike tune-up appointment booked for this Saturday at 10 AM under the name Sarah Thompson. Can you please confirm the details for me? Thanks!",
-      "expected_mode": "recall_booking"
-    },
-    {
-      "phase": "A",
-      "scenario": {
         "primary_intent": "what_can_you_do",
         "completeness": "no_info",
         "interaction_pattern": "single_turn",
         "user_behavior": "conversational",
         "tuple": "(what_can_you_do, no_info, single_turn, conversational)"
       },
-      "user_query": "Hey there! Could you tell me what you can help with at your bike shop?",
+      "user_query": "Hey there! What kind of things can you help me with?",
       "expected_mode": "what_can_you_do"
     },
     {
@@ -95,32 +47,32 @@
         "user_behavior": "conversational",
         "tuple": "(what_can_you_do, no_info, single_turn, conversational)"
       },
-      "user_query": "Hey there! What kind of things can you help me with today?",
+      "user_query": "Hey there! What all can you help me with?",
       "expected_mode": "what_can_you_do"
     },
     {
       "phase": "A",
       "scenario": {
-        "primary_intent": "policy_question",
-        "completeness": "no_info",
+        "primary_intent": "maintenance_tips",
+        "completeness": "complete_upfront",
         "interaction_pattern": "single_turn",
-        "user_behavior": "canceling",
-        "tuple": "(policy_question, no_info, single_turn, canceling)"
+        "user_behavior": "cooperative",
+        "tuple": "(maintenance_tips, complete_upfront, single_turn, cooperative)"
       },
-      "user_query": "Can I cancel my bike order if I've changed my mind?",
-      "expected_mode": "policy_question"
+      "user_query": "\"Hi there! I'm planning to tune up my bike this weekend and could really use some tips on how to properly clean and lubricate the chain. Could you guide me through the process or provide any other maintenance advice to keep my bike running smoothly?\"",
+      "expected_mode": "maintenance_tips"
     },
     {
       "phase": "A",
       "scenario": {
-        "primary_intent": "policy_question",
-        "completeness": "no_info",
+        "primary_intent": "maintenance_tips",
+        "completeness": "complete_upfront",
         "interaction_pattern": "single_turn",
-        "user_behavior": "canceling",
-        "tuple": "(policy_question, no_info, single_turn, canceling)"
+        "user_behavior": "cooperative",
+        "tuple": "(maintenance_tips, complete_upfront, single_turn, cooperative)"
       },
-      "user_query": "Can you tell me about your return policy?",
-      "expected_mode": "policy_question"
+      "user_query": "Hi there! I'm planning to do some maintenance on my road bike this weekend. Can you give me some tips on how to properly clean and lubricate the chain, and check the tire pressure? Thanks!",
+      "expected_mode": "maintenance_tips"
     }
   ]
 }
