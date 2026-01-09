@@ -1,0 +1,78 @@
+{
+  "conversation_type": "single_turn",
+  "count": 6,
+  "examples": [
+    {
+      "conversation_type": "single_turn",
+      "scenario": {
+        "primary_intent": "shop_info",
+        "completeness": "complete_upfront",
+        "interaction_pattern": "single_turn",
+        "user_behavior": "cooperative",
+        "tuple": "(shop_info, complete_upfront, single_turn, cooperative)"
+      },
+      "user_query": "\"Hi there! Can you tell me what your store hours are and if you\u2019re open on weekends? I\u2019d love to stop by and check out your bikes. Thanks!\"",
+      "expected_mode": "shop_info"
+    },
+    {
+      "conversation_type": "single_turn",
+      "scenario": {
+        "primary_intent": "shop_info",
+        "completeness": "complete_upfront",
+        "interaction_pattern": "single_turn",
+        "user_behavior": "cooperative",
+        "tuple": "(shop_info, complete_upfront, single_turn, cooperative)"
+      },
+      "user_query": "\"Hi there! Could you please tell me your opening hours and the exact location of your shop? I'm planning to visit soon. Thanks!\"",
+      "expected_mode": "shop_info"
+    },
+    {
+      "conversation_type": "single_turn",
+      "scenario": {
+        "primary_intent": "maintenance_tips",
+        "completeness": "no_info",
+        "interaction_pattern": "single_turn",
+        "user_behavior": "cooperative",
+        "tuple": "(maintenance_tips, no_info, single_turn, cooperative)"
+      },
+      "user_query": "Can you give me some tips on how to maintain my bike?",
+      "expected_mode": "maintenance_tips"
+    },
+    {
+      "conversation_type": "single_turn",
+      "scenario": {
+        "primary_intent": "maintenance_tips",
+        "completeness": "no_info",
+        "interaction_pattern": "single_turn",
+        "user_behavior": "cooperative",
+        "tuple": "(maintenance_tips, no_info, single_turn, cooperative)"
+      },
+      "user_query": "Can you give me some tips on how to maintain my bike?",
+      "expected_mode": "maintenance_tips"
+    },
+    {
+      "conversation_type": "single_turn",
+      "scenario": {
+        "primary_intent": "what_can_you_do",
+        "completeness": "no_info",
+        "interaction_pattern": "single_turn",
+        "user_behavior": "cooperative",
+        "tuple": "(what_can_you_do, no_info, single_turn, cooperative)"
+      },
+      "user_query": "What can you help me with here?",
+      "expected_mode": "what_can_you_do"
+    },
+    {
+      "conversation_type": "single_turn",
+      "scenario": {
+        "primary_intent": "what_can_you_do",
+        "completeness": "no_info",
+        "interaction_pattern": "single_turn",
+        "user_behavior": "cooperative",
+        "tuple": "(what_can_you_do, no_info, single_turn, cooperative)"
+      },
+      "user_query": "What can you help me with here?",
+      "expected_mode": "what_can_you_do"
+    }
+  ]
+}

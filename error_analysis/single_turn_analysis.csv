@@ -1,0 +1,18 @@
+Trace_ID,Conversation_Type,Scenario_Tuple,Primary_Intent,Completeness,Interaction_Pattern,User_Behavior,User_Query,Bot_Response_Preview,Action_Taken,Mode_Detected,Success,Error,Open_Code_Notes,Overall_Success
+ST001,single_turn,"(shop_info, complete_upfront, single_turn, cooperative)",shop_info,complete_upfront,single_turn,cooperative,"""Hi there! Can you tell me what your store hours are and if you’re open on weekends? I’d love to stop by and check out your bikes. Thanks!""","Hey there! We're open 7 days a week, so you can swing by whenever it's convenient for you. Our hours on weekends are Saturday from 8:00 AM - 5:00 PM and Sunday from 10:00 AM - 4:00 PM. Can't wait to s",shop_info,shop_info,1,,,
+ST002,single_turn,"(shop_info, complete_upfront, single_turn, cooperative)",shop_info,complete_upfront,single_turn,cooperative,"""Hi there! Could you please tell me your opening hours and the exact location of your shop? I'm planning to visit soon. Thanks!""","Absolutely, we're excited to have you visit JO's Bike Shop! We're located at 456 Pedal Lane, Portland, OR 97201. Our shop is open 7 days a week, with extended hours on Thursday and Friday evenings. Lo",shop_info,shop_info,1,,,
+ST003,single_turn,"(maintenance_tips, no_info, single_turn, cooperative)",maintenance_tips,no_info,single_turn,cooperative,Can you give me some tips on how to maintain my bike?,"1. Keep your bike clean by regularly wiping it down with a damp cloth.  
+2. Check tire pressure, brakes, and chain regularly for wear and tear to ensure safe and smooth riding.  
+3. Lubricate your cha",maintenance_tips,maintenance_tips,1,,,
+ST004,single_turn,"(maintenance_tips, no_info, single_turn, cooperative)",maintenance_tips,no_info,single_turn,cooperative,Can you give me some tips on how to maintain my bike?,"1. Keep your bike chain clean and lubricated regularly to prevent rust and ensure smooth shifting.
+2. Check tire pressure, brakes, and bolts for proper tightness before each ride to prevent accidents ",maintenance_tips,maintenance_tips,1,,,
+ST005,single_turn,"(what_can_you_do, no_info, single_turn, cooperative)",what_can_you_do,no_info,single_turn,cooperative,What can you help me with here?,"I'm here to help you with JO's Bike Shop! I can assist you with:
+
+• **Shop Information** - Opening hours, location, and contact details
+
+• **Product Inquiries** - Available bikes, accessories, and pro",what_can_you_do,what_can_you_do,1,,,
+ST006,single_turn,"(what_can_you_do, no_info, single_turn, cooperative)",what_can_you_do,no_info,single_turn,cooperative,What can you help me with here?,"I'm here to help you with JO's Bike Shop! I can assist you with:
+
+• **Shop Information** - Opening hours, location, and contact details
+
+• **Product Inquiries** - Available bikes, accessories, and pro",what_can_you_do,what_can_you_do,1,,,
