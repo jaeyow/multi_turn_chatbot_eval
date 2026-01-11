@@ -2,104 +2,72 @@
   "metadata": {
     "conversation_type": "multi_turn",
     "description": "Multi-Turn conversation tests",
-    "timestamp": "2026-01-10T09:55:11.751661",
-    "total_tests": 17,
-    "successful_tests": 17
+    "timestamp": "2026-01-11T18:55:18.735798",
+    "total_tests": 16,
+    "successful_tests": 16
   },
   "results": [
     {
       "test_id": "MT001",
       "scenario": {
-        "primary_intent": "book_appointment",
-        "completeness": "complete_upfront",
+        "primary_intent": "product_inquiry",
+        "completeness": "partial_info",
         "interaction_pattern": "multi_turn_linear",
-        "user_behavior": "cooperative",
-        "tuple": "(book_appointment, complete_upfront, multi_turn_linear, cooperative)"
+        "user_behavior": "conversational",
+        "tuple": "(product_inquiry, partial_info, multi_turn_linear, conversational)"
       },
-      "user_goal": "Successfully book a service appointment by providing service type, date, and time",
-      "initial_query": "Hi there! I'd like to book a service appointment for a tune-up on my bike. Could we schedule it for next Tuesday at 10 AM?",
+      "user_goal": "Learn about specific bikes or accessories and their availability",
+      "initial_query": "Hi there! I'm interested in finding out more about mountain bikes. Could you tell me about the options you have and what accessories might be available for them?",
       "turns": [
         {
           "role": "user",
-          "content": "Hello! I\u2019d like to book an appointment, please. Could you help me with the available times?"
+          "content": "Hi there! I\u2019m interested in learning more about one of your products and had a few questions. Could you help me out?"
         },
         {
           "role": "assistant",
-          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
+          "content": "Of course! I'd be happy to help. Please let me know which product you're interested in and what questions you have."
         },
         {
           "role": "user",
-          "content": "I\u2019d like to book a tune-up, please. What times do you have available?"
+          "content": "Thanks! I\u2019m looking at your wireless earbuds\u2014can you tell me about their battery life and if they\u2019re sweat-resistant?"
         },
         {
           "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What date works best for you?"
+          "content": "Our wireless earbuds have a battery life of up to 8 hours on a single charge and are sweat-resistant, making them perfect for workouts or outdoor activities. Feel free to reach out to us if you have any more questions or would like more information."
         },
         {
           "role": "user",
-          "content": "Next Friday would be ideal for me\u2014do you have any openings then?"
+          "content": "That sounds great! Do they come with a charging case, and how long does it take to fully charge them?"
         },
         {
           "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available."
-        },
-        {
-          "role": "user",
-          "content": "Afternoon would be perfect\u2014can I book a slot around 2pm?"
-        },
-        {
-          "role": "assistant",
-          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Friday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
-        },
-        {
-          "role": "user",
-          "content": "Yes, that looks great\u2014please go ahead and book it for me. Thank you!"
-        },
-        {
-          "role": "assistant",
-          "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
+          "content": "Yes, our wireless earbuds come with a charging case for convenient on-the-go charging. It takes approximately 1-2 hours to fully charge the earbuds in the case. Feel free to contact us if you have any more questions."
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hello! I\u2019d like to book an appointment, please. Could you help me with the available times?"
+          "content": "Hi there! I\u2019m interested in learning more about one of your products and had a few questions. Could you help me out?"
         },
         {
           "role": "assistant",
-          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
+          "content": "Of course! I'd be happy to help. Please let me know which product you're interested in and what questions you have."
         },
         {
           "role": "user",
-          "content": "I\u2019d like to book a tune-up, please. What times do you have available?"
+          "content": "Thanks! I\u2019m looking at your wireless earbuds\u2014can you tell me about their battery life and if they\u2019re sweat-resistant?"
         },
         {
           "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What date works best for you?"
+          "content": "Our wireless earbuds have a battery life of up to 8 hours on a single charge and are sweat-resistant, making them perfect for workouts or outdoor activities. Feel free to reach out to us if you have any more questions or would like more information."
         },
         {
           "role": "user",
-          "content": "Next Friday would be ideal for me\u2014do you have any openings then?"
+          "content": "That sounds great! Do they come with a charging case, and how long does it take to fully charge them?"
         },
         {
           "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available."
-        },
-        {
-          "role": "user",
-          "content": "Afternoon would be perfect\u2014can I book a slot around 2pm?"
-        },
-        {
-          "role": "assistant",
-          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Friday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
-        },
-        {
-          "role": "user",
-          "content": "Yes, that looks great\u2014please go ahead and book it for me. Thank you!"
-        },
-        {
-          "role": "assistant",
-          "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
+          "content": "Yes, our wireless earbuds come with a charging case for convenient on-the-go charging. It takes approximately 1-2 hours to fully charge the earbuds in the case. Feel free to contact us if you have any more questions."
         }
       ],
       "success": true,
@@ -109,25 +77,17 @@
       "test_id": "MT002",
       "scenario": {
         "primary_intent": "book_appointment",
-        "completeness": "partial_info",
+        "completeness": "minimal_info",
         "interaction_pattern": "multi_turn_complex",
-        "user_behavior": "corrective",
-        "tuple": "(book_appointment, partial_info, multi_turn_complex, corrective)"
+        "user_behavior": "cooperative",
+        "tuple": "(book_appointment, minimal_info, multi_turn_complex, cooperative)"
       },
       "user_goal": "Successfully book a service appointment by providing service type, date, and time",
-      "initial_query": "Hi! I need to book an appointment to service my bike. Can you help me find an available slot for next week?",
+      "initial_query": "Hi! I'd like to book an appointment for a bike service. Can you help me with that?",
       "turns": [
         {
           "role": "user",
-          "content": "Hello, I\u2019d like to book an appointment, but I want to make sure all the details are correct this time. Can you help me with that?"
-        },
-        {
-          "role": "assistant",
-          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
-        },
-        {
-          "role": "user",
-          "content": "Yes, I would like to book an appointment. Can you please confirm the available dates and times before proceeding?"
+          "content": "Hello! I\u2019d like to book an appointment, please. Could you help me with the available times?"
         },
         {
           "role": "assistant",
@@ -135,7 +95,7 @@
         },
         {
           "role": "user",
-          "content": "I need a tune-up, and I want to make sure the date and time are correct before confirming."
+          "content": "I\u2019d like to schedule a tune-up, please. What days and times are available?"
         },
         {
           "role": "assistant",
@@ -143,33 +103,33 @@
         },
         {
           "role": "user",
-          "content": "Can you please list the available dates and times for a tune-up so I can choose the correct one?"
+          "content": "Next Friday would be perfect for me\u2014do you have any openings then?"
         },
         {
           "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What date works best for you?"
+          "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available."
         },
         {
           "role": "user",
-          "content": "I\u2019d like to see a list of available dates and times for a tune-up before I choose, just to make sure I select the correct slot."
+          "content": "Afternoon would be best\u2014can I book a 2pm slot, please?"
         },
         {
           "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What date works best for you?"
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Friday\n\u2022 Time: 2pm\n\nDoes this look correct? I can book this for you now!"
+        },
+        {
+          "role": "user",
+          "content": "Yes, that\u2019s perfect\u2014please go ahead and book it. Thank you!"
+        },
+        {
+          "role": "assistant",
+          "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hello, I\u2019d like to book an appointment, but I want to make sure all the details are correct this time. Can you help me with that?"
-        },
-        {
-          "role": "assistant",
-          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
-        },
-        {
-          "role": "user",
-          "content": "Yes, I would like to book an appointment. Can you please confirm the available dates and times before proceeding?"
+          "content": "Hello! I\u2019d like to book an appointment, please. Could you help me with the available times?"
         },
         {
           "role": "assistant",
@@ -177,7 +137,7 @@
         },
         {
           "role": "user",
-          "content": "I need a tune-up, and I want to make sure the date and time are correct before confirming."
+          "content": "I\u2019d like to schedule a tune-up, please. What days and times are available?"
         },
         {
           "role": "assistant",
@@ -185,19 +145,27 @@
         },
         {
           "role": "user",
-          "content": "Can you please list the available dates and times for a tune-up so I can choose the correct one?"
+          "content": "Next Friday would be perfect for me\u2014do you have any openings then?"
         },
         {
           "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What date works best for you?"
+          "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available."
         },
         {
           "role": "user",
-          "content": "I\u2019d like to see a list of available dates and times for a tune-up before I choose, just to make sure I select the correct slot."
+          "content": "Afternoon would be best\u2014can I book a 2pm slot, please?"
         },
         {
           "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What date works best for you?"
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Friday\n\u2022 Time: 2pm\n\nDoes this look correct? I can book this for you now!"
+        },
+        {
+          "role": "user",
+          "content": "Yes, that\u2019s perfect\u2014please go ahead and book it. Thank you!"
+        },
+        {
+          "role": "assistant",
+          "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
         }
       ],
       "success": true,
@@ -206,96 +174,48 @@
     {
       "test_id": "MT003",
       "scenario": {
-        "primary_intent": "book_appointment",
-        "completeness": "minimal_info",
+        "primary_intent": "policy_question",
+        "completeness": "complete_upfront",
         "interaction_pattern": "multi_turn_linear",
         "user_behavior": "distracted",
-        "tuple": "(book_appointment, minimal_info, multi_turn_linear, distracted)"
+        "tuple": "(policy_question, complete_upfront, multi_turn_linear, distracted)"
       },
-      "user_goal": "Successfully book a service appointment by providing service type, date, and time",
-      "initial_query": "Hi, I need to book an appointment for my bike. Can you help me with that?",
+      "user_goal": "Understand store policies regarding returns, warranties, or delivery",
+      "initial_query": "\"Hey, I was just looking into getting a bike from your shop, but I might have to step out soon. Could you quickly tell me about your return policy and any warranties or delivery options you offer?\"",
       "turns": [
         {
           "role": "user",
-          "content": "Hey, I need to book an appointment but I keep getting sidetracked\u2014can you help me set one up quickly?"
+          "content": "Hey, sorry if I seem a bit all over the place, but I had a quick question about a policy and could use some help understanding it."
         },
         {
           "role": "assistant",
-          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
+          "content": "Absolutely, happy to help! For any questions regarding our shop policies on returns, warranties, or delivery, please feel free to contact us directly at (503) 555-BIKE or info@josbikeshop.com. We're here to assist with any inquiries you may have."
         },
         {
           "role": "user",
-          "content": "Oh right, I need a tune-up\u2014sorry, can you just pick the next available slot for me?"
+          "content": "Oh, thanks! Um, actually, I was wondering\u2014what's your return policy if I accidentally order the wrong part?"
         },
         {
           "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What date works best for you?"
-        },
-        {
-          "role": "user",
-          "content": "Honestly, any date is fine\u2014just pick the soonest one and let me know, thanks!"
-        },
-        {
-          "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available."
-        },
-        {
-          "role": "user",
-          "content": "Whichever is sooner\u2014just book it and let me know, please!"
-        },
-        {
-          "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available."
-        },
-        {
-          "role": "user",
-          "content": "Just go ahead and book the earliest time you have\u2014morning or afternoon, doesn't matter to me!"
-        },
-        {
-          "role": "assistant",
-          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: soonest available\n\u2022 Time: earliest\n\nDoes this look correct? I can book this for you now!"
+          "content": "Our return policy allows for exchanges or refunds on items in new, unused condition within 30 days of purchase. For further details or if you have any specific questions, please reach out to us at (503) 555-BIKE or info@josbikeshop.com."
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hey, I need to book an appointment but I keep getting sidetracked\u2014can you help me set one up quickly?"
+          "content": "Hey, sorry if I seem a bit all over the place, but I had a quick question about a policy and could use some help understanding it."
         },
         {
           "role": "assistant",
-          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
+          "content": "Absolutely, happy to help! For any questions regarding our shop policies on returns, warranties, or delivery, please feel free to contact us directly at (503) 555-BIKE or info@josbikeshop.com. We're here to assist with any inquiries you may have."
         },
         {
           "role": "user",
-          "content": "Oh right, I need a tune-up\u2014sorry, can you just pick the next available slot for me?"
+          "content": "Oh, thanks! Um, actually, I was wondering\u2014what's your return policy if I accidentally order the wrong part?"
         },
         {
           "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What date works best for you?"
-        },
-        {
-          "role": "user",
-          "content": "Honestly, any date is fine\u2014just pick the soonest one and let me know, thanks!"
-        },
-        {
-          "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available."
-        },
-        {
-          "role": "user",
-          "content": "Whichever is sooner\u2014just book it and let me know, please!"
-        },
-        {
-          "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available."
-        },
-        {
-          "role": "user",
-          "content": "Just go ahead and book the earliest time you have\u2014morning or afternoon, doesn't matter to me!"
-        },
-        {
-          "role": "assistant",
-          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: soonest available\n\u2022 Time: earliest\n\nDoes this look correct? I can book this for you now!"
+          "content": "Our return policy allows for exchanges or refunds on items in new, unused condition within 30 days of purchase. For further details or if you have any specific questions, please reach out to us at (503) 555-BIKE or info@josbikeshop.com."
         }
       ],
       "success": true,
@@ -304,18 +224,42 @@
     {
       "test_id": "MT004",
       "scenario": {
-        "primary_intent": "book_appointment",
-        "completeness": "no_info",
+        "primary_intent": "recall_booking",
+        "completeness": "partial_info",
         "interaction_pattern": "multi_turn_complex",
         "user_behavior": "cooperative",
-        "tuple": "(book_appointment, no_info, multi_turn_complex, cooperative)"
+        "tuple": "(recall_booking, partial_info, multi_turn_complex, cooperative)"
       },
-      "user_goal": "Successfully book a service appointment by providing service type, date, and time",
-      "initial_query": "Hi! I need to book a service appointment for my bike. Can you help me with that?",
+      "user_goal": "Successfully recall or reference a previously made booking",
+      "initial_query": "\"Hi, I booked a bike fitting session a while ago, but I can't remember the exact date. Could you help me find that information?\"",
       "turns": [
         {
           "role": "user",
-          "content": "Hello! I\u2019d like to book an appointment, please. Could you help me with the available times?"
+          "content": "Hi there! I\u2019d like to check on a booking I made earlier\u2014could you help me recall the details?"
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "Actually, I made the booking a few days ago\u2014could you check if you have it on file under my name?"
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "Could you check using my name or email address to see if the booking comes up in your system?"
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "Yes, let's go ahead and book an appointment then. What times are available?"
         },
         {
           "role": "assistant",
@@ -323,33 +267,41 @@
         },
         {
           "role": "user",
-          "content": "I\u2019d like to schedule a tune-up, please. What are the next available slots?"
+          "content": "I\u2019d like to book a tune-up, please\u2014could you let me know what times are available for that?"
         },
         {
           "role": "assistant",
           "content": "Great! I have you down for a tune-up. What date works best for you?"
-        },
-        {
-          "role": "user",
-          "content": "I\u2019m available this Friday afternoon\u2014does that work for a tune-up appointment?"
-        },
-        {
-          "role": "assistant",
-          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: this Friday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
-        },
-        {
-          "role": "user",
-          "content": "Yes, that looks perfect\u2014please go ahead and book it. Thank you!"
-        },
-        {
-          "role": "assistant",
-          "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hello! I\u2019d like to book an appointment, please. Could you help me with the available times?"
+          "content": "Hi there! I\u2019d like to check on a booking I made earlier\u2014could you help me recall the details?"
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "Actually, I made the booking a few days ago\u2014could you check if you have it on file under my name?"
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "Could you check using my name or email address to see if the booking comes up in your system?"
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "Yes, let's go ahead and book an appointment then. What times are available?"
         },
         {
           "role": "assistant",
@@ -357,27 +309,11 @@
         },
         {
           "role": "user",
-          "content": "I\u2019d like to schedule a tune-up, please. What are the next available slots?"
+          "content": "I\u2019d like to book a tune-up, please\u2014could you let me know what times are available for that?"
         },
         {
           "role": "assistant",
           "content": "Great! I have you down for a tune-up. What date works best for you?"
-        },
-        {
-          "role": "user",
-          "content": "I\u2019m available this Friday afternoon\u2014does that work for a tune-up appointment?"
-        },
-        {
-          "role": "assistant",
-          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: this Friday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
-        },
-        {
-          "role": "user",
-          "content": "Yes, that looks perfect\u2014please go ahead and book it. Thank you!"
-        },
-        {
-          "role": "assistant",
-          "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
         }
       ],
       "success": true,
@@ -386,96 +322,32 @@
     {
       "test_id": "MT005",
       "scenario": {
-        "primary_intent": "book_appointment",
-        "completeness": "partial_info",
+        "primary_intent": "what_can_you_do",
+        "completeness": "no_info",
         "interaction_pattern": "mixed_intent",
-        "user_behavior": "canceling",
-        "tuple": "(book_appointment, partial_info, mixed_intent, canceling)"
+        "user_behavior": "conversational",
+        "tuple": "(what_can_you_do, no_info, mixed_intent, conversational)"
       },
-      "user_goal": "Successfully book a service appointment by providing service type, date, and time",
-      "initial_query": "Hi, I need to book a service appointment for my bike soon, but I'm not quite sure about the available slots. Could you help me with the options?",
+      "user_goal": "Complete a what_can_you_do interaction successfully",
+      "initial_query": "Hi there! I'm thinking about getting a new bike and possibly some accessories. Can you tell me what kind of services and products you offer?",
       "turns": [
         {
           "role": "user",
-          "content": "Hi there, I\u2019d like to book an appointment, but I\u2019m a bit unsure about my schedule. Can you help me find a time that\u2019s easy to reschedule if needed?"
+          "content": "Hi there! I\u2019m curious\u2014what kinds of things can you help me with?"
         },
         {
           "role": "assistant",
-          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
-        },
-        {
-          "role": "user",
-          "content": "I\u2019m looking to book a tune-up, but I might need to change the time later\u2014what\u2019s your cancellation policy?"
-        },
-        {
-          "role": "assistant",
-          "content": "No problem! I've canceled the appointment booking. Is there anything else I can help you with?"
-        },
-        {
-          "role": "user",
-          "content": "Actually, could you tell me your most flexible time slots in case I want to try booking again?"
-        },
-        {
-          "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What date works best for you?"
-        },
-        {
-          "role": "user",
-          "content": "Could you let me know which days have the most availability in case I need to move my appointment?"
-        },
-        {
-          "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What date works best for you?"
-        },
-        {
-          "role": "user",
-          "content": "I\u2019m still not sure\u2014could you maybe suggest a few days that are usually easiest to reschedule?"
-        },
-        {
-          "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What date works best for you?"
+          "content": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?"
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hi there, I\u2019d like to book an appointment, but I\u2019m a bit unsure about my schedule. Can you help me find a time that\u2019s easy to reschedule if needed?"
+          "content": "Hi there! I\u2019m curious\u2014what kinds of things can you help me with?"
         },
         {
           "role": "assistant",
-          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
-        },
-        {
-          "role": "user",
-          "content": "I\u2019m looking to book a tune-up, but I might need to change the time later\u2014what\u2019s your cancellation policy?"
-        },
-        {
-          "role": "assistant",
-          "content": "No problem! I've canceled the appointment booking. Is there anything else I can help you with?"
-        },
-        {
-          "role": "user",
-          "content": "Actually, could you tell me your most flexible time slots in case I want to try booking again?"
-        },
-        {
-          "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What date works best for you?"
-        },
-        {
-          "role": "user",
-          "content": "Could you let me know which days have the most availability in case I need to move my appointment?"
-        },
-        {
-          "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What date works best for you?"
-        },
-        {
-          "role": "user",
-          "content": "I\u2019m still not sure\u2014could you maybe suggest a few days that are usually easiest to reschedule?"
-        },
-        {
-          "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What date works best for you?"
+          "content": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?"
         }
       ],
       "success": true,
@@ -484,42 +356,18 @@
     {
       "test_id": "MT006",
       "scenario": {
-        "primary_intent": "recall_booking",
+        "primary_intent": "book_appointment",
         "completeness": "complete_upfront",
         "interaction_pattern": "multi_turn_linear",
         "user_behavior": "cooperative",
-        "tuple": "(recall_booking, complete_upfront, multi_turn_linear, cooperative)"
+        "tuple": "(book_appointment, complete_upfront, multi_turn_linear, cooperative)"
       },
-      "user_goal": "Successfully recall or reference a previously made booking",
-      "initial_query": "Hi, I made a service appointment for my bike on the 15th of this month under the name Alex Johnson. Can you help me recall the details of that booking?",
+      "user_goal": "Successfully book a service appointment by providing service type, date, and time",
+      "initial_query": "Hello! I'd like to book a service appointment for a tune-up on my bike. I'm available on September 15th at 10 AM. Can you help me with that?",
       "turns": [
         {
           "role": "user",
-          "content": "Hi there! I\u2019d like to check the details of a booking I made earlier. Could you help me with that?"
-        },
-        {
-          "role": "assistant",
-          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
-        },
-        {
-          "role": "user",
-          "content": "I actually made the booking a few days ago\u2014could you check if you have it on file under my name?"
-        },
-        {
-          "role": "assistant",
-          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
-        },
-        {
-          "role": "user",
-          "content": "Could you please check using my full name or email address to see if the booking comes up?"
-        },
-        {
-          "role": "assistant",
-          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
-        },
-        {
-          "role": "user",
-          "content": "Yes, let's go ahead and book an appointment then. What information do you need from me?"
+          "content": "Hi there! I\u2019d like to book an appointment and was hoping you could help me with the process."
         },
         {
           "role": "assistant",
@@ -527,41 +375,41 @@
         },
         {
           "role": "user",
-          "content": "I\u2019d like to book a tune-up, please\u2014what dates and times are available?"
+          "content": "I\u2019d like to schedule a tune-up, please. What dates and times are available?"
         },
         {
           "role": "assistant",
           "content": "Great! I have you down for a tune-up. What date works best for you?"
+        },
+        {
+          "role": "user",
+          "content": "Next Friday would be perfect for me\u2014do you have any openings then?"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available."
+        },
+        {
+          "role": "user",
+          "content": "Afternoon would be best\u2014can I book a slot around 2pm?"
+        },
+        {
+          "role": "assistant",
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Friday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
+        },
+        {
+          "role": "user",
+          "content": "Yes, that looks great\u2014please go ahead and book it for me. Thank you!"
+        },
+        {
+          "role": "assistant",
+          "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hi there! I\u2019d like to check the details of a booking I made earlier. Could you help me with that?"
-        },
-        {
-          "role": "assistant",
-          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
-        },
-        {
-          "role": "user",
-          "content": "I actually made the booking a few days ago\u2014could you check if you have it on file under my name?"
-        },
-        {
-          "role": "assistant",
-          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
-        },
-        {
-          "role": "user",
-          "content": "Could you please check using my full name or email address to see if the booking comes up?"
-        },
-        {
-          "role": "assistant",
-          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
-        },
-        {
-          "role": "user",
-          "content": "Yes, let's go ahead and book an appointment then. What information do you need from me?"
+          "content": "Hi there! I\u2019d like to book an appointment and was hoping you could help me with the process."
         },
         {
           "role": "assistant",
@@ -569,11 +417,35 @@
         },
         {
           "role": "user",
-          "content": "I\u2019d like to book a tune-up, please\u2014what dates and times are available?"
+          "content": "I\u2019d like to schedule a tune-up, please. What dates and times are available?"
         },
         {
           "role": "assistant",
           "content": "Great! I have you down for a tune-up. What date works best for you?"
+        },
+        {
+          "role": "user",
+          "content": "Next Friday would be perfect for me\u2014do you have any openings then?"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available."
+        },
+        {
+          "role": "user",
+          "content": "Afternoon would be best\u2014can I book a slot around 2pm?"
+        },
+        {
+          "role": "assistant",
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Friday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
+        },
+        {
+          "role": "user",
+          "content": "Yes, that looks great\u2014please go ahead and book it for me. Thank you!"
+        },
+        {
+          "role": "assistant",
+          "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
         }
       ],
       "success": true,
@@ -582,96 +454,32 @@
     {
       "test_id": "MT007",
       "scenario": {
-        "primary_intent": "recall_booking",
-        "completeness": "minimal_info",
-        "interaction_pattern": "multi_turn_complex",
-        "user_behavior": "distracted",
-        "tuple": "(recall_booking, minimal_info, multi_turn_complex, distracted)"
+        "primary_intent": "maintenance_tips",
+        "completeness": "partial_info",
+        "interaction_pattern": "multi_turn_linear",
+        "user_behavior": "cooperative",
+        "tuple": "(maintenance_tips, partial_info, multi_turn_linear, cooperative)"
       },
-      "user_goal": "Successfully recall or reference a previously made booking",
-      "initial_query": "\"Hey, I think I booked a service for my bike, but I can't remember the details. Can you help me find it?\"",
+      "user_goal": "Get practical advice on bike maintenance or care",
+      "initial_query": "Hi there! I recently bought a new road bike, and I want to make sure I'm taking good care of it. Could you give me some maintenance tips to keep it in top shape?",
       "turns": [
         {
           "role": "user",
-          "content": "Hey, sorry if I\u2019m a bit all over the place, but could you remind me about my recent booking? I can\u2019t seem to remember the details right now."
+          "content": "Hi there! I\u2019m looking for some helpful maintenance tips\u2014could you share some advice to get me started?"
         },
         {
           "role": "assistant",
-          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
-        },
-        {
-          "role": "user",
-          "content": "Oh, maybe I booked it somewhere else? Can you check if there\u2019s anything under my email or phone number?"
-        },
-        {
-          "role": "assistant",
-          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
-        },
-        {
-          "role": "user",
-          "content": "Wait, did I maybe use a different email or something? I\u2019m honestly not sure right now."
-        },
-        {
-          "role": "assistant",
-          "content": "I understand this can be confusing. For account-related inquiries like email changes, it's best to reach out to the shop directly at info@josbikeshop.com or (503) 555-BIKE for assistance. Is there anything else I can help you with today regarding bikes, accessories, or service inquiries?"
-        },
-        {
-          "role": "user",
-          "content": "Oh, right, thanks. Actually, can you remind me what services you offer again? I keep losing track."
-        },
-        {
-          "role": "assistant",
-          "content": "Absolutely! At JO's Bike Shop, we offer Basic Tune-ups, Full Service, Custom Builds, Wheel Truing, Brake and Gear Cable Replacement, Bearing Service, Suspension Service, Frame Repair, and much more. Whether you need a quick fix or a full overhaul, we've got your back to keep you rolling smoothly!"
-        },
-        {
-          "role": "user",
-          "content": "Thanks! And do you guys do same-day repairs, or do I need to book ahead? Sorry if you already said that."
-        },
-        {
-          "role": "assistant",
-          "content": "Yes, at JO's Bike Shop, we recommend booking ahead for repairs to ensure we can give your bike the attention it deserves. Feel free to give us a call at (503) 555-BIKE to schedule your service! Happy riding!"
+          "content": "Of course! Here are some basic bike maintenance tips: \n1. Keep your tires properly inflated to prevent punctures and improve ride quality. \n2. Regularly clean and lubricate your chain to ensure smooth shifting and prolong its lifespan. \n3. Check your brakes regularly for wear and adjust as needed to maintain proper stopping power."
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hey, sorry if I\u2019m a bit all over the place, but could you remind me about my recent booking? I can\u2019t seem to remember the details right now."
+          "content": "Hi there! I\u2019m looking for some helpful maintenance tips\u2014could you share some advice to get me started?"
         },
         {
           "role": "assistant",
-          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
-        },
-        {
-          "role": "user",
-          "content": "Oh, maybe I booked it somewhere else? Can you check if there\u2019s anything under my email or phone number?"
-        },
-        {
-          "role": "assistant",
-          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
-        },
-        {
-          "role": "user",
-          "content": "Wait, did I maybe use a different email or something? I\u2019m honestly not sure right now."
-        },
-        {
-          "role": "assistant",
-          "content": "I understand this can be confusing. For account-related inquiries like email changes, it's best to reach out to the shop directly at info@josbikeshop.com or (503) 555-BIKE for assistance. Is there anything else I can help you with today regarding bikes, accessories, or service inquiries?"
-        },
-        {
-          "role": "user",
-          "content": "Oh, right, thanks. Actually, can you remind me what services you offer again? I keep losing track."
-        },
-        {
-          "role": "assistant",
-          "content": "Absolutely! At JO's Bike Shop, we offer Basic Tune-ups, Full Service, Custom Builds, Wheel Truing, Brake and Gear Cable Replacement, Bearing Service, Suspension Service, Frame Repair, and much more. Whether you need a quick fix or a full overhaul, we've got your back to keep you rolling smoothly!"
-        },
-        {
-          "role": "user",
-          "content": "Thanks! And do you guys do same-day repairs, or do I need to book ahead? Sorry if you already said that."
-        },
-        {
-          "role": "assistant",
-          "content": "Yes, at JO's Bike Shop, we recommend booking ahead for repairs to ensure we can give your bike the attention it deserves. Feel free to give us a call at (503) 555-BIKE to schedule your service! Happy riding!"
+          "content": "Of course! Here are some basic bike maintenance tips: \n1. Keep your tires properly inflated to prevent punctures and improve ride quality. \n2. Regularly clean and lubricate your chain to ensure smooth shifting and prolong its lifespan. \n3. Check your brakes regularly for wear and adjust as needed to maintain proper stopping power."
         }
       ],
       "success": true,
@@ -680,48 +488,96 @@
     {
       "test_id": "MT008",
       "scenario": {
-        "primary_intent": "shop_info",
-        "completeness": "partial_info",
-        "interaction_pattern": "mixed_intent",
-        "user_behavior": "conversational",
-        "tuple": "(shop_info, partial_info, mixed_intent, conversational)"
+        "primary_intent": "book_appointment",
+        "completeness": "no_info",
+        "interaction_pattern": "multi_turn_complex",
+        "user_behavior": "distracted",
+        "tuple": "(book_appointment, no_info, multi_turn_complex, distracted)"
       },
-      "user_goal": "Get specific information about shop hours, location, or services",
-      "initial_query": "\"Hi there! I'm planning to visit your shop soon but couldn't find all the details online. Could you tell me about your opening hours and where exactly you're located?\"",
+      "user_goal": "Successfully book a service appointment by providing service type, date, and time",
+      "initial_query": "\"Hey, I need to book something for my bike... um, can you help me with that?\"",
       "turns": [
         {
           "role": "user",
-          "content": "Hey there! I\u2019m looking to do a bit of shopping and could use some info\u2014can you help me out?"
+          "content": "Hey, sorry, I keep getting sidetracked, but I need to book an appointment\u2014can you help me with that?"
         },
         {
           "role": "assistant",
-          "content": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?"
+          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
         },
         {
           "role": "user",
-          "content": "Thanks! Could you tell me what your opening hours are and if you have any mountain bikes in stock?"
+          "content": "Oh right, sorry\u2014um, I think I need a tune-up for my bike. What times do you have available?"
         },
         {
           "role": "assistant",
-          "content": "Absolutely! We're open 7 days a week, Monday to Friday 9:00 AM - 6:00 PM, with extended hours Thursday and Friday until 7:00 PM, Saturday 8:00 AM - 5:00 PM, and Sunday 10:00 AM - 4:00 PM. Feel free to stop by to check out our selection of mountain bikes in stock and find your next adventure companion! \ud83d\udeb5\u200d\u2642\ufe0f\ud83d\udd27"
+          "content": "Great! I have you down for a tune-up. What date works best for you?"
+        },
+        {
+          "role": "user",
+          "content": "Oh, um, let me think\u2014maybe next Wednesday? Or wait, is that too soon?"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available."
+        },
+        {
+          "role": "user",
+          "content": "Oh, sorry, I keep losing track\u2014afternoon would be better for me, I think. Is 2pm open?"
+        },
+        {
+          "role": "assistant",
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Wednesday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
+        },
+        {
+          "role": "user",
+          "content": "Yes, that looks good\u2014please go ahead and book it for me. Thanks for your patience!"
+        },
+        {
+          "role": "assistant",
+          "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hey there! I\u2019m looking to do a bit of shopping and could use some info\u2014can you help me out?"
+          "content": "Hey, sorry, I keep getting sidetracked, but I need to book an appointment\u2014can you help me with that?"
         },
         {
           "role": "assistant",
-          "content": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?"
+          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
         },
         {
           "role": "user",
-          "content": "Thanks! Could you tell me what your opening hours are and if you have any mountain bikes in stock?"
+          "content": "Oh right, sorry\u2014um, I think I need a tune-up for my bike. What times do you have available?"
         },
         {
           "role": "assistant",
-          "content": "Absolutely! We're open 7 days a week, Monday to Friday 9:00 AM - 6:00 PM, with extended hours Thursday and Friday until 7:00 PM, Saturday 8:00 AM - 5:00 PM, and Sunday 10:00 AM - 4:00 PM. Feel free to stop by to check out our selection of mountain bikes in stock and find your next adventure companion! \ud83d\udeb5\u200d\u2642\ufe0f\ud83d\udd27"
+          "content": "Great! I have you down for a tune-up. What date works best for you?"
+        },
+        {
+          "role": "user",
+          "content": "Oh, um, let me think\u2014maybe next Wednesday? Or wait, is that too soon?"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available."
+        },
+        {
+          "role": "user",
+          "content": "Oh, sorry, I keep losing track\u2014afternoon would be better for me, I think. Is 2pm open?"
+        },
+        {
+          "role": "assistant",
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Wednesday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
+        },
+        {
+          "role": "user",
+          "content": "Yes, that looks good\u2014please go ahead and book it for me. Thanks for your patience!"
+        },
+        {
+          "role": "assistant",
+          "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
         }
       ],
       "success": true,
@@ -731,95 +587,95 @@
       "test_id": "MT009",
       "scenario": {
         "primary_intent": "product_inquiry",
-        "completeness": "complete_upfront",
-        "interaction_pattern": "multi_turn_linear",
-        "user_behavior": "cooperative",
-        "tuple": "(product_inquiry, complete_upfront, multi_turn_linear, cooperative)"
+        "completeness": "minimal_info",
+        "interaction_pattern": "mixed_intent",
+        "user_behavior": "corrective",
+        "tuple": "(product_inquiry, minimal_info, mixed_intent, corrective)"
       },
       "user_goal": "Learn about specific bikes or accessories and their availability",
-      "initial_query": "Hi! I'm interested in learning more about your range of mountain bikes and whether they're currently in stock. Can you provide details on the models available and any accessories that might complement them? Thank you!",
+      "initial_query": "Hi, I'm looking for information on road bikes you have in stock. Can you help?",
       "turns": [
         {
           "role": "user",
-          "content": "Hi there! I\u2019m interested in learning more about one of your products and was hoping you could help me with some details."
+          "content": "Hello, I have a few questions about one of your products and want to make sure I have the correct information. Could you help me with some details?"
         },
         {
           "role": "assistant",
-          "content": "Of course! I'd be happy to help. Please let me know which product you're interested in or what specific information you're looking for, and I'll do my best to assist you."
+          "content": "Of course! I'd be happy to help. Please let me know which product you are inquiring about, and I will provide you with the necessary information."
         },
         {
           "role": "user",
-          "content": "I'm interested in your wireless headphones\u2014could you tell me more about their features and battery life?"
+          "content": "I'm asking about the Model X wireless headphones\u2014can you confirm if they support Bluetooth 5.2 and active noise cancellation?"
         },
         {
           "role": "assistant",
-          "content": "Our wireless headphones offer a premium sound experience with comfortable ear cushioning and a lightweight design for long-lasting use. The battery life varies depending on the specific model, ranging from 8 to 20 hours of continuous playtime on a single charge."
+          "content": "Yes, the Model X wireless headphones support Bluetooth 5.2 technology and feature active noise cancellation for an enhanced listening experience."
         },
         {
           "role": "user",
-          "content": "Thanks for the info! Do these headphones support noise cancellation, and are they compatible with both iOS and Android devices?"
+          "content": "Thank you for confirming. Could you also clarify if the Model X headphones are compatible with both iOS and Android devices?"
         },
         {
           "role": "assistant",
-          "content": "Yes, our wireless headphones support noise cancellation for an immersive audio experience. They are compatible with both iOS and Android devices, making them versatile for a wide range of users."
+          "content": "Yes, the Model X wireless headphones are compatible with both iOS and Android devices, allowing you to easily connect and enjoy your music or audio content across different platforms."
         },
         {
           "role": "user",
-          "content": "Great, that sounds perfect! Could you also let me know if they come with a warranty and what the return policy is?"
+          "content": "Great, thanks for clarifying. One more thing\u2014can you confirm the battery life on a single charge and whether the headphones support fast charging?"
         },
         {
           "role": "assistant",
-          "content": "Our wireless headphones come with a warranty for manufacturer defects. We also offer a hassle-free return policy within 30 days of purchase for any reason. Feel free to contact us for more details or specific questions."
+          "content": "The Model X wireless headphones offer a battery life of up to 20 hours on a single charge and support fast charging for quick recharging when needed."
         },
         {
           "role": "user",
-          "content": "Thank you for clarifying! Could you please share the price and available color options for the wireless headphones?"
+          "content": "Thank you for confirming. Lastly, could you specify if the Model X headphones come with a warranty and what it covers?"
         },
         {
           "role": "assistant",
-          "content": "I'm glad to help with that! For details on price and color options for wireless headphones, please reach out to us directly using the contact information provided. In the meantime, I'm here to assist with any other questions you may have about bikes, accessories, or service appointments."
+          "content": "The Model X wireless headphones come with a one-year manufacturer's warranty that covers any defects in materials or workmanship. For more information on our shop policies including returns and delivery, please contact us at (503) 555-BIKE or info@josbikeshop.com."
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hi there! I\u2019m interested in learning more about one of your products and was hoping you could help me with some details."
+          "content": "Hello, I have a few questions about one of your products and want to make sure I have the correct information. Could you help me with some details?"
         },
         {
           "role": "assistant",
-          "content": "Of course! I'd be happy to help. Please let me know which product you're interested in or what specific information you're looking for, and I'll do my best to assist you."
+          "content": "Of course! I'd be happy to help. Please let me know which product you are inquiring about, and I will provide you with the necessary information."
         },
         {
           "role": "user",
-          "content": "I'm interested in your wireless headphones\u2014could you tell me more about their features and battery life?"
+          "content": "I'm asking about the Model X wireless headphones\u2014can you confirm if they support Bluetooth 5.2 and active noise cancellation?"
         },
         {
           "role": "assistant",
-          "content": "Our wireless headphones offer a premium sound experience with comfortable ear cushioning and a lightweight design for long-lasting use. The battery life varies depending on the specific model, ranging from 8 to 20 hours of continuous playtime on a single charge."
+          "content": "Yes, the Model X wireless headphones support Bluetooth 5.2 technology and feature active noise cancellation for an enhanced listening experience."
         },
         {
           "role": "user",
-          "content": "Thanks for the info! Do these headphones support noise cancellation, and are they compatible with both iOS and Android devices?"
+          "content": "Thank you for confirming. Could you also clarify if the Model X headphones are compatible with both iOS and Android devices?"
         },
         {
           "role": "assistant",
-          "content": "Yes, our wireless headphones support noise cancellation for an immersive audio experience. They are compatible with both iOS and Android devices, making them versatile for a wide range of users."
+          "content": "Yes, the Model X wireless headphones are compatible with both iOS and Android devices, allowing you to easily connect and enjoy your music or audio content across different platforms."
         },
         {
           "role": "user",
-          "content": "Great, that sounds perfect! Could you also let me know if they come with a warranty and what the return policy is?"
+          "content": "Great, thanks for clarifying. One more thing\u2014can you confirm the battery life on a single charge and whether the headphones support fast charging?"
         },
         {
           "role": "assistant",
-          "content": "Our wireless headphones come with a warranty for manufacturer defects. We also offer a hassle-free return policy within 30 days of purchase for any reason. Feel free to contact us for more details or specific questions."
+          "content": "The Model X wireless headphones offer a battery life of up to 20 hours on a single charge and support fast charging for quick recharging when needed."
         },
         {
           "role": "user",
-          "content": "Thank you for clarifying! Could you please share the price and available color options for the wireless headphones?"
+          "content": "Thank you for confirming. Lastly, could you specify if the Model X headphones come with a warranty and what it covers?"
         },
         {
           "role": "assistant",
-          "content": "I'm glad to help with that! For details on price and color options for wireless headphones, please reach out to us directly using the contact information provided. In the meantime, I'm here to assist with any other questions you may have about bikes, accessories, or service appointments."
+          "content": "The Model X wireless headphones come with a one-year manufacturer's warranty that covers any defects in materials or workmanship. For more information on our shop policies including returns and delivery, please contact us at (503) 555-BIKE or info@josbikeshop.com."
         }
       ],
       "success": true,
@@ -828,80 +684,96 @@
     {
       "test_id": "MT010",
       "scenario": {
-        "primary_intent": "product_inquiry",
+        "primary_intent": "recall_booking",
         "completeness": "minimal_info",
-        "interaction_pattern": "multi_turn_complex",
+        "interaction_pattern": "multi_turn_linear",
         "user_behavior": "corrective",
-        "tuple": "(product_inquiry, minimal_info, multi_turn_complex, corrective)"
+        "tuple": "(recall_booking, minimal_info, multi_turn_linear, corrective)"
       },
-      "user_goal": "Learn about specific bikes or accessories and their availability",
-      "initial_query": "\"Hi, do you have any mountain bikes with suspension in stock?\"",
+      "user_goal": "Successfully recall or reference a previously made booking",
+      "initial_query": "\"Hi, I think I made a booking for a tune-up, but I can't find the details. Can you help me check it?\"",
       "turns": [
         {
           "role": "user",
-          "content": "Hello, I have a few questions about one of your products and want to make sure I have the correct information. Could you help me with some details?"
+          "content": "Hi, I\u2019d like to check the details of a booking I made earlier. Can you help me recall it?"
         },
         {
           "role": "assistant",
-          "content": "Of course! I'd be happy to help with any questions you have about our bikes or accessories. Please feel free to ask away, and I'll provide you with the information you need."
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
         },
         {
           "role": "user",
-          "content": "Thanks! First, can you confirm if the Model X bike comes with hydraulic disc brakes as standard?"
+          "content": "Actually, I made a booking yesterday\u2014could you check under my account or by my email address?"
         },
         {
           "role": "assistant",
-          "content": "Yes, the Model X bike comes equipped with hydraulic disc brakes as a standard feature. They provide reliable stopping power and are great for improved control in various riding conditions."
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
         },
         {
           "role": "user",
-          "content": "Great, thank you for confirming. Could you also clarify if the Model X includes a rear rack or if that needs to be purchased separately?"
+          "content": "I\u2019m sure I made a booking\u2014can you please double-check using my account details or email?"
         },
         {
           "role": "assistant",
-          "content": "The Model X bike does not come with a rear rack included. You would need to purchase a rear rack separately if you'd like to add that feature to your bike."
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
         },
         {
           "role": "user",
-          "content": "Thanks for clarifying. Lastly, can you confirm if the Model X is compatible with all standard rear racks, or are there specific models you recommend?"
+          "content": "Can you please check again using my email address? I definitely made a booking yesterday."
         },
         {
           "role": "assistant",
-          "content": "The Model X bike is compatible with most standard rear racks available in the market. However, for optimal fit and performance, we recommend using our compatible rear rack accessories specifically designed for the Model X."
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "I\u2019m certain I booked yesterday\u2014can you escalate this or check with support using my email address?"
+        },
+        {
+          "role": "assistant",
+          "content": "I'm sorry for the inconvenience. For support regarding your booking, please reach out to support directly at info@josbikeshop.com, or give us a call at (503) 555-BIKE. If you need help with anything else related to our shop or services, feel free to ask!"
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hello, I have a few questions about one of your products and want to make sure I have the correct information. Could you help me with some details?"
+          "content": "Hi, I\u2019d like to check the details of a booking I made earlier. Can you help me recall it?"
         },
         {
           "role": "assistant",
-          "content": "Of course! I'd be happy to help with any questions you have about our bikes or accessories. Please feel free to ask away, and I'll provide you with the information you need."
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
         },
         {
           "role": "user",
-          "content": "Thanks! First, can you confirm if the Model X bike comes with hydraulic disc brakes as standard?"
+          "content": "Actually, I made a booking yesterday\u2014could you check under my account or by my email address?"
         },
         {
           "role": "assistant",
-          "content": "Yes, the Model X bike comes equipped with hydraulic disc brakes as a standard feature. They provide reliable stopping power and are great for improved control in various riding conditions."
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
         },
         {
           "role": "user",
-          "content": "Great, thank you for confirming. Could you also clarify if the Model X includes a rear rack or if that needs to be purchased separately?"
+          "content": "I\u2019m sure I made a booking\u2014can you please double-check using my account details or email?"
         },
         {
           "role": "assistant",
-          "content": "The Model X bike does not come with a rear rack included. You would need to purchase a rear rack separately if you'd like to add that feature to your bike."
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
         },
         {
           "role": "user",
-          "content": "Thanks for clarifying. Lastly, can you confirm if the Model X is compatible with all standard rear racks, or are there specific models you recommend?"
+          "content": "Can you please check again using my email address? I definitely made a booking yesterday."
         },
         {
           "role": "assistant",
-          "content": "The Model X bike is compatible with most standard rear racks available in the market. However, for optimal fit and performance, we recommend using our compatible rear rack accessories specifically designed for the Model X."
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "I\u2019m certain I booked yesterday\u2014can you escalate this or check with support using my email address?"
+        },
+        {
+          "role": "assistant",
+          "content": "I'm sorry for the inconvenience. For support regarding your booking, please reach out to support directly at info@josbikeshop.com, or give us a call at (503) 555-BIKE. If you need help with anything else related to our shop or services, feel free to ask!"
         }
       ],
       "success": true,
@@ -910,32 +782,96 @@
     {
       "test_id": "MT011",
       "scenario": {
-        "primary_intent": "maintenance_tips",
-        "completeness": "partial_info",
+        "primary_intent": "book_appointment",
+        "completeness": "minimal_info",
         "interaction_pattern": "multi_turn_linear",
-        "user_behavior": "distracted",
-        "tuple": "(maintenance_tips, partial_info, multi_turn_linear, distracted)"
+        "user_behavior": "canceling",
+        "tuple": "(book_appointment, minimal_info, multi_turn_linear, canceling)"
       },
-      "user_goal": "Get practical advice on bike maintenance or care",
-      "initial_query": "Hey there, I was wondering if you have any quick tips on keeping my bike in good shape?",
+      "user_goal": "Successfully book a service appointment by providing service type, date, and time",
+      "initial_query": "Hi, I'd like to book a service appointment for my bike. Can you help me with that?",
       "turns": [
         {
           "role": "user",
-          "content": "Hey, sorry if I seem a bit all over the place, but do you have any quick tips for keeping things in good shape? I always forget about maintenance stuff."
+          "content": "Hi there, I\u2019d like to book an appointment, but I\u2019m a bit unsure about my schedule. Could you help me find a time that\u2019s easy to reschedule if needed?"
         },
         {
           "role": "assistant",
-          "content": "No problem! Remember to regularly clean and lubricate your bike chain, check tire pressure before every ride, and inspect for any signs of wear or damage on your brakes and cables. These simple steps can help keep your bike running smoothly and safely."
+          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
+        },
+        {
+          "role": "user",
+          "content": "I\u2019m looking to book a tune-up, but I might need to change the time later\u2014what\u2019s your cancellation policy?"
+        },
+        {
+          "role": "assistant",
+          "content": "No problem! I've canceled the appointment booking. Is there anything else I can help you with?"
+        },
+        {
+          "role": "user",
+          "content": "Actually, I still want to book a tune-up\u2014could you suggest a time that\u2019s easy to move if I need to reschedule?"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! I have you down for a tune-up. What date works best for you?"
+        },
+        {
+          "role": "user",
+          "content": "Could you recommend a date that\u2019s usually less busy, in case I need to change it last minute?"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! I have you down for a tune-up. What date works best for you?"
+        },
+        {
+          "role": "user",
+          "content": "Is there a day next week that tends to have more open slots or is easier to reschedule?"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available."
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hey, sorry if I seem a bit all over the place, but do you have any quick tips for keeping things in good shape? I always forget about maintenance stuff."
+          "content": "Hi there, I\u2019d like to book an appointment, but I\u2019m a bit unsure about my schedule. Could you help me find a time that\u2019s easy to reschedule if needed?"
         },
         {
           "role": "assistant",
-          "content": "No problem! Remember to regularly clean and lubricate your bike chain, check tire pressure before every ride, and inspect for any signs of wear or damage on your brakes and cables. These simple steps can help keep your bike running smoothly and safely."
+          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
+        },
+        {
+          "role": "user",
+          "content": "I\u2019m looking to book a tune-up, but I might need to change the time later\u2014what\u2019s your cancellation policy?"
+        },
+        {
+          "role": "assistant",
+          "content": "No problem! I've canceled the appointment booking. Is there anything else I can help you with?"
+        },
+        {
+          "role": "user",
+          "content": "Actually, I still want to book a tune-up\u2014could you suggest a time that\u2019s easy to move if I need to reschedule?"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! I have you down for a tune-up. What date works best for you?"
+        },
+        {
+          "role": "user",
+          "content": "Could you recommend a date that\u2019s usually less busy, in case I need to change it last minute?"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! I have you down for a tune-up. What date works best for you?"
+        },
+        {
+          "role": "user",
+          "content": "Is there a day next week that tends to have more open slots or is easier to reschedule?"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available."
         }
       ],
       "success": true,
@@ -944,48 +880,48 @@
     {
       "test_id": "MT012",
       "scenario": {
-        "primary_intent": "policy_question",
-        "completeness": "minimal_info",
-        "interaction_pattern": "multi_turn_linear",
-        "user_behavior": "cooperative",
-        "tuple": "(policy_question, minimal_info, multi_turn_linear, cooperative)"
+        "primary_intent": "shop_info",
+        "completeness": "no_info",
+        "interaction_pattern": "mixed_intent",
+        "user_behavior": "distracted",
+        "tuple": "(shop_info, no_info, mixed_intent, distracted)"
       },
-      "user_goal": "Understand store policies regarding returns, warranties, or delivery",
-      "initial_query": "Hi! I recently bought a bike from your shop and was wondering if you could tell me a bit about your return policy?",
+      "user_goal": "Get specific information about shop hours, location, or services",
+      "initial_query": "Hey, um, could you tell me when you guys are open?",
       "turns": [
         {
           "role": "user",
-          "content": "Hi there! I have a question about a policy and was hoping you could help clarify a few things for me."
+          "content": "Hey, I was hoping you could help me find some info about shopping, but I might get a bit sidetracked\u2014can you keep things simple for me?"
         },
         {
           "role": "assistant",
-          "content": "Of course! I'd be happy to help. Please let me know what specific policy you have questions about - returns, warranties, or delivery?"
+          "content": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?"
         },
         {
           "role": "user",
-          "content": "Thanks! I have a question about your returns policy\u2014could you explain how it works and if there are any exceptions?"
+          "content": "Oh, cool\u2014can you just tell me what time the shop closes today? Sorry, I might ask about something else in a sec."
         },
         {
           "role": "assistant",
-          "content": "Our returns policy allows for returns within 30 days of purchase with proof of receipt. Exceptions include used or damaged items and personalized/customized products. If you have any specific concerns, please reach out to us at (503) 555-BIKE or info@josbikeshop.com."
+          "content": "Absolutely! JO's Bike Shop closes at 7:00 PM today. Feel free to swing by for any bike-related needs before then, or let me know if you've got more questions\u2014I'm here to help you roll smoothly!"
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hi there! I have a question about a policy and was hoping you could help clarify a few things for me."
+          "content": "Hey, I was hoping you could help me find some info about shopping, but I might get a bit sidetracked\u2014can you keep things simple for me?"
         },
         {
           "role": "assistant",
-          "content": "Of course! I'd be happy to help. Please let me know what specific policy you have questions about - returns, warranties, or delivery?"
+          "content": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?"
         },
         {
           "role": "user",
-          "content": "Thanks! I have a question about your returns policy\u2014could you explain how it works and if there are any exceptions?"
+          "content": "Oh, cool\u2014can you just tell me what time the shop closes today? Sorry, I might ask about something else in a sec."
         },
         {
           "role": "assistant",
-          "content": "Our returns policy allows for returns within 30 days of purchase with proof of receipt. Exceptions include used or damaged items and personalized/customized products. If you have any specific concerns, please reach out to us at (503) 555-BIKE or info@josbikeshop.com."
+          "content": "Absolutely! JO's Bike Shop closes at 7:00 PM today. Feel free to swing by for any bike-related needs before then, or let me know if you've got more questions\u2014I'm here to help you roll smoothly!"
         }
       ],
       "success": true,
@@ -994,48 +930,96 @@
     {
       "test_id": "MT013",
       "scenario": {
-        "primary_intent": "policy_question",
+        "primary_intent": "book_appointment",
         "completeness": "partial_info",
-        "interaction_pattern": "mixed_intent",
-        "user_behavior": "corrective",
-        "tuple": "(policy_question, partial_info, mixed_intent, corrective)"
+        "interaction_pattern": "multi_turn_linear",
+        "user_behavior": "cooperative",
+        "tuple": "(book_appointment, partial_info, multi_turn_linear, cooperative)"
       },
-      "user_goal": "Understand store policies regarding returns, warranties, or delivery",
-      "initial_query": "Hi, I recently bought a bike from your store, but there might be an issue. Could you tell me what your return policy is?",
+      "user_goal": "Successfully book a service appointment by providing service type, date, and time",
+      "initial_query": "Hi! I'd like to book a service appointment for my bike. Can you help me with the details?",
       "turns": [
         {
           "role": "user",
-          "content": "Hi there, I have a question about a specific policy and want to make sure I fully understand it. Could you help clarify a few points for me?"
+          "content": "Hi there! I\u2019d like to book an appointment and was hoping you could help me with the process."
         },
         {
           "role": "assistant",
-          "content": "Of course! Feel free to ask your questions about our shop policies regarding returns, warranties, and delivery. We'll be happy to provide you with more information and clarification."
+          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
         },
         {
           "role": "user",
-          "content": "Thanks! First, could you clarify your return policy, specifically regarding items that are opened but unused?"
+          "content": "I\u2019d like to schedule a tune-up, please. What dates and times are available?"
         },
         {
           "role": "assistant",
-          "content": "Our return policy allows for returns within 30 days of purchase for unused items in their original packaging. Opened but unused items may still be eligible for return, subject to inspection for any potential damage or wear. For more details on our return policy, please contact our shop directly."
+          "content": "Great! I have you down for a tune-up. What date works best for you?"
+        },
+        {
+          "role": "user",
+          "content": "Next Friday would be ideal for me\u2014do you have any openings then?"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available."
+        },
+        {
+          "role": "user",
+          "content": "Afternoon would be perfect\u2014can I book a 2pm slot if that's available?"
+        },
+        {
+          "role": "assistant",
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Friday\n\u2022 Time: 2pm\n\nDoes this look correct? I can book this for you now!"
+        },
+        {
+          "role": "user",
+          "content": "Yes, that looks great\u2014please go ahead and book it for me. Thank you!"
+        },
+        {
+          "role": "assistant",
+          "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hi there, I have a question about a specific policy and want to make sure I fully understand it. Could you help clarify a few points for me?"
+          "content": "Hi there! I\u2019d like to book an appointment and was hoping you could help me with the process."
         },
         {
           "role": "assistant",
-          "content": "Of course! Feel free to ask your questions about our shop policies regarding returns, warranties, and delivery. We'll be happy to provide you with more information and clarification."
+          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
         },
         {
           "role": "user",
-          "content": "Thanks! First, could you clarify your return policy, specifically regarding items that are opened but unused?"
+          "content": "I\u2019d like to schedule a tune-up, please. What dates and times are available?"
         },
         {
           "role": "assistant",
-          "content": "Our return policy allows for returns within 30 days of purchase for unused items in their original packaging. Opened but unused items may still be eligible for return, subject to inspection for any potential damage or wear. For more details on our return policy, please contact our shop directly."
+          "content": "Great! I have you down for a tune-up. What date works best for you?"
+        },
+        {
+          "role": "user",
+          "content": "Next Friday would be ideal for me\u2014do you have any openings then?"
+        },
+        {
+          "role": "assistant",
+          "content": "Great! I have you down for a tune-up. What time would you prefer? We have morning (8am-12pm) and afternoon (1pm-5pm) slots available."
+        },
+        {
+          "role": "user",
+          "content": "Afternoon would be perfect\u2014can I book a 2pm slot if that's available?"
+        },
+        {
+          "role": "assistant",
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Friday\n\u2022 Time: 2pm\n\nDoes this look correct? I can book this for you now!"
+        },
+        {
+          "role": "user",
+          "content": "Yes, that looks great\u2014please go ahead and book it for me. Thank you!"
+        },
+        {
+          "role": "assistant",
+          "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
         }
       ],
       "success": true,
@@ -1044,32 +1028,96 @@
     {
       "test_id": "MT014",
       "scenario": {
-        "primary_intent": "what_can_you_do",
+        "primary_intent": "product_inquiry",
         "completeness": "complete_upfront",
-        "interaction_pattern": "mixed_intent",
+        "interaction_pattern": "multi_turn_complex",
         "user_behavior": "cooperative",
-        "tuple": "(what_can_you_do, complete_upfront, mixed_intent, cooperative)"
+        "tuple": "(product_inquiry, complete_upfront, multi_turn_complex, cooperative)"
       },
-      "user_goal": "Complete a what_can_you_do interaction successfully",
-      "initial_query": "Hello! I'm interested in knowing more about the services and products you offer at your bike shop. Can you tell me what you can help with?",
+      "user_goal": "Learn about specific bikes or accessories and their availability",
+      "initial_query": "Hi! I'm interested in knowing if you have the Trek Marlin 7 mountain bike in stock, and if you also carry the Bontrager Circuit WaveCel helmet. Could you provide some details on their availability?",
       "turns": [
         {
           "role": "user",
-          "content": "Hi there! I\u2019m curious\u2014could you tell me what kinds of things you can help me with?"
+          "content": "Hi there! I\u2019m interested in learning more about one of your products and was hoping you could help me with some details."
         },
         {
           "role": "assistant",
-          "content": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?"
+          "content": "Of course! I'd be happy to help. Please let me know which product you are interested in and I can provide you with more information."
+        },
+        {
+          "role": "user",
+          "content": "I'm interested in your wireless headphones\u2014could you tell me more about their features and battery life?"
+        },
+        {
+          "role": "assistant",
+          "content": "Our wireless headphones provide high-quality sound and have a long battery life for extended use. They are designed for comfort and convenience, making them ideal for workouts, commutes, and everyday use."
+        },
+        {
+          "role": "user",
+          "content": "That sounds great! Could you also let me know if they have noise-cancelling features and what colors are available?"
+        },
+        {
+          "role": "assistant",
+          "content": "Our wireless headphones do not have noise-cancelling features. They are available in black, white, and blue."
+        },
+        {
+          "role": "user",
+          "content": "Thanks for the info! Could you also tell me about the warranty and return policy for these headphones?"
+        },
+        {
+          "role": "assistant",
+          "content": "Our wireless headphones come with a one-year warranty for any manufacturing defects. We also offer a 30-day return policy for unused products in their original packaging."
+        },
+        {
+          "role": "user",
+          "content": "Perfect, thank you! Could you let me know the price and if there are any current promotions or discounts available?"
+        },
+        {
+          "role": "assistant",
+          "content": "\"Thank you for reaching out! I'm glad to assist. For current pricing, promotions, and discounts, it's best to contact the shop directly at (503) 555-BIKE or info@josbikeshop.com. Is there anything else I can help you with today?\""
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hi there! I\u2019m curious\u2014could you tell me what kinds of things you can help me with?"
+          "content": "Hi there! I\u2019m interested in learning more about one of your products and was hoping you could help me with some details."
         },
         {
           "role": "assistant",
-          "content": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?"
+          "content": "Of course! I'd be happy to help. Please let me know which product you are interested in and I can provide you with more information."
+        },
+        {
+          "role": "user",
+          "content": "I'm interested in your wireless headphones\u2014could you tell me more about their features and battery life?"
+        },
+        {
+          "role": "assistant",
+          "content": "Our wireless headphones provide high-quality sound and have a long battery life for extended use. They are designed for comfort and convenience, making them ideal for workouts, commutes, and everyday use."
+        },
+        {
+          "role": "user",
+          "content": "That sounds great! Could you also let me know if they have noise-cancelling features and what colors are available?"
+        },
+        {
+          "role": "assistant",
+          "content": "Our wireless headphones do not have noise-cancelling features. They are available in black, white, and blue."
+        },
+        {
+          "role": "user",
+          "content": "Thanks for the info! Could you also tell me about the warranty and return policy for these headphones?"
+        },
+        {
+          "role": "assistant",
+          "content": "Our wireless headphones come with a one-year warranty for any manufacturing defects. We also offer a 30-day return policy for unused products in their original packaging."
+        },
+        {
+          "role": "user",
+          "content": "Perfect, thank you! Could you let me know the price and if there are any current promotions or discounts available?"
+        },
+        {
+          "role": "assistant",
+          "content": "\"Thank you for reaching out! I'm glad to assist. For current pricing, promotions, and discounts, it's best to contact the shop directly at (503) 555-BIKE or info@josbikeshop.com. Is there anything else I can help you with today?\""
         }
       ],
       "success": true,
@@ -1078,32 +1126,32 @@
     {
       "test_id": "MT015",
       "scenario": {
-        "primary_intent": "what_can_you_do",
+        "primary_intent": "maintenance_tips",
         "completeness": "minimal_info",
-        "interaction_pattern": "multi_turn_complex",
-        "user_behavior": "distracted",
-        "tuple": "(what_can_you_do, minimal_info, multi_turn_complex, distracted)"
+        "interaction_pattern": "mixed_intent",
+        "user_behavior": "conversational",
+        "tuple": "(maintenance_tips, minimal_info, mixed_intent, conversational)"
       },
-      "user_goal": "Complete a what_can_you_do interaction successfully",
-      "initial_query": "Hey, what can this place help me with?",
+      "user_goal": "Get practical advice on bike maintenance or care",
+      "initial_query": "\"Hi there! I'm pretty new to bike maintenance and was wondering if you could share some basic tips to keep my bike in good shape?\"",
       "turns": [
         {
           "role": "user",
-          "content": "Hey there! Sorry, I keep getting sidetracked\u2014can you tell me what kinds of things you can help with?"
+          "content": "Hi there! I\u2019m looking for some helpful maintenance tips\u2014could you share a few ideas to get me started?"
         },
         {
           "role": "assistant",
-          "content": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?"
+          "content": "1. Keep your bike chain clean and lubricated to prevent rust and improve shifting performance.\n2. Regularly check tire pressure and inflate them to the recommended PSI to avoid flats and improve handling. \n3. Inspect your brakes periodically and adjust as needed for smooth and reliable stopping power."
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hey there! Sorry, I keep getting sidetracked\u2014can you tell me what kinds of things you can help with?"
+          "content": "Hi there! I\u2019m looking for some helpful maintenance tips\u2014could you share a few ideas to get me started?"
         },
         {
           "role": "assistant",
-          "content": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?"
+          "content": "1. Keep your bike chain clean and lubricated to prevent rust and improve shifting performance.\n2. Regularly check tire pressure and inflate them to the recommended PSI to avoid flats and improve handling. \n3. Inspect your brakes periodically and adjust as needed for smooth and reliable stopping power."
         }
       ],
       "success": true,
@@ -1113,99 +1161,17 @@
       "test_id": "MT016",
       "scenario": {
         "primary_intent": "book_appointment",
-        "completeness": "complete_upfront",
-        "interaction_pattern": "mixed_intent",
-        "user_behavior": "conversational",
-        "tuple": "(book_appointment, complete_upfront, mixed_intent, conversational)"
-      },
-      "user_goal": "Successfully book a service appointment by providing service type, date, and time",
-      "initial_query": "Hi there! I'd like to book an appointment for a bike tune-up. I'm hoping to schedule it for this Saturday around 10 AM. Could you help me with that?",
-      "turns": [
-        {
-          "role": "user",
-          "content": "Hi there! I\u2019d like to book an appointment and was hoping you could help me with that."
-        },
-        {
-          "role": "assistant",
-          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
-        },
-        {
-          "role": "user",
-          "content": "I\u2019m looking to schedule a tune-up for my bike, please."
-        },
-        {
-          "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What date works best for you?"
-        },
-        {
-          "role": "user",
-          "content": "Do you have any openings this Friday afternoon?"
-        },
-        {
-          "role": "assistant",
-          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: this Friday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
-        },
-        {
-          "role": "user",
-          "content": "Yes, that looks perfect\u2014please go ahead and book it for me. Thanks!"
-        },
-        {
-          "role": "assistant",
-          "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
-        }
-      ],
-      "conversation": [
-        {
-          "role": "user",
-          "content": "Hi there! I\u2019d like to book an appointment and was hoping you could help me with that."
-        },
-        {
-          "role": "assistant",
-          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
-        },
-        {
-          "role": "user",
-          "content": "I\u2019m looking to schedule a tune-up for my bike, please."
-        },
-        {
-          "role": "assistant",
-          "content": "Great! I have you down for a tune-up. What date works best for you?"
-        },
-        {
-          "role": "user",
-          "content": "Do you have any openings this Friday afternoon?"
-        },
-        {
-          "role": "assistant",
-          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: this Friday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
-        },
-        {
-          "role": "user",
-          "content": "Yes, that looks perfect\u2014please go ahead and book it for me. Thanks!"
-        },
-        {
-          "role": "assistant",
-          "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
-        }
-      ],
-      "success": true,
-      "error": null
-    },
-    {
-      "test_id": "MT017",
-      "scenario": {
-        "primary_intent": "book_appointment",
-        "completeness": "no_info",
-        "interaction_pattern": "multi_turn_linear",
+        "completeness": "partial_info",
+        "interaction_pattern": "multi_turn_complex",
         "user_behavior": "cooperative",
-        "tuple": "(book_appointment, no_info, multi_turn_linear, cooperative)"
+        "tuple": "(book_appointment, partial_info, multi_turn_complex, cooperative)"
       },
       "user_goal": "Successfully book a service appointment by providing service type, date, and time",
-      "initial_query": "Hi, I\u2019m looking to book a service appointment for my bike. Can you help me with that?",
+      "initial_query": "Hi there! I need to book an appointment for a bike tune-up. Can you help me find a slot this week?",
       "turns": [
         {
           "role": "user",
-          "content": "Hi there! I\u2019d like to book an appointment and was hoping you could help me with the process."
+          "content": "Hi there! I\u2019d like to book an appointment, please. Could you help me with the process?"
         },
         {
           "role": "assistant",
@@ -1229,15 +1195,15 @@
         },
         {
           "role": "user",
-          "content": "Afternoon would be best\u2014can I book a slot around 2pm?"
+          "content": "Afternoon would be best\u2014can I book a 2pm slot, please?"
         },
         {
           "role": "assistant",
-          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Friday\n\u2022 Time: around 2pm\n\nDoes this look correct? I can book this for you now!"
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Friday\n\u2022 Time: 2pm\n\nDoes this look correct? I can book this for you now!"
         },
         {
           "role": "user",
-          "content": "Yes, that looks perfect\u2014please go ahead and book it for me. Thank you!"
+          "content": "Yes, that\u2019s perfect\u2014please go ahead and book it. Thank you!"
         },
         {
           "role": "assistant",
@@ -1247,7 +1213,7 @@
       "conversation": [
         {
           "role": "user",
-          "content": "Hi there! I\u2019d like to book an appointment and was hoping you could help me with the process."
+          "content": "Hi there! I\u2019d like to book an appointment, please. Could you help me with the process?"
         },
         {
           "role": "assistant",
@@ -1271,15 +1237,15 @@
         },
         {
           "role": "user",
-          "content": "Afternoon would be best\u2014can I book a slot around 2pm?"
+          "content": "Afternoon would be best\u2014can I book a 2pm slot, please?"
         },
         {
           "role": "assistant",
-          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Friday\n\u2022 Time: around 2pm\n\nDoes this look correct? I can book this for you now!"
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Friday\n\u2022 Time: 2pm\n\nDoes this look correct? I can book this for you now!"
         },
         {
           "role": "user",
-          "content": "Yes, that looks perfect\u2014please go ahead and book it for me. Thank you!"
+          "content": "Yes, that\u2019s perfect\u2014please go ahead and book it. Thank you!"
         },
         {
           "role": "assistant",

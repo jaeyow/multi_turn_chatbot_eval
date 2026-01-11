@@ -1,6 +1,6 @@
 {
   "conversation_type": "single_turn",
-  "count": 6,
+  "count": 8,
   "examples": [
     {
       "conversation_type": "single_turn",
@@ -11,7 +11,7 @@
         "user_behavior": "cooperative",
         "tuple": "(shop_info, complete_upfront, single_turn, cooperative)"
       },
-      "user_query": "\"Hi there! Can you tell me what your store hours are and if you\u2019re open on weekends? I\u2019d love to stop by and check out your bikes. Thanks!\"",
+      "user_query": "Hi there! Could you please let me know your store hours and location? I'm planning to visit soon. Thanks!",
       "expected_mode": "shop_info"
     },
     {
@@ -23,7 +23,7 @@
         "user_behavior": "cooperative",
         "tuple": "(shop_info, complete_upfront, single_turn, cooperative)"
       },
-      "user_query": "\"Hi there! Could you please tell me your opening hours and the exact location of your shop? I'm planning to visit soon. Thanks!\"",
+      "user_query": "\"Hi there! Could you please let me know your store hours and location? I'm planning to visit this weekend and want to make sure I have the right details. Thanks!\"",
       "expected_mode": "shop_info"
     },
     {
@@ -32,10 +32,10 @@
         "primary_intent": "maintenance_tips",
         "completeness": "no_info",
         "interaction_pattern": "single_turn",
-        "user_behavior": "cooperative",
-        "tuple": "(maintenance_tips, no_info, single_turn, cooperative)"
+        "user_behavior": "corrective",
+        "tuple": "(maintenance_tips, no_info, single_turn, corrective)"
       },
-      "user_query": "Can you give me some tips on how to maintain my bike?",
+      "user_query": "Oops, I meant to ask about bike maintenance tips. Can you help with that?",
       "expected_mode": "maintenance_tips"
     },
     {
@@ -44,34 +44,58 @@
         "primary_intent": "maintenance_tips",
         "completeness": "no_info",
         "interaction_pattern": "single_turn",
-        "user_behavior": "cooperative",
-        "tuple": "(maintenance_tips, no_info, single_turn, cooperative)"
+        "user_behavior": "corrective",
+        "tuple": "(maintenance_tips, no_info, single_turn, corrective)"
       },
-      "user_query": "Can you give me some tips on how to maintain my bike?",
+      "user_query": "Hey there! Can you give me some tips on bike maintenance?",
       "expected_mode": "maintenance_tips"
     },
     {
       "conversation_type": "single_turn",
       "scenario": {
-        "primary_intent": "what_can_you_do",
-        "completeness": "no_info",
+        "primary_intent": "policy_question",
+        "completeness": "partial_info",
         "interaction_pattern": "single_turn",
         "user_behavior": "cooperative",
-        "tuple": "(what_can_you_do, no_info, single_turn, cooperative)"
+        "tuple": "(policy_question, partial_info, single_turn, cooperative)"
       },
-      "user_query": "What can you help me with here?",
+      "user_query": "Hi there! Could you tell me a bit about your return policy for bikes? I'm considering buying one but want to know in case something doesn't work out. Thanks!",
+      "expected_mode": "policy_question"
+    },
+    {
+      "conversation_type": "single_turn",
+      "scenario": {
+        "primary_intent": "policy_question",
+        "completeness": "partial_info",
+        "interaction_pattern": "single_turn",
+        "user_behavior": "cooperative",
+        "tuple": "(policy_question, partial_info, single_turn, cooperative)"
+      },
+      "user_query": "\"Hi there! Can you tell me a bit about your warranty policy on new bikes?\"",
+      "expected_mode": "policy_question"
+    },
+    {
+      "conversation_type": "single_turn",
+      "scenario": {
+        "primary_intent": "what_can_you_do",
+        "completeness": "complete_upfront",
+        "interaction_pattern": "single_turn",
+        "user_behavior": "cooperative",
+        "tuple": "(what_can_you_do, complete_upfront, single_turn, cooperative)"
+      },
+      "user_query": "\"Hi there! Can you tell me everything you can help me with at your bike shop?\"",
       "expected_mode": "what_can_you_do"
     },
     {
       "conversation_type": "single_turn",
       "scenario": {
         "primary_intent": "what_can_you_do",
-        "completeness": "no_info",
+        "completeness": "complete_upfront",
         "interaction_pattern": "single_turn",
         "user_behavior": "cooperative",
-        "tuple": "(what_can_you_do, no_info, single_turn, cooperative)"
+        "tuple": "(what_can_you_do, complete_upfront, single_turn, cooperative)"
       },
-      "user_query": "What can you help me with here?",
+      "user_query": "\"Hi there! Could you tell me all the different things you can help me with at your bike shop?\"",
       "expected_mode": "what_can_you_do"
     }
   ]
