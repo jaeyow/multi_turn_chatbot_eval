@@ -1,0 +1,20 @@
+Trace_ID,Conversation_Type,Scenario_Tuple,Primary_Intent,Completeness,Interaction_Pattern,User_Behavior,User_Query,Bot_Response_Preview,Action_Taken,Mode_Detected,Success,Error,Open_Code_Notes,Overall_Success
+ST001,single_turn,"(shop_info, complete_upfront, single_turn, cooperative)",shop_info,complete_upfront,single_turn,cooperative,Hi there! Could you please let me know your store hours and location? I'm planning to visit soon. Thanks!,"Absolutely! JO's Bike Shop in Portland, OR is open 7 days a week. Our hours are Mon-Wed 9:00 AM - 6:00 PM, Thur-Fri 9:00 AM - 7:00 PM, Sat 8:00 AM - 5:00 PM, Sun 10:00 AM - 4:00 PM. We can't wait to w",shop_info,shop_info,1,,,
+ST002,single_turn,"(shop_info, complete_upfront, single_turn, cooperative)",shop_info,complete_upfront,single_turn,cooperative,"""Hi there! Could you please let me know your store hours and location? I'm planning to visit this weekend and want to make sure I have the right details. Thanks!""","Absolutely! JO's Bike Shop is located at 456 Pedal Lane, Portland, OR 97201. We're open this weekend on Saturday from 8:00 AM to 5:00 PM and Sunday from 10:00 AM to 4:00 PM. Can't wait to see you roll",shop_info,shop_info,1,,,
+ST003,single_turn,"(maintenance_tips, no_info, single_turn, corrective)",maintenance_tips,no_info,single_turn,corrective,"Oops, I meant to ask about bike maintenance tips. Can you help with that?","Of course! Here are some bike maintenance tips: 
+
+1. Regularly clean and lubricate your chain to prevent rust and ensure smooth shifts.
+2. Check your tire pressure and tread for wear to avoid flats an",maintenance_tips,maintenance_tips,1,,,
+ST004,single_turn,"(maintenance_tips, no_info, single_turn, corrective)",maintenance_tips,no_info,single_turn,corrective,Hey there! Can you give me some tips on bike maintenance?,"Of course! To keep your bike running smoothly, make sure to regularly clean and lubricate the chain, check tire pressure before each ride, and inspect the brake pads for wear. Regularly tune-ups by a ",maintenance_tips,maintenance_tips,1,,,
+ST005,single_turn,"(policy_question, partial_info, single_turn, cooperative)",policy_question,partial_info,single_turn,cooperative,Hi there! Could you tell me a bit about your return policy for bikes? I'm considering buying one but want to know in case something doesn't work out. Thanks!,"Hello! We offer a 30-day return policy for bikes, with the customer responsible for return shipping fees. If you have any concerns or questions about our policies, please feel free to contact us at (5",policy_question,policy_question,1,,,
+ST006,single_turn,"(policy_question, partial_info, single_turn, cooperative)",policy_question,partial_info,single_turn,cooperative,"""Hi there! Can you tell me a bit about your warranty policy on new bikes?""","Hi! Our new bikes come with a standard manufacturer's warranty. For more details or specific questions, please contact our shop at (503) 555-BIKE or info@josbikeshop.com.",policy_question,policy_question,1,,,
+ST007,single_turn,"(what_can_you_do, complete_upfront, single_turn, cooperative)",what_can_you_do,complete_upfront,single_turn,cooperative,"""Hi there! Can you tell me everything you can help me with at your bike shop?""","I'm here to help you with JO's Bike Shop! I can assist you with:
+
+• **Shop Information** - Opening hours, location, and contact details
+
+• **Product Inquiries** - Available bikes, accessories, and pro",what_can_you_do,what_can_you_do,1,,,
+ST008,single_turn,"(what_can_you_do, complete_upfront, single_turn, cooperative)",what_can_you_do,complete_upfront,single_turn,cooperative,"""Hi there! Could you tell me all the different things you can help me with at your bike shop?""","I'm here to help you with JO's Bike Shop! I can assist you with:
+
+• **Shop Information** - Opening hours, location, and contact details
+
+• **Product Inquiries** - Available bikes, accessories, and pro",what_can_you_do,what_can_you_do,1,,,
