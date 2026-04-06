@@ -7,53 +7,17 @@ default:
 
 # Install project dependencies
 install:
-    pip install -r requirements.txt
+    uv sync
 
-# Create and setup virtual environment
-venv:
-    python -m venv .venv
-    @echo "Virtual environment created. Activate with: source .venv/bin/activate"
+# Install including dev dependencies
+dev-install:
+    uv sync --dev
 
-# Run the Streamlit UI (recommended for quick start)
-streamlit:
-    streamlit run streamlit_app.py
-
-# Run the FastAPI server
-server:
-    uvicorn server:app --reload
-
-# Run the Burr monitoring UI
-burr:
-    burr
-
-# Generate state machine diagram
-diagram:
-    python application.py
-
-# Run all tests (if tests exist)
-test:
-    pytest
-
-# Format code with black
-format:
-    black .
-
-# Lint code with flake8
-lint:
-    flake8 .
-
-# Type check with mypy
-typecheck:
-    mypy .
-
-# Clean up Python cache files
-clean:
-    find . -type d -name "__pycache__" -exec rm -rf {} +
-    find . -type f -name "*.pyc" -delete
-    find . -type f -name "*.pyo" -delete
-    find . -type f -name "*.coverage" -delete
-    find . -type d -name "*.egg-info" -exec rm -rf {} +
-    find . -type d -name ".pytest_cache" -exec rm -rf {} +
+# Create and setup virtual environment + install deps + create .env
+setup:
+    uv sync --dev
+    @just env
+    @echo "Setup complete! Run: source .venv/bin/activate"
 
 # Create .env file from template (if it doesn't exist)
 env:
@@ -64,25 +28,67 @@ env:
         echo ".env file already exists."; \
     fi
 
-# Install development dependencies
-dev-install:
-    pip install black flake8 mypy pytest pytest-asyncio
+# Run the Streamlit UI (recommended for quick start)
+streamlit:
+    uv run streamlit run streamlit_app.py
 
-# Run a complete setup (venv + install + env)
-setup: venv
-    .venv/bin/pip install -r requirements.txt
-    @just env
-    @echo "Setup complete! Activate venv with: source .venv/bin/activate"
+# Run the FastAPI server
+server:
+    uv run uvicorn server:app --reload
 
-# Run the application in development mode (server with auto-reload)
-dev: server
+# Run the Burr monitoring UI
+burr:
+    uv run burr
+
+# Generate state machine diagram
+diagram:
+    uv run python application.py
+
+# Run all tests
+test:
+    uv run pytest
+
+# Format code with black
+format:
+    uv run black .
+
+# Lint code with flake8
+lint:
+    uv run flake8 .
+
+# Type check with mypy
+typecheck:
+    uv run mypy .
 
 # Check code quality (lint + typecheck)
 check: lint typecheck
 
 # Full CI check (format check + lint + typecheck + test)
 ci:
-    black --check .
-    flake8 .
-    mypy .
-    pytest
+    uv run black --check .
+    uv run flake8 .
+    uv run mypy .
+    uv run pytest
+
+# Clean up Python cache files and uv build artifacts
+clean:
+    find . -type d -name "__pycache__" -exec rm -rf {} +
+    find . -type f -name "*.pyc" -delete
+    find . -type f -name "*.pyo" -delete
+    find . -type f -name "*.coverage" -delete
+    find . -type d -name "*.egg-info" -exec rm -rf {} +
+    find . -type d -name ".pytest_cache" -exec rm -rf {} +
+
+# Run the application in development mode (server with auto-reload)
+dev: server
+
+# Run all evaluations and generate baseline scores
+# Override judge model : just eval --judge-model gpt-4o
+# Resume from a step   : just eval --start-step 4
+eval *ARGS:
+    uv run python eval_runner.py {{ARGS}}
+
+# Compare two baseline_scores.json files and report metric deltas
+# Usage: just compare error_analysis/baseline_scores.json error_analysis/baseline_scores_gemma4.json
+compare OLD NEW:
+    uv run python compare_baselines.py {{OLD}} {{NEW}}

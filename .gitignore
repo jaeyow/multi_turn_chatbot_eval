@@ -136,3 +136,12 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# DeepEval runtime cache and telemetry (personal tracking UUID + cached LLM outputs)
+.deepeval/
+
+# Eval runner step cache (used for --start-step resumption, not source)
+error_analysis/.cache/
+
+# Generated comparison reports (timestamped, created on demand via just compare)
+error_analysis/comparison_report_*.md

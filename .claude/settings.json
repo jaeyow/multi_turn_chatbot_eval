@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ':*)",
+      "Bash(python3 -c \"from application import application, TERMINAL_ACTIONS; print\\('import ok'\\)\")",
+      "Bash(python3 -c \"import deepeval; from deepeval.metrics import AnswerRelevancyMetric, GEval; from deepeval.test_case import LLMTestCase, LLMTestCaseParams, ConversationalTestCase, Turn; from deepeval.simulator import ConversationSimulator; from deepeval.dataset import ConversationalGolden; print\\('deepeval ok'\\)\")",
+      "Bash(python3 -c \"from application import TERMINAL_ACTIONS; print\\(TERMINAL_ACTIONS\\)\")",
+      "Bash(uv sync:*)",
+      "Bash(pip list:*)",
+      "Bash(python3 -c \"from deepeval import evaluate; import inspect; print\\(inspect.signature\\(evaluate\\)\\)\")",
+      "Bash(python3 -c \"from deepeval.evaluate.configs import AsyncConfig, DisplayConfig; import inspect; print\\(inspect.signature\\(AsyncConfig.__init__\\)\\); print\\(inspect.signature\\(DisplayConfig.__init__\\)\\)\")",
+      "Bash(python3 -m py_compile /Users/josereyes/Dev/multi_turn_chatbot_eval/eval_runner.py)",
+      "Bash(python3 -m py_compile eval_runner.py)",
+      "Bash(python3 -m py_compile compare_baselines.py)"
+    ]
+  }
+}
