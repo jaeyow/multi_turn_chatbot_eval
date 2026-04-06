@@ -107,19 +107,15 @@ ollama pull gemma4:e4b
 
 `e2b` is the lighter 2-billion-parameter variant; `e4b` is the 4-billion-parameter variant with higher quality but slower inference.
 
-### 3. Confirm Ollama is running
+### 3. Confirm the models are available
 
-Ollama starts automatically as a background service after installation. Verify it is up:
+Ollama runs as a background service automatically after installation — no manual start required. Verify the models are ready:
 
 ```bash
 ollama list
 ```
 
-You should see `gemma4:e2b` and `gemma4:e4b` in the output. If the service is not running, start it with:
-
-```bash
-ollama serve
-```
+You should see `gemma4:e2b` and `gemma4:e4b` in the output. That's all — you can now run the evals directly without any extra steps. (`ollama serve` is only needed if the service was explicitly stopped.)
 
 ### 4. Run the chatbot on Gemma 4
 

@@ -14,8 +14,10 @@ import argparse
 import asyncio
 import csv
 import json
+import math
 import os
 import sys
+import time
 import warnings
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -101,6 +103,9 @@ class CostTracker:
     judge_input_tokens: int = 0
     judge_output_tokens: int = 0
 
+    # Latency — one entry per _query_bot() call (seconds, wall clock)
+    bot_latencies_s: List[float] = field(default_factory=list)
+
     def _price(self, model: str) -> Tuple[float, float]:
         return _PRICING.get(model, _DEFAULT_PRICE)
 
@@ -108,6 +113,9 @@ class CostTracker:
         """Estimate bot tokens from string length (4 chars ≈ 1 token)."""
         self.bot_input_tokens += len(query) // 4
         self.bot_output_tokens += len(response) // 4
+
+    def record_latency(self, elapsed_s: float) -> None:
+        self.bot_latencies_s.append(elapsed_s)
 
     def record_deepeval_metric(self, metric: Any) -> None:
         self.deepeval_cost_usd += getattr(metric, "evaluation_cost", 0) or 0.0
@@ -139,6 +147,49 @@ class CostTracker:
     def total_cost_usd(self) -> float:
         return self.bot_cost_usd + self.judge_cost_usd
 
+    def _latency_percentile(self, p: float) -> Optional[float]:
+        if not self.bot_latencies_s:
+            return None
+        s = sorted(self.bot_latencies_s)
+        idx = int(math.ceil(p * len(s))) - 1
+        return round(s[max(0, min(idx, len(s) - 1))], 3)
+
+    @property
+    def avg_latency_s(self) -> Optional[float]:
+        if not self.bot_latencies_s:
+            return None
+        return round(sum(self.bot_latencies_s) / len(self.bot_latencies_s), 3)
+
+    @property
+    def p50_latency_s(self) -> Optional[float]:
+        return self._latency_percentile(0.50)
+
+    @property
+    def p95_latency_s(self) -> Optional[float]:
+        return self._latency_percentile(0.95)
+
+    @property
+    def max_latency_s(self) -> Optional[float]:
+        return round(max(self.bot_latencies_s), 3) if self.bot_latencies_s else None
+
+    @property
+    def total_bot_wall_time_s(self) -> float:
+        return round(sum(self.bot_latencies_s), 1)
+
+    def latency_dict(self) -> Dict[str, Any]:
+        return {
+            "num_calls": len(self.bot_latencies_s),
+            "avg_s": self.avg_latency_s,
+            "p50_s": self.p50_latency_s,
+            "p95_s": self.p95_latency_s,
+            "max_s": self.max_latency_s,
+            "total_bot_wall_time_s": self.total_bot_wall_time_s,
+            "note": (
+                "Measures wall-clock time from query sent to full response received, "
+                "including all LLM calls within one user turn (mode detection + response)."
+            ),
+        }
+
     def summary_dict(self) -> Dict[str, Any]:
         return {
             "bot": {
@@ -162,6 +213,7 @@ class CostTracker:
                 "Judge DeepEval costs are exact per DeepEval; "
                 "direct call costs are exact from OpenAI usage responses."
             ),
+            "latency": self.latency_dict(),
         }
 
 CHATBOT_ROLE = (
@@ -236,22 +288,35 @@ def _rebuild_mt_test_cases(mt_results: List[Dict]) -> None:
             turns=[Turn(role=t["role"], content=t["content"]) for t in r["turns"]],
             chatbot_role=CHATBOT_ROLE,
         )
+        # Ensure latency fields exist even in older caches
+        r.setdefault("turn_latencies_s", [])
+        r.setdefault("avg_turn_latency_s", None)
 
 
 # ─── Bot helpers ──────────────────────────────────────────────────────────────
 
 
-async def _query_bot(app, query: str, tracker: Optional["CostTracker"] = None):
-    """Send one query to a Burr app instance; return (action_name, response_text)."""
+async def _query_bot(
+    app, query: str, tracker: Optional["CostTracker"] = None
+) -> Tuple[str, str, float]:
+    """Send one query to a Burr app instance.
+
+    Returns (action_name, response_text, elapsed_seconds).
+    elapsed_seconds is wall-clock time from query sent to full response received,
+    covering all internal LLM calls (mode detection + response generation).
+    """
+    t0 = time.perf_counter()
     action_obj, streaming_container = await app.astream_result(
         halt_after=TERMINAL_ACTIONS,
         inputs={"query": query},
     )
     _, state = await streaming_container.get()
+    elapsed = round(time.perf_counter() - t0, 3)
     response = state["response"]["content"]
     if tracker:
         tracker.record_bot_exchange(query, response)
-    return action_obj.name, response
+        tracker.record_latency(elapsed)
+    return action_obj.name, response, elapsed
 
 
 # ─── Single-turn ──────────────────────────────────────────────────────────────
@@ -265,7 +330,7 @@ async def run_single_turn_scenarios(examples: List[Dict], tracker: "CostTracker"
         query = ex["user_query"]
         print(f"  [{test_id}] {query}")
         app = application(app_id=test_id)
-        action_name, response = await _query_bot(app, query, tracker)
+        action_name, response, elapsed = await _query_bot(app, query, tracker)
         results.append(
             {
                 "test_id": test_id,
@@ -275,6 +340,7 @@ async def run_single_turn_scenarios(examples: List[Dict], tracker: "CostTracker"
                 "action_taken": action_name,
                 "expected_mode": ex["expected_mode"],
                 "mode_correct": action_name == ex["expected_mode"],
+                "response_time_s": elapsed,
                 "success": True,
                 "error": None,
             }
@@ -391,9 +457,11 @@ async def simulate_one_multi_turn(
 ) -> ConversationalTestCase:
     """Simulate one multi-turn conversation using DeepEval ConversationSimulator."""
     app = application(app_id=test_id)
+    turn_latencies: List[float] = []
 
     async def bot_callback(input: str, **kwargs) -> Turn:  # noqa: A002
-        _, response = await _query_bot(app, input, tracker)
+        _, response, elapsed = await _query_bot(app, input, tracker)
+        turn_latencies.append(elapsed)
         return Turn(role="assistant", content=response)
 
     simulator = ConversationSimulator(
@@ -407,7 +475,7 @@ async def simulate_one_multi_turn(
     )
     tc = test_cases[0]
     tc.chatbot_role = CHATBOT_ROLE
-    return tc
+    return tc, turn_latencies
 
 
 async def run_multi_turn_scenarios(
@@ -419,10 +487,16 @@ async def run_multi_turn_scenarios(
         test_id = f"MT{i+1:03d}"
         print(f"  [{test_id}] {ex['scenario']['tuple']} — {ex['user_goal'][:50]}...")
         golden = _scenario_to_golden(ex)
-        test_case = await simulate_one_multi_turn(golden, test_id, judge_model, tracker)
+        test_case, turn_latencies = await simulate_one_multi_turn(
+            golden, test_id, judge_model, tracker
+        )
         turns = [
             {"role": t.role, "content": t.content} for t in test_case.turns
         ]
+        avg_turn_lat = (
+            round(sum(turn_latencies) / len(turn_latencies), 3)
+            if turn_latencies else None
+        )
         results.append(
             {
                 "test_id": test_id,
@@ -431,6 +505,8 @@ async def run_multi_turn_scenarios(
                 "initial_query": ex["initial_query"],
                 "turns": turns,
                 "conversation": turns,
+                "turn_latencies_s": turn_latencies,
+                "avg_turn_latency_s": avg_turn_lat,
                 "test_case": test_case,
                 "success": True,
                 "error": None,
@@ -696,7 +772,7 @@ def save_single_turn_csv(
         "Trace_ID", "Conversation_Type", "Scenario_Tuple",
         "Primary_Intent", "Completeness", "Interaction_Pattern", "User_Behavior",
         "User_Query", "Bot_Response_Preview", "Action_Taken", "Mode_Detected",
-        "Mode_Correct", "Success", "Error",
+        "Mode_Correct", "Response_Time_s", "Success", "Error",
         "Answer_Relevancy_Score", "Task_Completion_Score", "Conversation_Quality_Score",
         "Open_Code_What_Worked", "Open_Code_What_Went_Wrong", "Open_Code_Notable_Behaviors",
         "Overall_Success",
@@ -720,6 +796,7 @@ def save_single_turn_csv(
                 "Action_Taken": r["action_taken"],
                 "Mode_Detected": r["action_taken"],
                 "Mode_Correct": r["mode_correct"],
+                "Response_Time_s": r.get("response_time_s", ""),
                 "Success": int(r["success"]),
                 "Error": r["error"] or "",
                 "Answer_Relevancy_Score": s.get("Answer Relevancy", {}).get("score", ""),
@@ -746,7 +823,7 @@ def save_multi_turn_csv(
     fieldnames = [
         "Trace_ID", "Conversation_Type", "Scenario_Tuple",
         "Primary_Intent", "Completeness", "Interaction_Pattern", "User_Behavior",
-        "User_Goal", "Num_Turns", "Success", "Error",
+        "User_Goal", "Num_Turns", "Avg_Turn_Latency_s", "Success", "Error",
         "Conversation_Completeness_Score", "Knowledge_Retention_Score",
         "Role_Adherence_Score",
         "Open_Code_What_Worked", "Open_Code_What_Went_Wrong", "Open_Code_Notable_Behaviors",
@@ -768,6 +845,7 @@ def save_multi_turn_csv(
                 "User_Behavior": sc["user_behavior"],
                 "User_Goal": r["user_goal"],
                 "Num_Turns": len(r["turns"]),
+                "Avg_Turn_Latency_s": r.get("avg_turn_latency_s", ""),
                 "Success": int(r["success"]),
                 "Error": r["error"] or "",
                 "Conversation_Completeness_Score": s.get("Conversation Completeness", {}).get("score", ""),
@@ -810,6 +888,7 @@ def save_baseline_scores(
             "chatbot_model": CHATBOT_MODEL,
             "description": "Baseline evaluation scores before LLM replacement",
             "cost": tracker.summary_dict(),
+            "latency": tracker.latency_dict(),
         },
         "single_turn": {
             "total_scenarios": len(st_results),
@@ -829,6 +908,7 @@ def save_baseline_scores(
                     "test_id": r["test_id"],
                     "scenario": r["scenario"]["tuple"],
                     "mode_correct": r["mode_correct"],
+                    "response_time_s": r.get("response_time_s"),
                     "metrics": s,
                     "overall_success": oc.get("overall_success"),
                     "failure_modes": {k: fm.get(k, 0) for k in FAILURE_MODES},
@@ -851,6 +931,7 @@ def save_baseline_scores(
                     "test_id": r["test_id"],
                     "scenario": r["scenario"]["tuple"],
                     "num_turns": len(r["turns"]),
+                    "avg_turn_latency_s": r.get("avg_turn_latency_s"),
                     "metrics": s,
                     "overall_success": oc.get("overall_success"),
                     "failure_modes": {k: fm.get(k, 0) for k in FAILURE_MODES},
@@ -1030,6 +1111,20 @@ def print_report(baseline: Dict, st_results: List[Dict], st_scores: List[Dict],
     if not issues_found:
         print("  No notable issues found.")
 
+    # ── Latency ──────────────────────────────────────────────────────────────
+    lat = baseline["metadata"].get("latency", {})
+    if lat and lat.get("num_calls"):
+        print("\n" + "-" * W)
+        print("  RESPONSE LATENCY  (bot LLM only — excludes judge)")
+        print("-" * W)
+        print(f"  Avg response time : {lat['avg_s']:.2f}s")
+        print(f"  p50 (median)      : {lat['p50_s']:.2f}s")
+        print(f"  p95               : {lat['p95_s']:.2f}s")
+        print(f"  Max               : {lat['max_s']:.2f}s")
+        print(f"  Total bot wall time: {lat['total_bot_wall_time_s']:.0f}s "
+              f"({lat['num_calls']} calls)")
+        print(f"  Note: includes all LLM calls per turn (mode detection + response)")
+
     # ── Cost estimate ────────────────────────────────────────────────────────
     print("\n" + "-" * W)
     print("  ESTIMATED COST")
@@ -1171,6 +1266,22 @@ def save_markdown_report(
     p(table_row("**TOTAL**", "", f"**${cost['total_cost_usd']:.4f} USD**"))
     p(f"\n> _{cost['note']}_\n")
 
+    # ── Latency ────────────────────────────────────────────────────────────────
+    lat = baseline["metadata"].get("latency", {})
+    if lat and lat.get("num_calls"):
+        h(2, "Response Latency")
+        p("Measures wall-clock time from query sent to full response received, "
+          "covering **all LLM calls within one user turn** (mode detection + response generation). "
+          "Lower is better.\n")
+        p("| Metric | Value |")
+        p(table_sep(28, 16))
+        p(table_row("Avg response time", f"{lat['avg_s']:.2f}s"))
+        p(table_row("p50 (median)", f"{lat['p50_s']:.2f}s"))
+        p(table_row("p95", f"{lat['p95_s']:.2f}s"))
+        p(table_row("Max", f"{lat['max_s']:.2f}s"))
+        p(table_row("Total bot wall time", f"{lat['total_bot_wall_time_s']:.0f}s ({lat['num_calls']} calls)"))
+        p()
+
     # ── Metric Definitions ─────────────────────────────────────────────────────
     h(2, "Metric Definitions")
     p("All DeepEval scores are in the range **0.0 – 1.0** (higher is better).")
@@ -1241,7 +1352,8 @@ def save_markdown_report(
         p(f"**Expected mode:** `{r['expected_mode']}` · **Action taken:** `{r['action_taken']}` · "
           f"**Mode correct:** {'Yes' if r['mode_correct'] else 'No'}\n")
         p(f"**Bot response:**")
-        p(f"> {r['bot_response'].replace(chr(10), '  \n> ')}\n")
+        newline_replacement = '  \n> '
+        p(f"> {r['bot_response'].replace(chr(10), newline_replacement)}\n")
         p(f"| Metric | Score | Reason |")
         p(table_sep(24, 7, 50))
         for metric_name in ["Answer Relevancy", "Task Completion", "Conversation Quality"]:

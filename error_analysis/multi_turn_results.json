@@ -2,7 +2,7 @@
   "metadata": {
     "conversation_type": "multi_turn",
     "description": "Multi-Turn conversation tests",
-    "timestamp": "2026-04-06T04:54:27.594984+00:00",
+    "timestamp": "2026-04-06T11:43:32.610847+00:00",
     "total_tests": 16,
     "successful_tests": 16
   },
@@ -21,21 +21,21 @@
       "turns": [
         {
           "role": "user",
-          "content": "Hey! I'm looking to get into mountain biking and was wondering what kind of bikes you have in stock. Also, are there any cool accessories I should check out?"
+          "content": "Hey! I'm looking to get into mountain biking and was wondering what kind of bikes you have in stock. Also, do you have any cool accessories that might go with them?"
         },
         {
           "role": "assistant",
-          "content": "We have a variety of mountain bikes in stock, including full suspension and hardtail options. Some popular accessories to consider are helmets, gloves, hydration packs, and bike lights. Feel free to stop by the shop to see our selection in person!"
+          "content": "We have a diverse selection of mountain bikes perfect for beginners and experienced riders alike. We also carry many accessories, including safety gear and performance upgrades to complement your new bike. To view our specific models and get full details, including current pricing, please call (503) 555-BIKE or email info@josbikeshop.com."
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hey! I'm looking to get into mountain biking and was wondering what kind of bikes you have in stock. Also, are there any cool accessories I should check out?"
+          "content": "Hey! I'm looking to get into mountain biking and was wondering what kind of bikes you have in stock. Also, do you have any cool accessories that might go with them?"
         },
         {
           "role": "assistant",
-          "content": "We have a variety of mountain bikes in stock, including full suspension and hardtail options. Some popular accessories to consider are helmets, gloves, hydration packs, and bike lights. Feel free to stop by the shop to see our selection in person!"
+          "content": "We have a diverse selection of mountain bikes perfect for beginners and experienced riders alike. We also carry many accessories, including safety gear and performance upgrades to complement your new bike. To view our specific models and get full details, including current pricing, please call (503) 555-BIKE or email info@josbikeshop.com."
         }
       ],
       "success": true,
@@ -59,19 +59,19 @@
         },
         {
           "role": "assistant",
-          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
+          "content": "Great! I have you down for a bike service. What date works best for you?"
         },
         {
           "role": "user",
-          "content": "\"I need a full service, please. Can we schedule it for Thursday afternoon?\""
+          "content": "\"Could we schedule it for next Thursday afternoon?\""
         },
         {
           "role": "assistant",
-          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: full service\n\u2022 Date: Thursday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: bike service\n\u2022 Date: next Thursday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
         },
         {
           "role": "user",
-          "content": "\"Yes, that looks great! Please go ahead and book it.\""
+          "content": "\"Yes, that looks perfect. Please go ahead and book it.\""
         },
         {
           "role": "assistant",
@@ -85,19 +85,19 @@
         },
         {
           "role": "assistant",
-          "content": "What type of service do you need? We offer tune-ups, repairs, full services, and custom work."
+          "content": "Great! I have you down for a bike service. What date works best for you?"
         },
         {
           "role": "user",
-          "content": "\"I need a full service, please. Can we schedule it for Thursday afternoon?\""
+          "content": "\"Could we schedule it for next Thursday afternoon?\""
         },
         {
           "role": "assistant",
-          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: full service\n\u2022 Date: Thursday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: bike service\n\u2022 Date: next Thursday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
         },
         {
           "role": "user",
-          "content": "\"Yes, that looks great! Please go ahead and book it.\""
+          "content": "\"Yes, that looks perfect. Please go ahead and book it.\""
         },
         {
           "role": "assistant",
@@ -125,7 +125,7 @@
         },
         {
           "role": "assistant",
-          "content": "Our shop offers a flexible return policy, warranties on select products, and various delivery options available. For more detailed information, please contact us at (503) 555-BIKE or info@josbikeshop.com. Thank you for considering us for your purchase!"
+          "content": "We offer a clear return window and carry comprehensive warranties on most equipment. For delivery, you can select from various options based on your location. If you have questions about specific policies or associated fees, please contact the shop directly at (503) 555-BIKE or info@josbikeshop.com."
         }
       ],
       "conversation": [
@@ -135,7 +135,7 @@
         },
         {
           "role": "assistant",
-          "content": "Our shop offers a flexible return policy, warranties on select products, and various delivery options available. For more detailed information, please contact us at (503) 555-BIKE or info@josbikeshop.com. Thank you for considering us for your purchase!"
+          "content": "We offer a clear return window and carry comprehensive warranties on most equipment. For delivery, you can select from various options based on your location. If you have questions about specific policies or associated fees, please contact the shop directly at (503) 555-BIKE or info@josbikeshop.com."
         }
       ],
       "success": true,
@@ -155,7 +155,7 @@
       "turns": [
         {
           "role": "user",
-          "content": "Hi, I booked a bike fitting session at JO's Bike Shop some time back, but I'm having trouble recalling the date. Could you assist me in finding that information?"
+          "content": "Hi, I booked a bike fitting session at JO's Bike Shop some time ago, but I can't recall the exact date. Could you assist me in finding that information?"
         },
         {
           "role": "assistant",
@@ -163,7 +163,7 @@
         },
         {
           "role": "user",
-          "content": "I actually made the booking a few weeks ago, could you check under the name Alex Johnson?"
+          "content": "I actually made the booking a few weeks back, could you check under the name Alex Johnson?"
         },
         {
           "role": "assistant",
@@ -179,25 +179,49 @@
         },
         {
           "role": "user",
-          "content": "\"Could you try searching with my phone number, 555-1234, instead?\""
+          "content": "\"Could you try searching with my phone number, 0010281839, instead?\""
         },
         {
           "role": "assistant",
-          "content": "I appreciate your question. For assistance with searching by phone number, please contact the shop directly at (503) 555-BIKE or info@josbikeshop.com. I'm here to help with any other inquiries you may have about our products or services."
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
         },
         {
           "role": "user",
-          "content": "\"Thank you for the contact information. I'll reach out to them directly. Could you tell me more about the latest bike models you have in stock?\""
+          "content": "\"Could you please check if there's any record under the name Alex Johnson with the email alex.johnson@example.com or phone number 0010281839?\""
         },
         {
           "role": "assistant",
-          "content": "We have a variety of road, mountain, and hybrid bikes in stock, with options for all skill levels and preferences. Feel free to contact our shop for more details on the latest models available."
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "\"Could you please check your records again? I might have used a different email or phone number.\""
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "\"Could you please verify if there's any record under the name Alex Johnson with any of the details I've provided?\""
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "\"Could you please double-check your system? I might have used a different name or contact detail.\""
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "Hi, I booked a bike fitting session at JO's Bike Shop some time back, but I'm having trouble recalling the date. Could you assist me in finding that information?"
+          "content": "Hi, I booked a bike fitting session at JO's Bike Shop some time ago, but I can't recall the exact date. Could you assist me in finding that information?"
         },
         {
           "role": "assistant",
@@ -205,7 +229,7 @@
         },
         {
           "role": "user",
-          "content": "I actually made the booking a few weeks ago, could you check under the name Alex Johnson?"
+          "content": "I actually made the booking a few weeks back, could you check under the name Alex Johnson?"
         },
         {
           "role": "assistant",
@@ -221,19 +245,43 @@
         },
         {
           "role": "user",
-          "content": "\"Could you try searching with my phone number, 555-1234, instead?\""
+          "content": "\"Could you try searching with my phone number, 0010281839, instead?\""
         },
         {
           "role": "assistant",
-          "content": "I appreciate your question. For assistance with searching by phone number, please contact the shop directly at (503) 555-BIKE or info@josbikeshop.com. I'm here to help with any other inquiries you may have about our products or services."
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
         },
         {
           "role": "user",
-          "content": "\"Thank you for the contact information. I'll reach out to them directly. Could you tell me more about the latest bike models you have in stock?\""
+          "content": "\"Could you please check if there's any record under the name Alex Johnson with the email alex.johnson@example.com or phone number 0010281839?\""
         },
         {
           "role": "assistant",
-          "content": "We have a variety of road, mountain, and hybrid bikes in stock, with options for all skill levels and preferences. Feel free to contact our shop for more details on the latest models available."
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "\"Could you please check your records again? I might have used a different email or phone number.\""
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "\"Could you please verify if there's any record under the name Alex Johnson with any of the details I've provided?\""
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+        },
+        {
+          "role": "user",
+          "content": "\"Could you please double-check your system? I might have used a different name or contact detail.\""
+        },
+        {
+          "role": "assistant",
+          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
         }
       ],
       "success": true,
@@ -257,7 +305,7 @@
         },
         {
           "role": "assistant",
-          "content": "Absolutely! At JO's Bike Shop, we offer a range of services including basic tune-ups and full-service options, custom bike builds, and various repairs. We also have a curated selection of accessories and E-bikes for sale. Swing by, chat with our team, and let's find the perfect match for your cycling adventures! \ud83d\udeb2\u2728"
+          "content": "We offer a wide selection of high-quality bikes for all cycling levels, along with a full range of complementary accessories. Our services include professional tune-ups, repairs, and expert bike fitting to ensure you ride safely and comfortably. Feel free to ask specific questions about models or setup recommendations!"
         }
       ],
       "conversation": [
@@ -267,7 +315,7 @@
         },
         {
           "role": "assistant",
-          "content": "Absolutely! At JO's Bike Shop, we offer a range of services including basic tune-ups and full-service options, custom bike builds, and various repairs. We also have a curated selection of accessories and E-bikes for sale. Swing by, chat with our team, and let's find the perfect match for your cycling adventures! \ud83d\udeb2\u2728"
+          "content": "We offer a wide selection of high-quality bikes for all cycling levels, along with a full range of complementary accessories. Our services include professional tune-ups, repairs, and expert bike fitting to ensure you ride safely and comfortably. Feel free to ask specific questions about models or setup recommendations!"
         }
       ],
       "success": true,
@@ -295,7 +343,7 @@
         },
         {
           "role": "user",
-          "content": "Yes, that looks great! Please go ahead and book it for me."
+          "content": "\"Yes, that looks perfect. Please go ahead and book it. Thank you!\""
         },
         {
           "role": "assistant",
@@ -313,7 +361,7 @@
         },
         {
           "role": "user",
-          "content": "Yes, that looks great! Please go ahead and book it for me."
+          "content": "\"Yes, that looks perfect. Please go ahead and book it. Thank you!\""
         },
         {
           "role": "assistant",
@@ -341,7 +389,7 @@
         },
         {
           "role": "assistant",
-          "content": "1. Keep your chain lubricated and clean regularly to prevent rust and improve shifting performance.\n2. Check your tire pressure before each ride to prevent flats and ensure a smooth ride.\n3. Regularly inspect your brakes, cables, and gears for wear and tear, and adjust or replace as needed."
+          "content": "Start your bike life with a clean, thorough inspection to check tire pressure, brake cable function, and quick-release skewers. Regularly clean the frame and lubricate the chain every few weeks to prevent friction wear. Always check for any loose bolts and keep an eye on your brakes and gears as your riding improves."
         }
       ],
       "conversation": [
@@ -351,7 +399,7 @@
         },
         {
           "role": "assistant",
-          "content": "1. Keep your chain lubricated and clean regularly to prevent rust and improve shifting performance.\n2. Check your tire pressure before each ride to prevent flats and ensure a smooth ride.\n3. Regularly inspect your brakes, cables, and gears for wear and tear, and adjust or replace as needed."
+          "content": "Start your bike life with a clean, thorough inspection to check tire pressure, brake cable function, and quick-release skewers. Regularly clean the frame and lubricate the chain every few weeks to prevent friction wear. Always check for any loose bolts and keep an eye on your brakes and gears as your riding improves."
         }
       ],
       "success": true,
@@ -383,7 +431,7 @@
         },
         {
           "role": "assistant",
-          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: this Thursday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: Thursday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
         },
         {
           "role": "user",
@@ -392,14 +440,6 @@
         {
           "role": "assistant",
           "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
-        },
-        {
-          "role": "user",
-          "content": "\"Actually, I was wondering if you have any recommendations for bike accessories?\""
-        },
-        {
-          "role": "assistant",
-          "content": "I'd be happy to help! Some popular bike accessories include helmets, lights, locks, and water bottle holders. Let me know if you have any specific needs or preferences."
         }
       ],
       "conversation": [
@@ -417,7 +457,7 @@
         },
         {
           "role": "assistant",
-          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: this Thursday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: Thursday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
         },
         {
           "role": "user",
@@ -426,14 +466,6 @@
         {
           "role": "assistant",
           "content": "Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?"
-        },
-        {
-          "role": "user",
-          "content": "\"Actually, I was wondering if you have any recommendations for bike accessories?\""
-        },
-        {
-          "role": "assistant",
-          "content": "I'd be happy to help! Some popular bike accessories include helmets, lights, locks, and water bottle holders. Let me know if you have any specific needs or preferences."
         }
       ],
       "success": true,
@@ -457,31 +489,31 @@
         },
         {
           "role": "assistant",
-          "content": "Of course! We have a variety of road bikes available at JO's Bike Shop, ranging from different brands, sizes, and styles. Feel free to stop by the shop or contact us for more information on specific models and availability."
+          "content": "Absolutely! We have a selection of road bikes suitable for various riding styles. We can easily provide you with details regarding current models, specifications, and features. Please feel free to stop by the shop or call us to discuss which bike best fits your needs."
         },
         {
           "role": "user",
-          "content": "Could you tell me more about the Trek models you have in stock?"
+          "content": "Thanks! Could you also let me know if you have any lightweight models suitable for long-distance rides?"
         },
         {
           "role": "assistant",
-          "content": "We have a variety of Trek road bikes in stock, including models suited for beginner riders to advanced cyclists. Each Trek bike offers high-quality construction, smooth performance, and innovative features designed for a great riding experience. Feel free to visit our shop or contact us for more information on specific Trek models available."
+          "content": "We certainly do! For long-distance comfort and lightweight performance, we carry several excellent endurance road bikes that minimize fatigue. These models typically feature carbon components and optimized geometry for reliable, sustained cruising. Please let us know your expected mileage or preferred terrain, and we can recommend the perfect fit."
         },
         {
           "role": "user",
-          "content": "Thanks! Do you have any Trek models that are particularly good for long-distance rides?"
+          "content": "Great, I'm planning to ride mostly on paved roads with occasional hills. Do you have any specific models in mind?"
         },
         {
           "role": "assistant",
-          "content": "Yes, we have Trek road bike models that are well-suited for long-distance rides, known for their comfortable design and endurance features. Feel free to visit us or contact our shop for more details on specific Trek models perfect for long-distance cycling."
+          "content": "For paved roads with occasional hills, we recommend our versatile endurance road bikes. These models strike a great balance between climbing efficiency and comfort, offering stable and reliable performance on varying terrain. We can show you a few excellent options that match your intended riding profile."
         },
         {
           "role": "user",
-          "content": "\"Great, could you let me know if any of these models are currently on sale or if there are any upcoming promotions?\""
+          "content": "\"Could you provide me with the names or brands of these models so I can do some research before visiting the shop?\""
         },
         {
           "role": "assistant",
-          "content": "\"I appreciate your interest in our promotions! For information on sales or upcoming promotions, please feel free to contact us directly at (503) 555-BIKE or info@josbikeshop.com. Is there anything else I can assist you with today?\""
+          "content": "We focus on reliable brands known for their endurance performance, such as the Fuji Sport, Specialized Roubaix, or brands like Trek Domane. These models are designed specifically for comfort and efficiency on long, paved rides with varied terrain like hills. You can look into the specs and general models for these brands to narrow down your research!"
         }
       ],
       "conversation": [
@@ -491,31 +523,31 @@
         },
         {
           "role": "assistant",
-          "content": "Of course! We have a variety of road bikes available at JO's Bike Shop, ranging from different brands, sizes, and styles. Feel free to stop by the shop or contact us for more information on specific models and availability."
+          "content": "Absolutely! We have a selection of road bikes suitable for various riding styles. We can easily provide you with details regarding current models, specifications, and features. Please feel free to stop by the shop or call us to discuss which bike best fits your needs."
         },
         {
           "role": "user",
-          "content": "Could you tell me more about the Trek models you have in stock?"
+          "content": "Thanks! Could you also let me know if you have any lightweight models suitable for long-distance rides?"
         },
         {
           "role": "assistant",
-          "content": "We have a variety of Trek road bikes in stock, including models suited for beginner riders to advanced cyclists. Each Trek bike offers high-quality construction, smooth performance, and innovative features designed for a great riding experience. Feel free to visit our shop or contact us for more information on specific Trek models available."
+          "content": "We certainly do! For long-distance comfort and lightweight performance, we carry several excellent endurance road bikes that minimize fatigue. These models typically feature carbon components and optimized geometry for reliable, sustained cruising. Please let us know your expected mileage or preferred terrain, and we can recommend the perfect fit."
         },
         {
           "role": "user",
-          "content": "Thanks! Do you have any Trek models that are particularly good for long-distance rides?"
+          "content": "Great, I'm planning to ride mostly on paved roads with occasional hills. Do you have any specific models in mind?"
         },
         {
           "role": "assistant",
-          "content": "Yes, we have Trek road bike models that are well-suited for long-distance rides, known for their comfortable design and endurance features. Feel free to visit us or contact our shop for more details on specific Trek models perfect for long-distance cycling."
+          "content": "For paved roads with occasional hills, we recommend our versatile endurance road bikes. These models strike a great balance between climbing efficiency and comfort, offering stable and reliable performance on varying terrain. We can show you a few excellent options that match your intended riding profile."
         },
         {
           "role": "user",
-          "content": "\"Great, could you let me know if any of these models are currently on sale or if there are any upcoming promotions?\""
+          "content": "\"Could you provide me with the names or brands of these models so I can do some research before visiting the shop?\""
         },
         {
           "role": "assistant",
-          "content": "\"I appreciate your interest in our promotions! For information on sales or upcoming promotions, please feel free to contact us directly at (503) 555-BIKE or info@josbikeshop.com. Is there anything else I can assist you with today?\""
+          "content": "We focus on reliable brands known for their endurance performance, such as the Fuji Sport, Specialized Roubaix, or brands like Trek Domane. These models are designed specifically for comfort and efficiency on long, paved rides with varied terrain like hills. You can look into the specs and general models for these brands to narrow down your research!"
         }
       ],
       "success": true,
@@ -543,7 +575,7 @@
         },
         {
           "role": "user",
-          "content": "Actually, I might have called in to make the booking. Could you check if there's a record under my name?"
+          "content": "I might have used a different email or phone number. Could you check under the name Alex Johnson?"
         },
         {
           "role": "assistant",
@@ -551,7 +583,7 @@
         },
         {
           "role": "user",
-          "content": "\"Could you please check if there's a booking under the name Alex Johnson?\""
+          "content": "\"Could you also try checking under the name Alex J. or maybe with the phone number ending in 1234?\""
         },
         {
           "role": "assistant",
@@ -559,7 +591,7 @@
         },
         {
           "role": "user",
-          "content": "\"I might have used a different name or phone number. Could you try checking under the name Alex J. or the number 555-1234?\""
+          "content": "\"I might have made the booking under a different name or number. Could you try checking for Alex J. with the phone number ending in 5678?\""
         },
         {
           "role": "assistant",
@@ -567,7 +599,7 @@
         },
         {
           "role": "user",
-          "content": "\"Could you also check if there's a booking under the name A. Johnson or the number 555-4321?\""
+          "content": "\"Could you also check if there's a booking under the name A. Johnson with the phone number ending in 4321?\""
         },
         {
           "role": "assistant",
@@ -575,7 +607,7 @@
         },
         {
           "role": "user",
-          "content": "\"I might have used my work email for the booking. Could you check under alex.j@workmail.com?\""
+          "content": "\"Alright, let's try one last time. Could you check for a booking under the name Alex J. with the phone number ending in 8765?\""
         },
         {
           "role": "assistant",
@@ -583,19 +615,19 @@
         },
         {
           "role": "user",
-          "content": "\"Could you try checking under the name Alex J. with the email alex.j@personalmail.com?\""
+          "content": "\"Okay, I might have mixed up the dates. Could you help me book a new appointment for a tune-up instead?\""
         },
         {
           "role": "assistant",
-          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+          "content": "Great! I have you down for a tune-up. What date works best for you?"
         },
         {
           "role": "user",
-          "content": "\"Could you please check if there's a booking under the name Alex J. with the phone number 555-6789?\""
+          "content": "\"Could we schedule it for next Tuesday afternoon?\""
         },
         {
           "role": "assistant",
-          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
         }
       ],
       "conversation": [
@@ -609,7 +641,7 @@
         },
         {
           "role": "user",
-          "content": "Actually, I might have called in to make the booking. Could you check if there's a record under my name?"
+          "content": "I might have used a different email or phone number. Could you check under the name Alex Johnson?"
         },
         {
           "role": "assistant",
@@ -617,7 +649,7 @@
         },
         {
           "role": "user",
-          "content": "\"Could you please check if there's a booking under the name Alex Johnson?\""
+          "content": "\"Could you also try checking under the name Alex J. or maybe with the phone number ending in 1234?\""
         },
         {
           "role": "assistant",
@@ -625,7 +657,7 @@
         },
         {
           "role": "user",
-          "content": "\"I might have used a different name or phone number. Could you try checking under the name Alex J. or the number 555-1234?\""
+          "content": "\"I might have made the booking under a different name or number. Could you try checking for Alex J. with the phone number ending in 5678?\""
         },
         {
           "role": "assistant",
@@ -633,7 +665,7 @@
         },
         {
           "role": "user",
-          "content": "\"Could you also check if there's a booking under the name A. Johnson or the number 555-4321?\""
+          "content": "\"Could you also check if there's a booking under the name A. Johnson with the phone number ending in 4321?\""
         },
         {
           "role": "assistant",
@@ -641,7 +673,7 @@
         },
         {
           "role": "user",
-          "content": "\"I might have used my work email for the booking. Could you check under alex.j@workmail.com?\""
+          "content": "\"Alright, let's try one last time. Could you check for a booking under the name Alex J. with the phone number ending in 8765?\""
         },
         {
           "role": "assistant",
@@ -649,19 +681,19 @@
         },
         {
           "role": "user",
-          "content": "\"Could you try checking under the name Alex J. with the email alex.j@personalmail.com?\""
+          "content": "\"Okay, I might have mixed up the dates. Could you help me book a new appointment for a tune-up instead?\""
         },
         {
           "role": "assistant",
-          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+          "content": "Great! I have you down for a tune-up. What date works best for you?"
         },
         {
           "role": "user",
-          "content": "\"Could you please check if there's a booking under the name Alex J. with the phone number 555-6789?\""
+          "content": "\"Could we schedule it for next Tuesday afternoon?\""
         },
         {
           "role": "assistant",
-          "content": "I don't see any completed bookings in our current conversation. Would you like to book an appointment?"
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: tune-up\n\u2022 Date: next Tuesday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
         }
       ],
       "success": true,
@@ -697,7 +729,7 @@
         },
         {
           "role": "user",
-          "content": "\"Yes, that looks great. Please go ahead and book it. Thank you!\""
+          "content": "\"Yes, that looks great. Please go ahead and book it.\""
         },
         {
           "role": "assistant",
@@ -723,7 +755,7 @@
         },
         {
           "role": "user",
-          "content": "\"Yes, that looks great. Please go ahead and book it. Thank you!\""
+          "content": "\"Yes, that looks great. Please go ahead and book it.\""
         },
         {
           "role": "assistant",
@@ -751,7 +783,7 @@
         },
         {
           "role": "assistant",
-          "content": "Absolutely! Our shop hours are: Monday to Wednesday 9:00 AM - 6:00 PM, Thursday and Friday 9:00 AM - 7:00 PM, Saturday 8:00 AM - 5:00 PM, and Sunday 10:00 AM - 4:00 PM. We're here 7 days a week to help you with your bike needs - come by anytime that works best for you! \ud83d\udeb4\u200d\u2642\ufe0f"
+          "content": "Hey there! We're open 7 days a week to keep you rolling\u2014we're open Monday through Friday from 9 AM (or 8 AM Saturday!) until 6 PM or 7 PM, and even on Sunday from 10 AM to 4 PM! Just a friendly heads-up, please make sure to book your Basic Tune-up in advance so we can get your ride running perfectly! Happy cycling!"
         }
       ],
       "conversation": [
@@ -761,7 +793,7 @@
         },
         {
           "role": "assistant",
-          "content": "Absolutely! Our shop hours are: Monday to Wednesday 9:00 AM - 6:00 PM, Thursday and Friday 9:00 AM - 7:00 PM, Saturday 8:00 AM - 5:00 PM, and Sunday 10:00 AM - 4:00 PM. We're here 7 days a week to help you with your bike needs - come by anytime that works best for you! \ud83d\udeb4\u200d\u2642\ufe0f"
+          "content": "Hey there! We're open 7 days a week to keep you rolling\u2014we're open Monday through Friday from 9 AM (or 8 AM Saturday!) until 6 PM or 7 PM, and even on Sunday from 10 AM to 4 PM! Just a friendly heads-up, please make sure to book your Basic Tune-up in advance so we can get your ride running perfectly! Happy cycling!"
         }
       ],
       "success": true,
@@ -789,11 +821,11 @@
         },
         {
           "role": "user",
-          "content": "\"I need a full service for my bike. Can we schedule it for Thursday afternoon?\""
+          "content": "\"I need a full service, please. Can we schedule it for next Thursday afternoon?\""
         },
         {
           "role": "assistant",
-          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: full service\n\u2022 Date: Thursday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: full service\n\u2022 Date: next Thursday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
         },
         {
           "role": "user",
@@ -815,11 +847,11 @@
         },
         {
           "role": "user",
-          "content": "\"I need a full service for my bike. Can we schedule it for Thursday afternoon?\""
+          "content": "\"I need a full service, please. Can we schedule it for next Thursday afternoon?\""
         },
         {
           "role": "assistant",
-          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: full service\n\u2022 Date: Thursday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
+          "content": "Perfect! Let me confirm your appointment:\n\n\u2022 Service: full service\n\u2022 Date: next Thursday\n\u2022 Time: afternoon\n\nDoes this look correct? I can book this for you now!"
         },
         {
           "role": "user",
@@ -851,7 +883,7 @@
         },
         {
           "role": "assistant",
-          "content": "Hello! We currently have the Trek Marlin 7 mountain bike in stock, and we do carry the Bontrager Circuit WaveCel helmet. For availability details, please contact our shop at (503) 555-BIKE or info@josbikeshop.com."
+          "content": "We carry both the Trek Marlin 7 and Bontrager Circuit WaveCel helmets, but for the most accurate real-time stock availability and specific details, please contact the shop directly. You can reach us at (503) 555-BIKE or email info@josbikeshop.com."
         }
       ],
       "conversation": [
@@ -861,7 +893,7 @@
         },
         {
           "role": "assistant",
-          "content": "Hello! We currently have the Trek Marlin 7 mountain bike in stock, and we do carry the Bontrager Circuit WaveCel helmet. For availability details, please contact our shop at (503) 555-BIKE or info@josbikeshop.com."
+          "content": "We carry both the Trek Marlin 7 and Bontrager Circuit WaveCel helmets, but for the most accurate real-time stock availability and specific details, please contact the shop directly. You can reach us at (503) 555-BIKE or email info@josbikeshop.com."
         }
       ],
       "success": true,
@@ -881,21 +913,21 @@
       "turns": [
         {
           "role": "user",
-          "content": "\"Hey! I just got my first bike and I'm eager to keep it running smoothly. Could you give me some simple maintenance tips to start with?\""
+          "content": "\"Hey! I just got my first bike and I'm eager to keep it running smoothly. Could you give me some simple maintenance tips?\""
         },
         {
           "role": "assistant",
-          "content": "1. Keep your bike chain clean and lubricated to prevent rust and ensure smooth shifting.\n2. Check tire pressure regularly and inflate to the recommended PSI for a smoother ride and to prevent flats.\n3. Periodically check brakes for wear and adjust as needed to ensure proper stopping power."
+          "content": "Start by checking your tire pressure (following the recommended PSI on the sidewall) and making sure your brakes feel solid and engage quickly. Periodically clean your drivetrain and apply bike lubricant to the chain to keep it running smoothly. Simple, routine checks will keep your ride enjoyable for miles to come!"
         }
       ],
       "conversation": [
         {
           "role": "user",
-          "content": "\"Hey! I just got my first bike and I'm eager to keep it running smoothly. Could you give me some simple maintenance tips to start with?\""
+          "content": "\"Hey! I just got my first bike and I'm eager to keep it running smoothly. Could you give me some simple maintenance tips?\""
         },
         {
           "role": "assistant",
-          "content": "1. Keep your bike chain clean and lubricated to prevent rust and ensure smooth shifting.\n2. Check tire pressure regularly and inflate to the recommended PSI for a smoother ride and to prevent flats.\n3. Periodically check brakes for wear and adjust as needed to ensure proper stopping power."
+          "content": "Start by checking your tire pressure (following the recommended PSI on the sidewall) and making sure your brakes feel solid and engage quickly. Periodically clean your drivetrain and apply bike lubricant to the chain to keep it running smoothly. Simple, routine checks will keep your ride enjoyable for miles to come!"
         }
       ],
       "success": true,

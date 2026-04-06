@@ -1,0 +1,12 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^python compare_baselines\\.py error_analysis/baseline_scores_gpt-4o\\.json error_analysis/baseline_scores_gemma4-e2b\\.json$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^python3 compare_baselines\\.py error_analysis/baseline_scores_gpt-4o\\.json error_analysis/baseline_scores_gemma4-e2b\\.json$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

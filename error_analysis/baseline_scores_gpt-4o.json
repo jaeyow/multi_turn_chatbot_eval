@@ -1,0 +1,940 @@
+{
+  "metadata": {
+    "timestamp": "2026-04-06T06:57:14.921174+00:00",
+    "judge_model": "gpt-4o",
+    "chatbot_model": "gpt-4o",
+    "description": "Baseline evaluation scores before LLM replacement",
+    "cost": {
+      "bot": {
+        "model": "gpt-4o",
+        "local_inference": false,
+        "input_tokens_estimated": 1049,
+        "output_tokens_estimated": 2315,
+        "cost_usd_estimated": 0.025772
+      },
+      "judge": {
+        "model": "gpt-4o",
+        "deepeval_metrics_cost_usd": 0.382207,
+        "direct_calls_input_tokens": 23863,
+        "direct_calls_output_tokens": 4833,
+        "direct_calls_cost_usd": 0.107987,
+        "total_judge_cost_usd": 0.490195
+      },
+      "total_cost_usd": 0.515967,
+      "note": "Bot token counts are estimated (len/4). Judge DeepEval costs are exact per DeepEval; direct call costs are exact from OpenAI usage responses.",
+      "latency": {
+        "num_calls": 41,
+        "avg_s": 2.833,
+        "p50_s": 2.457,
+        "p95_s": 5.8,
+        "max_s": 9.924,
+        "total_bot_wall_time_s": 116.2,
+        "note": "Measures wall-clock time from query sent to full response received, including all LLM calls within one user turn (mode detection + response)."
+      }
+    },
+    "latency": {
+      "num_calls": 41,
+      "avg_s": 2.833,
+      "p50_s": 2.457,
+      "p95_s": 5.8,
+      "max_s": 9.924,
+      "total_bot_wall_time_s": 116.2,
+      "note": "Measures wall-clock time from query sent to full response received, including all LLM calls within one user turn (mode detection + response)."
+    }
+  },
+  "single_turn": {
+    "total_scenarios": 8,
+    "mode_detection_accuracy": 1.0,
+    "avg_answer_relevancy": 0.8812,
+    "avg_task_completion": 0.9457,
+    "avg_conversation_quality": 0.6555,
+    "overall_success_distribution": {
+      "0": 0,
+      "1": 0,
+      "2": 8
+    },
+    "failure_mode_frequencies": {
+      "FM1_intent_detection_error": 0,
+      "FM2_info_extraction_issue": 0,
+      "FM3_state_management_problem": 0,
+      "FM4_context_loss": 0,
+      "FM5_correction_handling_failure": 0,
+      "FM6_confirmation_flow_issue": 0,
+      "FM7_off_topic_redirection_failure": 0,
+      "FM8_cancellation_not_detected": 0,
+      "FM9_recall_failure": 0,
+      "FM10_response_quality_issue": 0,
+      "FM11_redundant_questioning": 0,
+      "FM12_flow_transition_error": 0
+    },
+    "per_trace": [
+      {
+        "test_id": "ST001",
+        "scenario": "(shop_info, complete_upfront, single_turn, cooperative)",
+        "mode_correct": true,
+        "response_time_s": 2.457,
+        "metrics": {
+          "Answer Relevancy": {
+            "score": 0.8333333333333334,
+            "reason": "The score is 0.83 because the response effectively provides the store hours and location, which directly addresses the input query. However, the inclusion of a friendly closing remark, while pleasant, does not contribute to the requested information, slightly lowering the score."
+          },
+          "Task Completion": {
+            "score": 1.0,
+            "reason": "The response directly addresses the user's query about store hours and location, providing complete and accurate details including the address and specific opening hours for each day of the week."
+          },
+          "Conversation Quality": {
+            "score": 0.9269120793208934,
+            "reason": "The response accurately provides the store's location and operating hours, aligning with the factual accuracy requirement. The tone is friendly and professional, suitable for customer interaction. The length is appropriate, offering all necessary details without unnecessary verbosity. However, the response could slightly improve by explicitly confirming the store name as 'JO's Bike Shop' in the input context."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "ST002",
+        "scenario": "(shop_info, complete_upfront, single_turn, cooperative)",
+        "mode_correct": true,
+        "response_time_s": 2.166,
+        "metrics": {
+          "Answer Relevancy": {
+            "score": 0.8,
+            "reason": "The score is 0.80 because the response mostly addresses the query about store hours and location, which is the main focus of the input. However, the inclusion of a statement about their passion for bikes, which is unrelated to the requested information, slightly detracts from the overall relevancy."
+          },
+          "Task Completion": {
+            "score": 0.9972414714925251,
+            "reason": "The response directly addresses the user's query about store hours and location, providing accurate and complete details including the address and weekend hours. This aligns perfectly with the evaluation steps for shop information queries."
+          },
+          "Conversation Quality": {
+            "score": 0.8702211498994978,
+            "reason": "The response accurately provides the shop's location and weekend hours, aligning with the factual details required. The tone is friendly and professional, suitable for customer interaction. The response is concise and includes all necessary information without unnecessary details. However, it could slightly improve by including the phone number for completeness."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "ST003",
+        "scenario": "(maintenance_tips, no_info, single_turn, corrective)",
+        "mode_correct": true,
+        "response_time_s": 2.303,
+        "metrics": {
+          "Answer Relevancy": {
+            "score": 1.0,
+            "reason": "The score is 1.00 because the response perfectly addressed the request for bike maintenance tips without any irrelevant information. Great job staying on topic!"
+          },
+          "Task Completion": {
+            "score": 0.9545499374290071,
+            "reason": "The response directly addresses the user's request for bike maintenance tips by providing three specific and actionable tips: cleaning and lubricating the chain, checking tire pressure, and inspecting brake pads and cables. This aligns perfectly with the evaluation step for maintenance tips, which requires at least two relevant tips."
+          },
+          "Conversation Quality": {
+            "score": 0.6279597888998579,
+            "reason": "The response provides accurate and practical bike maintenance tips, aligning well with the request for advice. The tone is friendly and professional, suitable for a shop assistant. However, the response could be slightly more comprehensive by including additional tips or resources for further assistance, which would enhance its completeness."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "ST004",
+        "scenario": "(maintenance_tips, no_info, single_turn, corrective)",
+        "mode_correct": true,
+        "response_time_s": 1.917,
+        "metrics": {
+          "Answer Relevancy": {
+            "score": 0.6666666666666666,
+            "reason": "The score is 0.67 because while the output provides some relevant bike maintenance tips, it also includes irrelevant information such as service costs and contact details, which do not directly address the request for maintenance tips."
+          },
+          "Task Completion": {
+            "score": 0.9562176500885797,
+            "reason": "The response directly addresses the user's request for bike maintenance tips by providing three specific and actionable tips: cleaning and lubricating the chain, checking tire pressure, and inspecting brakes, cables, and bolts. These tips are relevant and practical, aligning well with the evaluation criteria for maintenance tips."
+          },
+          "Conversation Quality": {
+            "score": 0.37749745674579066,
+            "reason": "The Actual Output provides useful bike maintenance tips, maintaining a friendly and professional tone. However, it fails to verify factual accuracy as it does not mention the shop's address or operating hours, and the email provided does not match the input parameters. The response is concise but omits key details required for full alignment with the evaluation steps."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "ST005",
+        "scenario": "(policy_question, partial_info, single_turn, cooperative)",
+        "mode_correct": true,
+        "response_time_s": 1.591,
+        "metrics": {
+          "Answer Relevancy": {
+            "score": 1.0,
+            "reason": "The score is 1.00 because the response perfectly addressed the query about the return policy for bikes without any irrelevant information. Great job on staying focused and providing a clear, concise answer!"
+          },
+          "Task Completion": {
+            "score": 0.942632159254749,
+            "reason": "The response directly addresses the user's query about the return policy for bikes, providing clear information about the 30-day return period and the condition requirement. It also offers contact details for further inquiries, enhancing completeness. However, it could include more specific details about the process or exceptions to achieve full alignment."
+          },
+          "Conversation Quality": {
+            "score": 0.7554205066646319,
+            "reason": "The response accurately provides the return policy details, including the 30-day return period and condition requirements, aligning with the factual accuracy step. The tone is friendly and professional, suitable for a shop assistant. However, the response could be slightly more comprehensive by explicitly confirming the shop's name or location, which would enhance the cross-referencing step. Overall, it is concise and relevant to the input query."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "ST006",
+        "scenario": "(policy_question, partial_info, single_turn, cooperative)",
+        "mode_correct": true,
+        "response_time_s": 2.523,
+        "metrics": {
+          "Answer Relevancy": {
+            "score": 1.0,
+            "reason": "The score is 1.00 because the response perfectly addressed the inquiry about the warranty policy on new bikes without any irrelevant information. Great job on staying focused and relevant!"
+          },
+          "Task Completion": {
+            "score": 0.7398936523888759,
+            "reason": "The response addresses the user's query about the warranty policy by mentioning coverage for manufacturer defects and providing contact information for further details. However, it lacks specific details about the warranty terms and duration, which would have made the response more complete."
+          },
+          "Conversation Quality": {
+            "score": 0.40633138472523544,
+            "reason": "The response provides some information about the warranty policy but lacks specific details such as the exact duration of the warranty. The tone is friendly and professional, which aligns well with the evaluation criteria. However, the response does not address the shop's address or operating hours, which are part of the factual accuracy check. The length is appropriate, but the lack of comprehensive details on the warranty policy limits its effectiveness."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "ST007",
+        "scenario": "(what_can_you_do, complete_upfront, single_turn, cooperative)",
+        "mode_correct": true,
+        "response_time_s": 5.8,
+        "metrics": {
+          "Answer Relevancy": {
+            "score": 0.9166666666666666,
+            "reason": "The score is 0.92 because the response is highly relevant and informative, addressing the user's inquiry about services offered at a bike shop. However, it slightly loses points due to a specific mention of 'JO's Bike Shop,' which may not directly relate to the user's context. Overall, it's a strong and helpful answer!"
+          },
+          "Task Completion": {
+            "score": 0.9923039157423421,
+            "reason": "The response directly addresses the user's query about the capabilities of the bike shop's chatbot. It lists the main functions, including shop information, product inquiries, service appointments, maintenance tips, and shop policies, aligning well with the system's documentation."
+          },
+          "Conversation Quality": {
+            "score": 0.4790312732478196,
+            "reason": "The response maintains a friendly and professional tone, providing a clear and helpful overview of services. However, it lacks factual accuracy as it does not include the specific address, phone number, or operating hours required for verification. The length is appropriate, offering a comprehensive list of services without unnecessary detail."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "ST008",
+        "scenario": "(what_can_you_do, complete_upfront, single_turn, cooperative)",
+        "mode_correct": true,
+        "response_time_s": 5.713,
+        "metrics": {
+          "Answer Relevancy": {
+            "score": 0.8333333333333334,
+            "reason": "The score is 0.83 because the response mostly addresses the inquiry about services offered at the bike shop. However, it includes irrelevant details about a specific bike shop and general inquiries, which slightly detract from the focus on the services provided."
+          },
+          "Task Completion": {
+            "score": 0.983114304994961,
+            "reason": "The response aligns perfectly with the evaluation steps for capability questions. It lists the main functions of the chatbot, including shop information, product inquiries, service appointments, maintenance tips, and shop policies, which directly addresses the user's query about the different things the chatbot can help with at the bike shop."
+          },
+          "Conversation Quality": {
+            "score": 0.8010224311463304,
+            "reason": "The response is factually accurate as it provides a comprehensive list of services offered by the bike shop, aligning with typical offerings. The tone is friendly and professional, resembling a shop assistant's style. However, the response lacks specific shop details like address, phone number, and operating hours, which are necessary for full factual accuracy. The length is appropriate, being concise yet comprehensive in listing services."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      }
+    ]
+  },
+  "multi_turn": {
+    "total_scenarios": 16,
+    "avg_conversation_completeness": 0.8438,
+    "avg_knowledge_retention": 0.4062,
+    "avg_role_adherence": 0.7979,
+    "overall_success_distribution": {
+      "0": 1,
+      "1": 4,
+      "2": 11
+    },
+    "failure_mode_frequencies": {
+      "FM1_intent_detection_error": 0,
+      "FM2_info_extraction_issue": 0,
+      "FM3_state_management_problem": 0,
+      "FM4_context_loss": 0,
+      "FM5_correction_handling_failure": 0,
+      "FM6_confirmation_flow_issue": 0,
+      "FM7_off_topic_redirection_failure": 0,
+      "FM8_cancellation_not_detected": 0,
+      "FM9_recall_failure": 2,
+      "FM10_response_quality_issue": 3,
+      "FM11_redundant_questioning": 0,
+      "FM12_flow_transition_error": 0
+    },
+    "per_trace": [
+      {
+        "test_id": "MT001",
+        "scenario": "(product_inquiry, partial_info, multi_turn_linear, conversational)",
+        "num_turns": 2,
+        "avg_turn_latency_s": 1.831,
+        "metrics": {
+          "Conversation Completeness": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because the LLM response fully meets the user's intention to learn about mountain bike options and available accessories. There are no noted incompletenesses, indicating that the LLM provided comprehensive and satisfactory information aligned with the user's request."
+          },
+          "Knowledge Retention": {
+            "score": 0,
+            "reason": "The score is 0.00 because there are no attritions provided, indicating a complete lack of information to assess knowledge retention."
+          },
+          "Role Adherence": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because there are no out of character responses listed, indicating that the LLM chatbot consistently adhered to its role as a helpful customer service chatbot for JO's Bike Shop. The absence of any deviations from the specified role suggests that the chatbot effectively focused on booking service appointments, answering shop-related inquiries, providing product information, offering bike maintenance advice, and addressing policy questions, all of which align perfectly with its designated responsibilities."
+          }
+        },
+        "overall_success": 1,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 1,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "MT002",
+        "scenario": "(book_appointment, minimal_info, multi_turn_complex, cooperative)",
+        "num_turns": 6,
+        "avg_turn_latency_s": 2.067,
+        "metrics": {
+          "Conversation Completeness": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because the LLM response fully meets the user's intention to book an appointment for a bike service, as there are no noted incompletenesses in the conversation."
+          },
+          "Knowledge Retention": {
+            "score": 1.0,
+            "reason": "The score is 1.00 because there are no attritions listed, indicating perfect retention of knowledge established previously in the conversation."
+          },
+          "Role Adherence": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because there are no out of character responses listed, indicating that the LLM chatbot consistently adhered to its role as a helpful customer service chatbot for JO's Bike Shop. It likely provided accurate information on service appointments, shop details, product information, maintenance advice, and policy questions, maintaining its role throughout the conversation."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "MT003",
+        "scenario": "(policy_question, complete_upfront, multi_turn_linear, distracted)",
+        "num_turns": 2,
+        "avg_turn_latency_s": 1.757,
+        "metrics": {
+          "Conversation Completeness": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because the LLM response fully addressed the user's intentions by providing comprehensive information on the return policy, warranties, and delivery options for purchasing a bike. There are no noted incompletenesses, indicating that the user's inquiries were thoroughly satisfied."
+          },
+          "Knowledge Retention": {
+            "score": 0,
+            "reason": "The score is 0.00 because there are no attritions provided to evaluate the knowledge retention capabilities of the LLM. Without any data on forgetfulness or established knowledge, it is impossible to assess the retention score accurately."
+          },
+          "Role Adherence": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because there are no out of character responses listed, indicating that the LLM chatbot consistently adhered to its role as a helpful customer service chatbot for JO's Bike Shop. It likely provided accurate information on service appointments, shop details, product information, maintenance advice, and policy questions, maintaining its role throughout the conversation."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "MT004",
+        "scenario": "(recall_booking, partial_info, multi_turn_complex, cooperative)",
+        "num_turns": 4,
+        "avg_turn_latency_s": 1.905,
+        "metrics": {
+          "Conversation Completeness": {
+            "score": 0.0,
+            "reason": "The score is 0.0 because the LLM response failed to meet the user's intention of retrieving information about a past bike fitting appointment. The assistant's response, 'Unfortunately, I don't have access to appointment records,' and the suggestion to contact the shop directly did not fulfill the user's request for direct information retrieval within the conversation."
+          },
+          "Knowledge Retention": {
+            "score": 0,
+            "reason": "The score is 0.00 because there are no attritions provided, indicating a complete lack of information to assess knowledge retention."
+          },
+          "Role Adherence": {
+            "score": 0.5,
+            "reason": "The score is 0.5 because the LLM chatbot response in turn #2, \"I don't see any completed bookings in our current conversation. Would you like to book an appointment?\", deviates from the expected role of a helpful customer service chatbot for JO's Bike Shop. While the chatbot is supposed to facilitate booking appointments, the response suggests a lack of awareness or memory of the conversation's context, which is not typical for a customer service role. This response could confuse users expecting a seamless booking process, thus impacting the chatbot's adherence to its role."
+          }
+        },
+        "overall_success": 0,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 1,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "MT005",
+        "scenario": "(what_can_you_do, no_info, mixed_intent, conversational)",
+        "num_turns": 2,
+        "avg_turn_latency_s": 1.791,
+        "metrics": {
+          "Conversation Completeness": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because the LLM response fully met the user's intentions. The user sought information on purchasing a new bike and accessories, as well as details on services and products offered by the shop. The absence of any incompletenesses indicates that the LLM response comprehensively addressed all aspects of the user's inquiry, providing a complete and satisfactory answer."
+          },
+          "Knowledge Retention": {
+            "score": 0,
+            "reason": "The score is 0.00 because there are no attritions provided, indicating a complete lack of information to assess knowledge retention."
+          },
+          "Role Adherence": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because there are no out of character responses listed, indicating that the LLM chatbot consistently adhered to its role as a helpful customer service chatbot for JO's Bike Shop. It likely provided accurate information on service appointments, shop details, product information, maintenance advice, and policy questions, maintaining its role throughout the conversation."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "MT006",
+        "scenario": "(book_appointment, complete_upfront, multi_turn_linear, cooperative)",
+        "num_turns": 4,
+        "avg_turn_latency_s": 4.378,
+        "metrics": {
+          "Conversation Completeness": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because the LLM response fully meets the user's intention to book a service appointment for a bike tune-up. There are no noted incompletenesses, indicating that the LLM response provided all necessary information and actions required by the user."
+          },
+          "Knowledge Retention": {
+            "score": 0.5,
+            "reason": "The score is 0.50 because the LLM response inaccurately confirmed an appointment booking, which was not established in the previous knowledge that only provided availability details. This indicates a partial retention of information, as the LLM failed to maintain consistency with the prior conversation context."
+          },
+          "Role Adherence": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because there are no out of character responses listed, indicating that the LLM chatbot consistently adhered to its role as a helpful customer service chatbot for JO's Bike Shop. The chatbot likely provided accurate information on service appointments, shop details, product information, bike maintenance advice, and policy questions, aligning perfectly with its designated role."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "MT007",
+        "scenario": "(maintenance_tips, partial_info, multi_turn_linear, cooperative)",
+        "num_turns": 2,
+        "avg_turn_latency_s": 1.991,
+        "metrics": {
+          "Conversation Completeness": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because the LLM response fully met the user's intention of seeking maintenance tips for their new road bike. There are no noted incompletenesses, indicating that the LLM provided comprehensive and satisfactory guidance on the topic."
+          },
+          "Knowledge Retention": {
+            "score": 0,
+            "reason": "The score is 0.00 because there are no attritions provided, indicating a complete lack of information to assess knowledge retention. Without any data points or context from previous interactions, it is impossible to evaluate the retention of knowledge, resulting in the lowest possible score."
+          },
+          "Role Adherence": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because there are no out of character responses listed, indicating that the LLM chatbot consistently adhered to its role as a helpful customer service chatbot for JO's Bike Shop. It likely provided accurate information on service appointments, shop details, product information, bike maintenance advice, and policy questions, maintaining its role throughout the conversation."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "MT008",
+        "scenario": "(book_appointment, no_info, multi_turn_complex, distracted)",
+        "num_turns": 6,
+        "avg_turn_latency_s": 2.528,
+        "metrics": {
+          "Conversation Completeness": {
+            "score": 0.0,
+            "reason": "The score is 0.0 because the LLM response failed to address the user's primary intentions. The user sought to book a tune-up service and inquired about its cost. However, the LLM response only confirmed the booking without providing the requested cost information, leaving the user's query about the cost unanswered."
+          },
+          "Knowledge Retention": {
+            "score": 1.0,
+            "reason": "The score is 1.00 because there are no attritions listed, indicating perfect retention of knowledge established previously in the conversation."
+          },
+          "Role Adherence": {
+            "score": 0.6666666666666666,
+            "reason": "The score is 0.6666666666666666 because the LLM chatbot response in turn #6, \"Excellent! Your appointment has been booked. We'll see you then! Is there anything else I can help you with?\", is out of character for the specified role. As a customer service chatbot for JO's Bike Shop, it should confirm the details of the appointment, such as the service type, date, and time, rather than simply stating that the appointment has been booked. This lack of detail and confirmation does not align with the role's requirement to collect and confirm specific appointment information, leading to a lower adherence score."
+          }
+        },
+        "overall_success": 1,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 1,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "MT009",
+        "scenario": "(product_inquiry, minimal_info, mixed_intent, corrective)",
+        "num_turns": 4,
+        "avg_turn_latency_s": 2.346,
+        "metrics": {
+          "Conversation Completeness": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because the LLM response fully met the user's intentions. The user wanted to learn about road bikes available at JO's Bike Shop and was interested in lightweight models suitable for long-distance rides. The absence of any incompletenesses indicates that the LLM response provided comprehensive information on both the availability of road bikes at JO's Bike Shop and detailed insights into lightweight models ideal for long-distance cycling."
+          },
+          "Knowledge Retention": {
+            "score": 0,
+            "reason": "The score is 0.00 because there are no attritions provided, indicating a complete lack of information to assess knowledge retention."
+          },
+          "Role Adherence": {
+            "score": 0.0,
+            "reason": "The score is 0.0 because the LLM chatbot responses in turn #2 and turn #4 fail to adhere to the role of a helpful customer service chatbot for JO's Bike Shop. Instead of providing detailed product information directly, the chatbot redirects the user to contact the shop for more details. This behavior is out of character as the role specifies that the chatbot should provide product information directly, rather than deferring to external contact methods. This lack of direct assistance in providing product details justifies the low role adherence score."
+          }
+        },
+        "overall_success": 1,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 1,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "MT010",
+        "scenario": "(recall_booking, minimal_info, multi_turn_linear, corrective)",
+        "num_turns": 10,
+        "avg_turn_latency_s": 3.966,
+        "metrics": {
+          "Conversation Completeness": {
+            "score": 0.5,
+            "reason": "The score is 0.5 because the LLM response partially met the user intentions. While the assistant successfully provided information about the shop's services and facilitated a new booking for a Full Service tune-up, it failed to verify the user's existing appointment and booking details under a different name. The inability to access customer records and the suggestion to contact the shop directly left the user's primary intentions unmet."
+          },
+          "Knowledge Retention": {
+            "score": 1.0,
+            "reason": "The score is 1.00 because there are no attritions listed, indicating perfect retention of knowledge established previously in the conversation."
+          },
+          "Role Adherence": {
+            "score": 0.6,
+            "reason": "The score is 0.6 because the LLM chatbot responses in turn #2 and turn #4 deviate from the expected role of a helpful customer service chatbot for JO's Bike Shop. In turn #2, the response \"I don't see any completed bookings in our current conversation. Would you like to book an appointment?\" suggests a lack of continuity or memory, which is not typical for a customer service chatbot that should seamlessly handle booking requests. In turn #4, the response \"While I can't access customer records, I recommend contacting us directly at (503) 555-BIKE or via email at info@josbikeshop.com for personalized assistance\" indicates an inability to assist with customer records, which might be expected from a customer service role. These responses show a lack of adherence to the role's responsibilities, such as efficiently managing bookings and providing direct assistance, thus justifying the score of 0.6."
+          }
+        },
+        "overall_success": 1,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 1,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "MT011",
+        "scenario": "(book_appointment, minimal_info, multi_turn_linear, canceling)",
+        "num_turns": 6,
+        "avg_turn_latency_s": 2.663,
+        "metrics": {
+          "Conversation Completeness": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because the LLM response fully meets the user's intention to book a service appointment for their bike. There are no noted incompletenesses, indicating that the LLM response provided all necessary information and actions required by the user."
+          },
+          "Knowledge Retention": {
+            "score": 1.0,
+            "reason": "The score is 1.00 because there are no attritions indicating forgetfulness or inconsistencies in the LLM's responses, demonstrating perfect knowledge retention throughout the conversation."
+          },
+          "Role Adherence": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because there are no out of character responses listed, indicating that the LLM chatbot consistently adhered to its role as a helpful customer service chatbot for JO's Bike Shop. It likely provided accurate information on service appointments, shop details, product information, maintenance advice, and policy questions, maintaining its role throughout the conversation."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "MT012",
+        "scenario": "(shop_info, no_info, mixed_intent, distracted)",
+        "num_turns": 2,
+        "avg_turn_latency_s": 3.105,
+        "metrics": {
+          "Conversation Completeness": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because the LLM response fully met the user's intention of knowing the shop hours before purchasing a new bike. There are no noted incompletenesses, indicating that the LLM provided all necessary information to satisfy the user's query."
+          },
+          "Knowledge Retention": {
+            "score": 0,
+            "reason": "The score is 0.00 because there are no attritions provided, indicating a complete lack of information to assess knowledge retention. Without any data points or context from previous interactions, it is impossible to evaluate the retention of knowledge, resulting in the lowest possible score."
+          },
+          "Role Adherence": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because there are no out of character responses listed, indicating that the LLM chatbot consistently adhered to its role as a helpful customer service chatbot for JO's Bike Shop. It likely provided accurate information on service appointments, shop details, product information, maintenance advice, and policy questions, maintaining its role throughout the conversation."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "MT013",
+        "scenario": "(book_appointment, partial_info, multi_turn_linear, cooperative)",
+        "num_turns": 6,
+        "avg_turn_latency_s": 2.449,
+        "metrics": {
+          "Conversation Completeness": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because the LLM response fully met the user's intention to book a service appointment for their bike, as indicated by the absence of any incompletenesses."
+          },
+          "Knowledge Retention": {
+            "score": 1.0,
+            "reason": "The score is 1.00 because there are no attritions indicating forgetfulness or inconsistencies in the LLM's responses, demonstrating perfect knowledge retention throughout the conversation."
+          },
+          "Role Adherence": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because there are no out of character responses listed, indicating that the LLM chatbot consistently adhered to its role as a helpful customer service chatbot for JO's Bike Shop. It likely provided accurate information on service appointments, shop details, product information, bike maintenance advice, and policy questions, maintaining its role effectively throughout the conversation."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "MT014",
+        "scenario": "(product_inquiry, complete_upfront, multi_turn_complex, cooperative)",
+        "num_turns": 2,
+        "avg_turn_latency_s": 2.858,
+        "metrics": {
+          "Conversation Completeness": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because the LLM response fully met the user's intention to inquire about the availability of specific bike products. There are no noted incompletenesses, indicating that the LLM provided comprehensive and satisfactory information regarding the user's query."
+          },
+          "Knowledge Retention": {
+            "score": 0,
+            "reason": "The score is 0.00 because there are no attritions provided, indicating a complete lack of information to assess knowledge retention."
+          },
+          "Role Adherence": {
+            "score": 0.0,
+            "reason": "The score is 0.0 because the LLM chatbot response in turn #2 is out of character for a customer service chatbot. Instead of directly providing product information, the response redirects the user to contact the shop for more details or to confirm availability. This contradicts the role of being a helpful customer service chatbot, which should provide immediate assistance and information without requiring additional steps from the user."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "MT015",
+        "scenario": "(maintenance_tips, minimal_info, mixed_intent, conversational)",
+        "num_turns": 2,
+        "avg_turn_latency_s": 3.32,
+        "metrics": {
+          "Conversation Completeness": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because the LLM response fully meets the user's intention of seeking beginner-friendly maintenance tips for their new bike. There are no noted incompletenesses, indicating that the LLM provided comprehensive and satisfactory guidance that aligns with the user's needs."
+          },
+          "Knowledge Retention": {
+            "score": 0,
+            "reason": "The score is 0.00 because there are no attritions provided, indicating a complete lack of information to assess knowledge retention."
+          },
+          "Role Adherence": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because there are no out of character responses listed, indicating that the LLM chatbot consistently adhered to its role as a helpful customer service chatbot for JO's Bike Shop. The chatbot likely provided accurate information on service appointments, shop details, product information, maintenance advice, and policy questions, aligning perfectly with its designated role."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      },
+      {
+        "test_id": "MT016",
+        "scenario": "(book_appointment, partial_info, multi_turn_complex, cooperative)",
+        "num_turns": 6,
+        "avg_turn_latency_s": 2.941,
+        "metrics": {
+          "Conversation Completeness": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because the LLM response fully meets the user's intention to book an appointment for a bike tune-up. There are no noted incompletenesses, indicating that the LLM response provided all necessary information and actions required by the user."
+          },
+          "Knowledge Retention": {
+            "score": 1.0,
+            "reason": "The score is 1.00 because there are no attritions indicating forgetfulness or inconsistencies in the LLM's responses, demonstrating perfect knowledge retention throughout the conversation."
+          },
+          "Role Adherence": {
+            "score": 1.0,
+            "reason": "The score is 1.0 because there are no out of character responses listed, indicating that the LLM chatbot consistently adhered to its role as a helpful customer service chatbot for JO's Bike Shop. The chatbot likely provided accurate and relevant information regarding service appointments, shop details, product information, bike maintenance advice, and policy questions, aligning perfectly with its designated role."
+          }
+        },
+        "overall_success": 2,
+        "failure_modes": {
+          "FM1_intent_detection_error": 0,
+          "FM2_info_extraction_issue": 0,
+          "FM3_state_management_problem": 0,
+          "FM4_context_loss": 0,
+          "FM5_correction_handling_failure": 0,
+          "FM6_confirmation_flow_issue": 0,
+          "FM7_off_topic_redirection_failure": 0,
+          "FM8_cancellation_not_detected": 0,
+          "FM9_recall_failure": 0,
+          "FM10_response_quality_issue": 0,
+          "FM11_redundant_questioning": 0,
+          "FM12_flow_transition_error": 0
+        }
+      }
+    ]
+  }
+}

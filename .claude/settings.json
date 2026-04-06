@@ -13,7 +13,11 @@
       "Bash(python3 -m py_compile eval_runner.py)",
       "Bash(python3 -m py_compile compare_baselines.py)",
       "Bash(grep -rn \"sk-\\\\|api_key\\\\s*=\\\\s*['\\\\\"][^$]\\\\|password\\\\s*=\\\\s*['\\\\\"]\" eval_runner.py compare_baselines.py)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(python3 -m py_compile /Users/josereyes/Dev/multi_turn_chatbot_eval/application.py)",
+      "Bash(python3 -m py_compile /Users/josereyes/Dev/multi_turn_chatbot_eval/compare_baselines.py)",
+      "Bash(python3 -m py_compile application.py)"
     ]
   }
 }

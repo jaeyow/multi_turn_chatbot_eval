@@ -2,7 +2,7 @@
   "metadata": {
     "conversation_type": "single_turn",
     "description": "Single-Turn conversation tests",
-    "timestamp": "2026-04-06T04:54:27.594984+00:00",
+    "timestamp": "2026-04-06T11:43:32.610847+00:00",
     "total_tests": 8,
     "successful_tests": 8
   },
@@ -17,7 +17,7 @@
         "tuple": "(shop_info, complete_upfront, single_turn, cooperative)"
       },
       "user_query": "Hi there! Could you please let me know your store hours and location? I'm planning to visit soon. Thanks!",
-      "bot_response": "Absolutely! JO's Bike Shop is located at 456 Pedal Lane, Portland, OR 97201. We're open 7 days a week: Mon-Wed 9:00 AM - 6:00 PM, Thurs-Fri 9:00 AM - 7:00 PM, Sat 8:00 AM - 5:00 PM, and Sun 10:00 AM - 4:00 PM. We can't wait to see you and help with your biking needs! \ud83d\udeb4\u200d\u2642\ufe0f",
+      "bot_response": "Hey there, future rider! We'd love to see you\u2014we're at 456 Pedal Lane in Portland, OR 97201! We're open seven days a week, with hours varying slightly (for example, we're open 10 AM - 4 PM on Sundays). Stop by and let\u2019s get you hooked up to the perfect ride!",
       "action_taken": "shop_info",
       "expected_mode": "shop_info",
       "mode_correct": true,
@@ -34,7 +34,7 @@
         "tuple": "(shop_info, complete_upfront, single_turn, cooperative)"
       },
       "user_query": "\"Hi there! Could you please let me know your store hours and location? I'm planning to visit this weekend and want to make sure I have the right details. Thanks!\"",
-      "bot_response": "Absolutely! JO's Bike Shop is located at 456 Pedal Lane, Portland, OR 97201. We're open this weekend on Saturday from 8:00 AM to 5:00 PM and Sunday from 10:00 AM to 4:00 PM. Can't wait to see you roll in - happy biking! \ud83d\udeb2\ud83d\udd27",
+      "bot_response": "Hey there! We'd love to see you and get you rolling! We're located at 456 Pedal Lane in Portland, OR, and this weekend we'll be open Saturday from 8:00 AM to 5:00 PM, and Sunday from 10:00 AM to 4:00 PM. Can't wait to help you with your ride!",
       "action_taken": "shop_info",
       "expected_mode": "shop_info",
       "mode_correct": true,
@@ -51,7 +51,7 @@
         "tuple": "(maintenance_tips, no_info, single_turn, corrective)"
       },
       "user_query": "Oops, I meant to ask about bike maintenance tips. Can you help with that?",
-      "bot_response": "Of course! Here are some bike maintenance tips:\n- Regularly check tire pressure and inflate as needed\n- Keep the chain clean and lubricated for smooth shifting and to prevent rust\n- Check brakes for wear and adjust or replace pads as necessary.",
+      "bot_response": "Regular maintenance starts with a \"ABC\" check: Air (check your tire pressure), Brakes (ensure they engage firmly), and Chain (clean and lubricate the drivetrain). Before every ride, run your hands over the bike to confirm all visible bolts are tight and nothing feels loose. If you are unsure about deeper mechanical servicing, please contact the shop at (503) 555-BIKE or info@josbikeshop.com.",
       "action_taken": "maintenance_tips",
       "expected_mode": "maintenance_tips",
       "mode_correct": true,
@@ -68,7 +68,7 @@
         "tuple": "(maintenance_tips, no_info, single_turn, corrective)"
       },
       "user_query": "Hey there! Can you give me some tips on bike maintenance?",
-      "bot_response": "Of course! Make sure to regularly clean and lubricate your bike chain, check tire pressure frequently, and inspect your brakes and gears for any signs of wear or damage. It's also a good idea to have a professional tune-up performed at least once a year.",
+      "bot_response": "Regular bike maintenance is easy! Start by checking your tire pressure, ensuring brakes operate smoothly, and lubricating your chain to minimize squeaks. A quick pre-ride inspection of these three areas will keep you safe and your ride enjoyable.",
       "action_taken": "maintenance_tips",
       "expected_mode": "maintenance_tips",
       "mode_correct": true,
@@ -85,7 +85,7 @@
         "tuple": "(policy_question, partial_info, single_turn, cooperative)"
       },
       "user_query": "Hi there! Could you tell me a bit about your return policy for bikes? I'm considering buying one but want to know in case something doesn't work out. Thanks!",
-      "bot_response": "Our shop offers a 30-day return policy on all bikes in their original condition. Please contact us directly at (503) 555-BIKE or info@josbikeshop.com for further details on our return process. Thank you for considering us for your purchase!",
+      "bot_response": "We welcome questions about our policies! For our return policy, we encourage you to review the detailed guidelines, which cover item condition and timing. If you need confirmation or have specific questions about your purchase, please connect with us directly by emailing info@josbikeshop.com or calling (503) 555-BIKE.",
       "action_taken": "policy_question",
       "expected_mode": "policy_question",
       "mode_correct": true,
@@ -102,7 +102,7 @@
         "tuple": "(policy_question, partial_info, single_turn, cooperative)"
       },
       "user_query": "\"Hi there! Can you tell me a bit about your warranty policy on new bikes?\"",
-      "bot_response": "Hi! Our new bikes come with a manufacturer's warranty - for specific details, please reach out to us directly at (503) 555-BIKE or info@josbikeshop.com.",
+      "bot_response": "Our warranty covers defects in materials and workmanship on all new bikes. For the specific details regarding coverage, exclusions, and how to process a claim, please visit our website. If you have questions after reviewing the policy, please do not hesitate to contact the shop directly.",
       "action_taken": "policy_question",
       "expected_mode": "policy_question",
       "mode_correct": true,

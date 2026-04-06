@@ -225,6 +225,30 @@ def print_comparison(old: Dict, new: Dict) -> None:
     print(f"    Old: {o_dist.get('2',0)} / {o_dist.get('1',0)} / {o_dist.get('0',0)}")
     print(f"    New: {n_dist.get('2',0)} / {n_dist.get('1',0)} / {n_dist.get('0',0)}")
 
+    # ── Latency ──────────────────────────────────────────────────────────────
+    old_lat = old_meta.get("latency", {})
+    new_lat = new_meta.get("latency", {})
+    if old_lat and old_lat.get("num_calls") and new_lat and new_lat.get("num_calls"):
+        print(f"\n{'-' * W}")
+        print("  RESPONSE LATENCY  (lower is better)")
+        print(f"{'-' * W}")
+        print(f"  {'Metric':<{col_w}} {'Old':>7}  {'New':>7}  {'Delta':<18}")
+        print(f"  {'-'*col_w} {'-'*7}  {'-'*7}  {'-'*18}")
+        
+        lat_metrics = [
+            ("Avg response time (s)",    "avg_s",  False),
+            ("p50 / median (s)",         "p50_s",  False),
+            ("p95 (s)",                  "p95_s",  False),
+            ("Max (s)",                  "max_s",  False),
+        ]
+        for label, key, hib in lat_metrics:
+            o = old_lat.get(key)
+            n = new_lat.get(key)
+            print(f"  {label:<{col_w}} {_fmt(o):>7}  {_fmt(n):>7}  {_delta_str(o, n, hib)}")
+        
+        print(f"\n  Total bot wall time: {old_lat.get('total_bot_wall_time_s', 0):.0f}s → {new_lat.get('total_bot_wall_time_s', 0):.0f}s")
+        print(f"  Note: Includes all LLM calls per turn (mode detection + response)")
+
     # ── Failure modes ────────────────────────────────────────────────────────
     print(f"\n{'-' * W}")
     print("  FAILURE MODE CHANGES  (old → new, fewer occurrences = better)")
@@ -379,6 +403,34 @@ def save_markdown_comparison(old: Dict, new: Dict, old_path: str, new_path: str)
         f"{n_d.get('2',0)} / {n_d.get('1',0)} / {n_d.get('0',0)}",
         "",
     ))
+
+    # ── Latency comparison ─────────────────────────────────────────────────────
+    old_lat = old_meta.get("latency", {})
+    new_lat = new_meta.get("latency", {})
+    if old_lat and old_lat.get("num_calls") and new_lat and new_lat.get("num_calls"):
+        p("\n### Response Latency (Lower is Better)\n")
+        p("Wall-clock time from query sent to full response received, including all LLM calls within one user turn (mode detection + response generation).\n")
+        p("| Metric | Old | New | Delta |")
+        p(table_sep(28, 12, 12, 20))
+        lat_metrics = [
+            ("Avg response time (s)",  "avg_s"),
+            ("p50 / median (s)",       "p50_s"),
+            ("p95 (s)",                "p95_s"),
+            ("Max (s)",                "max_s"),
+        ]
+        for label, key in lat_metrics:
+            o = old_lat.get(key)
+            n = new_lat.get(key)
+            o_fmt = f"{o:.2f}s" if o is not None else "n/a"
+            n_fmt = f"{n:.2f}s" if n is not None else "n/a"
+            p(table_row(label, o_fmt, n_fmt, _delta_badge(o, n, higher_is_better=False)))
+        
+        o_wall = old_lat.get("total_bot_wall_time_s", 0)
+        n_wall = new_lat.get("total_bot_wall_time_s", 0)
+        o_calls = old_lat.get("num_calls", 0)
+        n_calls = new_lat.get("num_calls", 0)
+        p(table_row("Total bot wall time", f"{o_wall:.0f}s ({o_calls} calls)", f"{n_wall:.0f}s ({n_calls} calls)", ""))
+        p()
 
     # ── Top failure mode changes ───────────────────────────────────────────────
     total_old = old_st["total_scenarios"] + old_mt["total_scenarios"]
