@@ -63,13 +63,25 @@ DEFAULT_JUDGE_MODEL = "gpt-4o"
 ERROR_ANALYSIS_DIR = Path("error_analysis")
 CACHE_DIR = ERROR_ANALYSIS_DIR / ".cache"
 
-# GPT-4o pricing (USD per 1M tokens) — update when pricing changes
+# Chatbot model is driven by the same env vars used by application.py
+CHATBOT_MODEL = os.environ.get("CHATBOT_MODEL", "gpt-4o")
+CHATBOT_BASE_URL = os.environ.get("CHATBOT_BASE_URL", "")
+# Local/Ollama models have no API cost
+_BOT_IS_LOCAL = bool(CHATBOT_BASE_URL)
+
+# OpenAI pricing (USD per 1M tokens) — update when pricing changes.
+# Local/Ollama models are $0 regardless of this table.
 _PRICING: Dict[str, Tuple[float, float]] = {
     "gpt-4o":       (2.50, 10.00),
     "gpt-4o-mini":  (0.15,  0.60),
     "gpt-4-turbo":  (10.00, 30.00),
 }
-_DEFAULT_PRICE = (2.50, 10.00)  # fallback if model not in table
+_DEFAULT_PRICE = (2.50, 10.00)  # fallback for unknown cloud models
+
+
+def _sanitize_model_name(model: str) -> str:
+    """Convert a model name to a safe filename component (e.g. gemma4:e2b → gemma4-e2b)."""
+    return model.replace(":", "-").replace("/", "-").replace(" ", "_")
 
 
 @dataclass
@@ -107,6 +119,8 @@ class CostTracker:
 
     @property
     def bot_cost_usd(self) -> float:
+        if _BOT_IS_LOCAL:
+            return 0.0  # local Ollama inference — no API cost
         p_in, p_out = self._price(self.bot_model)
         return (self.bot_input_tokens / 1_000_000 * p_in
                 + self.bot_output_tokens / 1_000_000 * p_out)
@@ -129,6 +143,7 @@ class CostTracker:
         return {
             "bot": {
                 "model": self.bot_model,
+                "local_inference": _BOT_IS_LOCAL,
                 "input_tokens_estimated": self.bot_input_tokens,
                 "output_tokens_estimated": self.bot_output_tokens,
                 "cost_usd_estimated": round(self.bot_cost_usd, 6),
@@ -792,7 +807,7 @@ def save_baseline_scores(
         "metadata": {
             "timestamp": timestamp,
             "judge_model": judge_model,
-            "chatbot_model": "gpt-4o",
+            "chatbot_model": CHATBOT_MODEL,
             "description": "Baseline evaluation scores before LLM replacement",
             "cost": tracker.summary_dict(),
         },
@@ -845,7 +860,8 @@ def save_baseline_scores(
         },
     }
 
-    path = ERROR_ANALYSIS_DIR / "baseline_scores.json"
+    filename = f"baseline_scores_{_sanitize_model_name(CHATBOT_MODEL)}.json"
+    path = ERROR_ANALYSIS_DIR / filename
     path.write_text(json.dumps(baseline, indent=2))
     print(f"  Saved → {path}")
     return baseline
@@ -1021,7 +1037,8 @@ def print_report(baseline: Dict, st_results: List[Dict], st_scores: List[Dict],
     cost = baseline["metadata"]["cost"]
     bot = cost["bot"]
     judge = cost["judge"]
-    print(f"  Bot ({bot['model']}) — estimated (4 chars ≈ 1 token):")
+    local_tag = " [local Ollama — no API cost]" if bot.get("local_inference") else " — estimated (4 chars ≈ 1 token)"
+    print(f"  Bot ({bot['model']}){local_tag}:")
     print(f"    Input tokens  : ~{bot['input_tokens_estimated']:,}")
     print(f"    Output tokens : ~{bot['output_tokens_estimated']:,}")
     print(f"    Cost          : ~${bot['cost_usd_estimated']:.4f} USD")
@@ -1349,7 +1366,7 @@ def _wrap(text: str, width: int, indent: str = "") -> List[str]:
 async def main(judge_model: str, start_step: int = 1):
     timestamp = datetime.now(timezone.utc).isoformat()
     client = OpenAI()
-    tracker = CostTracker(bot_model="gpt-4o", judge_model=judge_model)
+    tracker = CostTracker(bot_model=CHATBOT_MODEL, judge_model=judge_model)
 
     start_step = _resolve_start_step(start_step)
 
@@ -1359,8 +1376,9 @@ async def main(judge_model: str, start_step: int = 1):
     print(f"  This script evaluates the JO's Bike Shop chatbot across")
     print(f"  24 test scenarios (8 single-turn + 16 multi-turn) using")
     print(f"  DeepEval metrics and LLM-assisted qualitative analysis.")
+    local_note = f"  (local Ollama — {CHATBOT_BASE_URL})" if _BOT_IS_LOCAL else "  (OpenAI API)"
     print(f"\n  Judge model   : {judge_model}  (scores the responses)")
-    print(f"  Chatbot model : gpt-4o  (powers the chatbot being tested)")
+    print(f"  Chatbot model : {CHATBOT_MODEL}{local_note}")
     print(f"  Starting step : {start_step} of 6")
     print(f"  Timestamp     : {timestamp}")
     print(f"\n  Results will be saved to: {ERROR_ANALYSIS_DIR}/")

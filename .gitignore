@@ -1,4 +1,4 @@
-# Environment files
+# Environment files (secrets — never commit)
 .env
 .env.local
 .env.development
@@ -7,6 +7,8 @@
 .env.staging
 .env.*
 *.env
+# ...but the example template is safe to commit
+!.env.example
 env/
 .venv/
 venv/

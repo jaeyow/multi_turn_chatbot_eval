@@ -1,11 +1,10 @@
 import asyncio
 import copy
 import json
-from typing import AsyncGenerator, Optional, Tuple, Literal
+import os
+from typing import AsyncGenerator, Optional, Tuple
 
 import openai
-import instructor
-from pydantic import BaseModel, Field
 
 from burr.core import ApplicationBuilder, State, default, when
 from burr.core.action import action, streaming_action
@@ -17,6 +16,19 @@ from opentelemetry.instrumentation.openai import OpenAIInstrumentor
 OpenAIInstrumentor().instrument()
 
 load_dotenv()
+
+# ─── Model configuration ──────────────────────────────────────────────────────
+# Override via environment variables to switch between OpenAI and local Ollama.
+#
+#   Default (OpenAI):
+#     CHATBOT_MODEL=gpt-4o          (reads OPENAI_API_KEY from .env)
+#
+#   Ollama / Gemma 4:
+#     CHATBOT_MODEL=gemma4:e2b
+#     CHATBOT_BASE_URL=http://localhost:11434/v1
+#
+CHATBOT_MODEL = os.environ.get("CHATBOT_MODEL", "gpt-4o")
+CHATBOT_BASE_URL = os.environ.get("CHATBOT_BASE_URL", "")  # empty = use OpenAI
 
 MODES = [
     "shop_info",  # Hours, location, contact info
@@ -123,96 +135,78 @@ async def check_safety(state: State) -> Tuple[dict, State]:
 
 
 def _get_openai_client():
+    """Return an async OpenAI-compatible client.
+
+    When CHATBOT_BASE_URL is set (e.g. pointing at a local Ollama instance) the
+    client is pointed at that URL.  Ollama accepts any non-empty API key, so we
+    fall back to the string "ollama" if OPENAI_API_KEY is not in the environment.
+    """
+    if CHATBOT_BASE_URL:
+        return openai.AsyncOpenAI(
+            base_url=CHATBOT_BASE_URL,
+            api_key=os.environ.get("OPENAI_API_KEY", "ollama"),
+        )
     return openai.AsyncOpenAI()
-
-
-def _get_instructor_client():
-    """Get an instructor-patched OpenAI client for structured outputs."""
-    return instructor.from_openai(openai.AsyncOpenAI())
-
-
-class ModeClassification(BaseModel):
-    """Structured classification of user intent into chatbot modes."""
-    
-    mode: Literal[
-        "shop_info",
-        "product_inquiry",
-        "book_appointment",
-        "maintenance_tips",
-        "policy_question",
-        "what_can_you_do",
-        "recall_booking",
-        "generic_question",
-        "unknown"
-    ] = Field(
-        ...,
-        description="The mode that best matches the user's intent"
-    )
-    
-    reasoning: str = Field(
-        ...,
-        description="Brief explanation of why this mode was chosen"
-    )
 
 
 @action(reads=["query"], writes=["mode"])
 async def decide_mode(state: State) -> Tuple[dict, State]:
-    """Classify user query into one of the supported chatbot modes using structured output."""
-    
-    client = _get_instructor_client()
-    
-    classification = await client.chat.completions.create(
-        model="gpt-4o",
-        response_model=ModeClassification,
+    """Classify user query into one of the supported chatbot modes.
+
+    Uses a plain JSON prompt so it works with both OpenAI and local Ollama models
+    (no instructor / function-calling required).
+    """
+    client = _get_openai_client()
+
+    response = await client.chat.completions.create(
+        model=CHATBOT_MODEL,
+        response_format={"type": "json_object"},
         messages=[
             {
                 "role": "system",
-                "content": """You are an intent classifier for JO's Bike Shop chatbot.
-
-IMPORTANT: Only provide pricing information of only the data in the shop_info page. If asked about prices,
-costs, or fees, direct them to contact the shop directly using the provided contact details. Avoid repeating
-any information already given in prvious responses if it makes sense. 
-                
-Classify user queries into one of these modes:
-
-- shop_info: Questions about hours, location, contact info, services offered (but NOT pricing),
-  or if there are any questions about specific service, tune-up, or repair offerings.
-  Examples: "What are your opening hours?", "Where are you located?", "What services do you offer?"
-
-- product_inquiry: Questions about bike brands and models, accessories, or product availability (but NOT pricing)
-  Examples: "What bikes do you have for sale?", "Do you have mountain bikes in stock?"
-
-- book_appointment: Requests to schedule service appointments or repairs
-  Examples: "I need to book a service", "Can I make an appointment?", "I'd like to schedule a repair"
-
-- maintenance_tips: Requests for bike maintenance advice or tips
-  Examples: "How do I maintain my bike?", "Chain maintenance tips?", "How often should I tune up my bike?"
-
-- policy_question: Questions about returns, warranties, delivery, or shop policies (but NOT pricing)
-  Examples: "What is your return policy?", "Do you offer warranties?", "How does delivery work?"
-
-- what_can_you_do: Questions about chatbot capabilities or what help is available
-  Examples: "What can you help me with?", "What do you do?", "How can you assist me?"
-
-- recall_booking: Questions about appointments already made in this session
-  Examples: "What was my booking?", "Remind me about my appointment", "When is my appointment?"
-
-- generic_question: General questions about bicycles, cycling, bike care, or cycling-related topics that don't fit other categories
-  Examples: "What's the best bike for commuting?", "How do I choose the right bike size?", "What are the benefits of disc brakes?", "How often should I replace my tires?", "What's the difference between road and mountain bikes?"
-
-- unknown: Queries that don't fit any of the above categories, including pricing questions
-  Examples: Off-topic questions, unclear requests, "How much does a tune-up cost?", "What are your prices?"
-
-Choose the most appropriate mode based on the user's primary intent. Remember: pricing questions should be classified as 'unknown' so customers are directed to contact the shop."""
+                "content": (
+                    "You are an intent classifier for JO's Bike Shop chatbot.\n\n"
+                    "IMPORTANT: Do not provide pricing information. If asked about prices, costs, or "
+                    "fees, classify as 'unknown' so customers are directed to contact the shop.\n\n"
+                    "Classify the customer query into exactly one of these modes:\n\n"
+                    "- shop_info: Hours, location, contact info, services offered (not pricing)\n"
+                    "  e.g. 'What are your opening hours?', 'Where are you located?'\n\n"
+                    "- product_inquiry: Bike brands, accessories, availability (not pricing)\n"
+                    "  e.g. 'What bikes do you have?', 'Do you stock mountain bikes?'\n\n"
+                    "- book_appointment: Schedule a service or repair\n"
+                    "  e.g. 'I need to book a service', 'Can I make an appointment?'\n\n"
+                    "- maintenance_tips: Bike care and maintenance advice\n"
+                    "  e.g. 'How do I maintain my bike?', 'Chain maintenance tips?'\n\n"
+                    "- policy_question: Returns, warranties, delivery, shop policies (not pricing)\n"
+                    "  e.g. 'What is your return policy?', 'Do you offer warranties?'\n\n"
+                    "- what_can_you_do: Questions about chatbot capabilities\n"
+                    "  e.g. 'What can you help me with?', 'How can you assist me?'\n\n"
+                    "- recall_booking: Recall an appointment made earlier in this session\n"
+                    "  e.g. 'What was my booking?', 'Remind me about my appointment'\n\n"
+                    "- generic_question: General cycling topics not covered above\n"
+                    "  e.g. 'Best bike for commuting?', 'Difference between road and MTB?'\n\n"
+                    "- unknown: Anything else, including all pricing questions\n"
+                    "  e.g. 'How much does a tune-up cost?', off-topic questions\n\n"
+                    "Respond with ONLY a JSON object: "
+                    '{"mode": "<mode_name>", "reasoning": "<one sentence>"}'
+                ),
             },
             {
                 "role": "user",
-                "content": f"Classify this customer query: {state['query']}"
-            }
+                "content": f"Classify this customer query: {state['query']}",
+            },
         ],
     )
-    
-    result = {"mode": classification.mode}
+
+    try:
+        parsed = json.loads(response.choices[0].message.content)
+        mode = parsed.get("mode", "unknown")
+        if mode not in MODES:
+            mode = "unknown"
+    except (json.JSONDecodeError, AttributeError, KeyError):
+        mode = "unknown"
+
+    result = {"mode": mode}
     return result, state.update(**result)
 
 
@@ -256,7 +250,7 @@ Be warm, conversational, and helpful - not robotic. Keep the response concise: m
     
     client = _get_openai_client()
     result = await client.chat.completions.create(
-        model="gpt-3.5-turbo", messages=chat_history_api_format, stream=True
+        model=CHATBOT_MODEL, messages=chat_history_api_format, stream=True
     )
     buffer = []
     async for chunk in result:
@@ -276,7 +270,7 @@ Be warm, conversational, and helpful - not robotic. Keep the response concise: m
 
 @streaming_action(reads=["query", "chat_history", "mode"], writes=["response"])
 async def chat_response(
-    state: State, prepend_prompt: str, model: str = "gpt-3.5-turbo"
+    state: State, prepend_prompt: str, model: str = ""
 ) -> AsyncGenerator[Tuple[dict, Optional[State]], None]:
     """Streaming action, as we don't have the result immediately. This makes it more interactive"""
     chat_history = copy.deepcopy(state["chat_history"])
@@ -290,7 +284,7 @@ async def chat_response(
     ]
     client = _get_openai_client()
     result = await client.chat.completions.create(
-        model=model, messages=chat_history_api_format, stream=True
+        model=model or CHATBOT_MODEL, messages=chat_history_api_format, stream=True
     )
     buffer = []
     async for chunk in result:
@@ -456,7 +450,7 @@ IMPORTANT: Keep your response concise - maximum 2-3 sentences. Provide only the 
 
     client = _get_openai_client()
     result = await client.chat.completions.create(
-        model="gpt-3.5-turbo", messages=chat_history_api_format, stream=True
+        model=CHATBOT_MODEL, messages=chat_history_api_format, stream=True
     )
     buffer = []
     async for chunk in result:
@@ -508,7 +502,7 @@ If nothing is found, return: {{}}
 
     client = _get_openai_client()
     result = await client.chat.completions.create(
-        model="gpt-4o",
+        model=CHATBOT_MODEL,
         messages=[
             {
                 "role": "system",
@@ -599,7 +593,7 @@ Examples:
 
     client = _get_openai_client()
     result = await client.chat.completions.create(
-        model="gpt-4o",
+        model=CHATBOT_MODEL,
         messages=[
             {
                 "role": "system",
@@ -648,7 +642,7 @@ Examples:
 
     client = _get_openai_client()
     result = await client.chat.completions.create(
-        model="gpt-4o",
+        model=CHATBOT_MODEL,
         messages=[
             {
                 "role": "system",

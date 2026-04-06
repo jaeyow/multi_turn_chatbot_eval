@@ -12,13 +12,40 @@ Run the full evaluation suite (single-turn + multi-turn) in one command:
 just eval
 ```
 
-This re-runs all test scenarios through the live chatbot, scores them with DeepEval metrics, performs LLM-assisted open coding, and classifies failure modes. All results are written to `error_analysis/`.
+This re-runs all 24 test scenarios through the live chatbot, scores them with DeepEval metrics, performs LLM-assisted open coding, and classifies failure modes. All results are written to `error_analysis/`.
 
-To use a different judge model (e.g. when swapping the chatbot LLM):
+The baseline scores file is named after the chatbot model being tested:
+
+| Command | Baseline file saved |
+|---|---|
+| `just eval` | `error_analysis/baseline_scores_gpt-4o.json` |
+| `just eval-gemma2b` | `error_analysis/baseline_scores_gemma4-e2b.json` |
+| `just eval-gemma4b` | `error_analysis/baseline_scores_gemma4-e4b.json` |
+
+### Comparing models
+
+Once you have two baseline files, compare them by model name — no file paths needed:
 
 ```bash
-just eval --judge-model gpt-4o
+# GPT-4o vs Gemma 4 e2b
+just compare gpt-4o gemma4:e2b
+
+# GPT-4o vs Gemma 4 e4b
+just compare gpt-4o gemma4:e4b
+
+# Gemma 4 e2b vs e4b head-to-head
+just compare gemma4:e2b gemma4:e4b
 ```
+
+This prints a delta table to the terminal and saves a markdown comparison report to `error_analysis/`.
+
+To use a different judge model:
+
+```bash
+just eval --judge-model gpt-4o-mini
+```
+
+> **Important:** Keep the judge model the same across all runs you want to compare. Swapping the judge changes how scores are calibrated, making deltas unreliable.
 
 ### What gets measured
 
@@ -36,7 +63,6 @@ just eval --judge-model gpt-4o
 | Conversation Completeness | DeepEval `ConversationCompletenessMetric` |
 | Knowledge Retention | DeepEval `KnowledgeRetentionMetric` |
 | Role Adherence | DeepEval `RoleAdherenceMetric` |
-| Task Completion | DeepEval `TaskCompletionMetric` |
 
 **Qualitative (both turn types)**
 - LLM-assisted open coding (what worked / what went wrong / notable behaviours)
@@ -46,15 +72,89 @@ just eval --judge-model gpt-4o
 
 | File | Contents |
 |---|---|
-| `error_analysis/baseline_scores.json` | Machine-readable snapshot of all metric scores — use this for before/after model comparison |
-| `error_analysis/single_turn_results.json` | Raw single-turn bot responses |
-| `error_analysis/multi_turn_results.json` | Raw multi-turn conversation traces |
+| `error_analysis/baseline_scores_<model>.json` | Machine-readable metric snapshot for the named model |
+| `error_analysis/single_turn_results.json` | Raw single-turn bot responses (latest run) |
+| `error_analysis/multi_turn_results.json` | Raw multi-turn conversation traces (latest run) |
 | `error_analysis/single_turn_analysis.csv` | Per-trace scores + open coding + failure mode flags |
 | `error_analysis/multi_turn_analysis.csv` | Per-trace scores + open coding + failure mode flags |
+| `error_analysis/eval_report_<datetime>_AEST.md` | Detailed markdown evaluation report |
+| `error_analysis/comparison_report_<datetime>_AEST.md` | Markdown comparison report (from `just compare`) |
 
-### Swapping the chatbot LLM
+## Running with Ollama / Gemma 4 (local inference)
 
-The chatbot model is configured in `application.py`. The judge model used for evaluation is separate and set via `--judge-model` (default: `gpt-4o`). When replacing the chatbot LLM (e.g. with Gemma 4), re-run `just eval` to get updated scores — then compare against `baseline_scores.json`.
+The chatbot supports any OpenAI-compatible API endpoint. [Ollama](https://ollama.com) exposes one at `http://localhost:11434/v1`, making it straightforward to swap in local models.
+
+### 1. Install Ollama
+
+**macOS:**
+```bash
+brew install ollama
+```
+
+**Linux / WSL:**
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+Or download the desktop app from [Ollama.com](https://ollama.com).
+
+### 2. Pull the Gemma 4 models
+
+```bash
+ollama pull gemma4:e2b
+ollama pull gemma4:e4b
+```
+
+`e2b` is the lighter 2-billion-parameter variant; `e4b` is the 4-billion-parameter variant with higher quality but slower inference.
+
+### 3. Confirm Ollama is running
+
+Ollama starts automatically as a background service after installation. Verify it is up:
+
+```bash
+ollama list
+```
+
+You should see `gemma4:e2b` and `gemma4:e4b` in the output. If the service is not running, start it with:
+
+```bash
+ollama serve
+```
+
+### 4. Run the chatbot on Gemma 4
+
+**Streamlit UI:**
+```bash
+CHATBOT_MODEL=gemma4:e2b CHATBOT_BASE_URL=http://localhost:11434/v1 just streamlit
+```
+
+**FastAPI server:**
+```bash
+CHATBOT_MODEL=gemma4:e2b CHATBOT_BASE_URL=http://localhost:11434/v1 just server
+```
+
+Or set the variables permanently in your `.env` file (see `.env.example`).
+
+### 5. Run evaluations and compare
+
+```bash
+# Run evals with Gemma 4 e2b — saves baseline_scores_gemma4-e2b.json
+just eval-gemma2b
+
+# Run evals with Gemma 4 e4b — saves baseline_scores_gemma4-e4b.json
+just eval-gemma4b
+
+# Compare each against the GPT-4o baseline
+just compare gpt-4o gemma4:e2b
+just compare gpt-4o gemma4:e4b
+
+# Compare the two Gemma variants head-to-head
+just compare gemma4:e2b gemma4:e4b
+```
+
+Each comparison prints a delta table and saves a markdown report to `error_analysis/`.
+
+> **Note on cost:** Ollama inference runs locally — there is no API cost for the chatbot. The judge model (GPT-4o by default) still calls the OpenAI API and incurs cost. Both figures are reported in the eval output and baseline snapshot.
 
 ## Conversation Extraction Tools
 

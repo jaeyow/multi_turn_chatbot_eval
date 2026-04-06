@@ -82,13 +82,28 @@ clean:
 # Run the application in development mode (server with auto-reload)
 dev: server
 
-# Run all evaluations and generate baseline scores
+# Run all evaluations against the default chatbot model (gpt-4o via OpenAI)
+# Saves: error_analysis/baseline_scores_gpt-4o.json
 # Override judge model : just eval --judge-model gpt-4o
 # Resume from a step   : just eval --start-step 4
 eval *ARGS:
     uv run python eval_runner.py {{ARGS}}
 
-# Compare two baseline_scores.json files and report metric deltas
-# Usage: just compare error_analysis/baseline_scores.json error_analysis/baseline_scores_gemma4.json
+# Run evaluations with Gemma 4 e2b (local Ollama — must be running on port 11434)
+# Saves: error_analysis/baseline_scores_gemma4-e2b.json
+eval-gemma2b *ARGS:
+    CHATBOT_MODEL=gemma4:e2b CHATBOT_BASE_URL=http://localhost:11434/v1 uv run python eval_runner.py {{ARGS}}
+
+# Run evaluations with Gemma 4 e4b (local Ollama — must be running on port 11434)
+# Saves: error_analysis/baseline_scores_gemma4-e4b.json
+eval-gemma4b *ARGS:
+    CHATBOT_MODEL=gemma4:e4b CHATBOT_BASE_URL=http://localhost:11434/v1 uv run python eval_runner.py {{ARGS}}
+
+# Compare two baselines — accepts model names OR file paths
+# Examples:
+#   just compare gpt-4o gemma4:e2b
+#   just compare gpt-4o gemma4:e4b
+#   just compare gemma4:e2b gemma4:e4b
+#   just compare error_analysis/baseline_scores_gpt-4o.json error_analysis/baseline_scores_gemma4-e2b.json
 compare OLD NEW:
     uv run python compare_baselines.py {{OLD}} {{NEW}}

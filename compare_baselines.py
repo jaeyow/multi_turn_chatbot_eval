@@ -41,12 +41,46 @@ FAILURE_MODES = {
 # ─── Helpers ──────────────────────────────────────────────────────────────────
 
 
+def _sanitize_model_name(model: str) -> str:
+    return model.replace(":", "-").replace("/", "-").replace(" ", "_")
+
+
+def _resolve_baseline_path(name_or_path: str) -> Path:
+    """Accept a file path OR a model name shorthand.
+
+    Examples:
+        "gpt-4o"          → error_analysis/baseline_scores_gpt-4o.json
+        "gemma4:e2b"      → error_analysis/baseline_scores_gemma4-e2b.json
+        "error_analysis/baseline_scores_gpt-4o.json"  → that exact path
+    """
+    p = Path(name_or_path)
+    if p.exists():
+        return p
+
+    # Try as a model name shorthand → baseline_scores_{sanitized}.json
+    candidate = ERROR_ANALYSIS_DIR / f"baseline_scores_{_sanitize_model_name(name_or_path)}.json"
+    if candidate.exists():
+        return candidate
+
+    # Try prefixing error_analysis/ in case user gave a bare filename
+    candidate2 = ERROR_ANALYSIS_DIR / name_or_path
+    if candidate2.exists():
+        return candidate2
+
+    print(
+        f"Error: cannot find baseline for '{name_or_path}'.\n"
+        f"  Tried: {p}\n"
+        f"         {candidate}\n"
+        f"         {candidate2}\n"
+        f"  Run 'just eval' (or 'just eval-gemma2b' / 'just eval-gemma4b') first to generate a baseline.",
+        file=sys.stderr,
+    )
+    sys.exit(1)
+
+
 def _load(path: str) -> Dict:
-    p = Path(path)
-    if not p.exists():
-        print(f"Error: file not found: {p}", file=sys.stderr)
-        sys.exit(1)
-    return json.loads(p.read_text())
+    resolved = _resolve_baseline_path(path)
+    return json.loads(resolved.read_text())
 
 
 def _delta_str(old: Optional[float], new: Optional[float], higher_is_better: bool = True) -> str:
@@ -526,11 +560,13 @@ def main() -> None:
 
     old = _load(old_path)
     new = _load(new_path)
+    old_resolved = str(_resolve_baseline_path(old_path))
+    new_resolved = str(_resolve_baseline_path(new_path))
 
     print_comparison(old, new)
 
     ERROR_ANALYSIS_DIR.mkdir(exist_ok=True)
-    report_path = save_markdown_comparison(old, new, old_path, new_path)
+    report_path = save_markdown_comparison(old, new, old_resolved, new_resolved)
     print(f"  Markdown comparison report saved to: {report_path}")
 
 
