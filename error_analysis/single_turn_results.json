@@ -2,7 +2,7 @@
   "metadata": {
     "conversation_type": "single_turn",
     "description": "Single-Turn conversation tests",
-    "timestamp": "2026-01-11T18:55:18.732072",
+    "timestamp": "2026-04-06T04:54:27.594984+00:00",
     "total_tests": 8,
     "successful_tests": 8
   },
@@ -17,14 +17,10 @@
         "tuple": "(shop_info, complete_upfront, single_turn, cooperative)"
       },
       "user_query": "Hi there! Could you please let me know your store hours and location? I'm planning to visit soon. Thanks!",
-      "bot_response": "Absolutely! JO's Bike Shop in Portland, OR is open 7 days a week. Our hours are Mon-Wed 9:00 AM - 6:00 PM, Thur-Fri 9:00 AM - 7:00 PM, Sat 8:00 AM - 5:00 PM, Sun 10:00 AM - 4:00 PM. We can't wait to welcome you and talk bikes! \ud83d\udeb2\ud83d\udee0\ufe0f",
+      "bot_response": "Absolutely! JO's Bike Shop is located at 456 Pedal Lane, Portland, OR 97201. We're open 7 days a week: Mon-Wed 9:00 AM - 6:00 PM, Thurs-Fri 9:00 AM - 7:00 PM, Sat 8:00 AM - 5:00 PM, and Sun 10:00 AM - 4:00 PM. We can't wait to see you and help with your biking needs! \ud83d\udeb4\u200d\u2642\ufe0f",
       "action_taken": "shop_info",
-      "state_snapshot": {
-        "mode": "shop_info",
-        "in_appointment_flow": false,
-        "appointment_data": {},
-        "safe": true
-      },
+      "expected_mode": "shop_info",
+      "mode_correct": true,
       "success": true,
       "error": null
     },
@@ -38,14 +34,10 @@
         "tuple": "(shop_info, complete_upfront, single_turn, cooperative)"
       },
       "user_query": "\"Hi there! Could you please let me know your store hours and location? I'm planning to visit this weekend and want to make sure I have the right details. Thanks!\"",
-      "bot_response": "Absolutely! JO's Bike Shop is located at 456 Pedal Lane, Portland, OR 97201. We're open this weekend on Saturday from 8:00 AM to 5:00 PM and Sunday from 10:00 AM to 4:00 PM. Can't wait to see you roll in! \ud83d\udeb2",
+      "bot_response": "Absolutely! JO's Bike Shop is located at 456 Pedal Lane, Portland, OR 97201. We're open this weekend on Saturday from 8:00 AM to 5:00 PM and Sunday from 10:00 AM to 4:00 PM. Can't wait to see you roll in - happy biking! \ud83d\udeb2\ud83d\udd27",
       "action_taken": "shop_info",
-      "state_snapshot": {
-        "mode": "shop_info",
-        "in_appointment_flow": false,
-        "appointment_data": {},
-        "safe": true
-      },
+      "expected_mode": "shop_info",
+      "mode_correct": true,
       "success": true,
       "error": null
     },
@@ -59,14 +51,10 @@
         "tuple": "(maintenance_tips, no_info, single_turn, corrective)"
       },
       "user_query": "Oops, I meant to ask about bike maintenance tips. Can you help with that?",
-      "bot_response": "Of course! Here are some bike maintenance tips: \n\n1. Regularly clean and lubricate your chain to prevent rust and ensure smooth shifts.\n2. Check your tire pressure and tread for wear to avoid flats and maintain traction.",
+      "bot_response": "Of course! Here are some bike maintenance tips:\n- Regularly check tire pressure and inflate as needed\n- Keep the chain clean and lubricated for smooth shifting and to prevent rust\n- Check brakes for wear and adjust or replace pads as necessary.",
       "action_taken": "maintenance_tips",
-      "state_snapshot": {
-        "mode": "maintenance_tips",
-        "in_appointment_flow": false,
-        "appointment_data": {},
-        "safe": true
-      },
+      "expected_mode": "maintenance_tips",
+      "mode_correct": true,
       "success": true,
       "error": null
     },
@@ -80,14 +68,10 @@
         "tuple": "(maintenance_tips, no_info, single_turn, corrective)"
       },
       "user_query": "Hey there! Can you give me some tips on bike maintenance?",
-      "bot_response": "Of course! To keep your bike running smoothly, make sure to regularly clean and lubricate the chain, check tire pressure before each ride, and inspect the brake pads for wear. Regularly tune-ups by a professional can also help prevent bigger issues down the road.",
+      "bot_response": "Of course! Make sure to regularly clean and lubricate your bike chain, check tire pressure frequently, and inspect your brakes and gears for any signs of wear or damage. It's also a good idea to have a professional tune-up performed at least once a year.",
       "action_taken": "maintenance_tips",
-      "state_snapshot": {
-        "mode": "maintenance_tips",
-        "in_appointment_flow": false,
-        "appointment_data": {},
-        "safe": true
-      },
+      "expected_mode": "maintenance_tips",
+      "mode_correct": true,
       "success": true,
       "error": null
     },
@@ -101,14 +85,10 @@
         "tuple": "(policy_question, partial_info, single_turn, cooperative)"
       },
       "user_query": "Hi there! Could you tell me a bit about your return policy for bikes? I'm considering buying one but want to know in case something doesn't work out. Thanks!",
-      "bot_response": "Hello! We offer a 30-day return policy for bikes, with the customer responsible for return shipping fees. If you have any concerns or questions about our policies, please feel free to contact us at (503) 555-BIKE or info@josbikeshop.com.",
+      "bot_response": "Our shop offers a 30-day return policy on all bikes in their original condition. Please contact us directly at (503) 555-BIKE or info@josbikeshop.com for further details on our return process. Thank you for considering us for your purchase!",
       "action_taken": "policy_question",
-      "state_snapshot": {
-        "mode": "policy_question",
-        "in_appointment_flow": false,
-        "appointment_data": {},
-        "safe": true
-      },
+      "expected_mode": "policy_question",
+      "mode_correct": true,
       "success": true,
       "error": null
     },
@@ -122,14 +102,10 @@
         "tuple": "(policy_question, partial_info, single_turn, cooperative)"
       },
       "user_query": "\"Hi there! Can you tell me a bit about your warranty policy on new bikes?\"",
-      "bot_response": "Hi! Our new bikes come with a standard manufacturer's warranty. For more details or specific questions, please contact our shop at (503) 555-BIKE or info@josbikeshop.com.",
+      "bot_response": "Hi! Our new bikes come with a manufacturer's warranty - for specific details, please reach out to us directly at (503) 555-BIKE or info@josbikeshop.com.",
       "action_taken": "policy_question",
-      "state_snapshot": {
-        "mode": "policy_question",
-        "in_appointment_flow": false,
-        "appointment_data": {},
-        "safe": true
-      },
+      "expected_mode": "policy_question",
+      "mode_correct": true,
       "success": true,
       "error": null
     },
@@ -145,12 +121,8 @@
       "user_query": "\"Hi there! Can you tell me everything you can help me with at your bike shop?\"",
       "bot_response": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?",
       "action_taken": "what_can_you_do",
-      "state_snapshot": {
-        "mode": "what_can_you_do",
-        "in_appointment_flow": false,
-        "appointment_data": {},
-        "safe": true
-      },
+      "expected_mode": "what_can_you_do",
+      "mode_correct": true,
       "success": true,
       "error": null
     },
@@ -166,12 +138,8 @@
       "user_query": "\"Hi there! Could you tell me all the different things you can help me with at your bike shop?\"",
       "bot_response": "I'm here to help you with JO's Bike Shop! I can assist you with:\n\n\u2022 **Shop Information** - Opening hours, location, and contact details\n\n\u2022 **Product Inquiries** - Available bikes, accessories, and product availability\n\n\u2022 **Service Appointments** - Booking bike service and repairs\n\n\u2022 **Maintenance Tips** - Advice on keeping your bike in top condition\n\n\u2022 **Shop Policies** - Questions about returns, warranties, and delivery\n\nHow can I help you today?",
       "action_taken": "what_can_you_do",
-      "state_snapshot": {
-        "mode": "what_can_you_do",
-        "in_appointment_flow": false,
-        "appointment_data": {},
-        "safe": true
-      },
+      "expected_mode": "what_can_you_do",
+      "mode_correct": true,
       "success": true,
       "error": null
     }

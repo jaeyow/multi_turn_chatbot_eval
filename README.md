@@ -4,9 +4,61 @@ A sophisticated multi-turn conversational AI chatbot built with Burr and OpenAI,
 
 Built as a realistic example of a multi-turn chatbot for evaluation and demonstration purposes, based on the [Streaming API example in the Burr repository](https://github.com/apache/burr/tree/main/examples/streaming-fastapi).
 
-## 📊 NEW: Conversation Extraction & Evaluation Tools
+## Evaluation
 
-Extract conversation data from Burr tracking files for multi-turn evaluation:
+Run the full evaluation suite (single-turn + multi-turn) in one command:
+
+```bash
+just eval
+```
+
+This re-runs all test scenarios through the live chatbot, scores them with DeepEval metrics, performs LLM-assisted open coding, and classifies failure modes. All results are written to `error_analysis/`.
+
+To use a different judge model (e.g. when swapping the chatbot LLM):
+
+```bash
+just eval --judge-model gpt-4o
+```
+
+### What gets measured
+
+**Single-turn (8 scenarios)**
+| Metric | Tool |
+|---|---|
+| Answer Relevancy | DeepEval `AnswerRelevancyMetric` |
+| Task Completion | DeepEval `GEval` (custom criteria) |
+| Conversation Quality | DeepEval `GEval` (factual accuracy + tone) |
+| Mode Detection Accuracy | Deterministic (`action_taken` vs `expected_mode`) |
+
+**Multi-turn (16 scenarios — simulated by DeepEval `ConversationSimulator`)**
+| Metric | Tool |
+|---|---|
+| Conversation Completeness | DeepEval `ConversationCompletenessMetric` |
+| Knowledge Retention | DeepEval `KnowledgeRetentionMetric` |
+| Role Adherence | DeepEval `RoleAdherenceMetric` |
+| Task Completion | DeepEval `TaskCompletionMetric` |
+
+**Qualitative (both turn types)**
+- LLM-assisted open coding (what worked / what went wrong / notable behaviours)
+- Failure mode taxonomy classification across 12 pre-defined failure modes (FM1–FM12)
+
+### Output files
+
+| File | Contents |
+|---|---|
+| `error_analysis/baseline_scores.json` | Machine-readable snapshot of all metric scores — use this for before/after model comparison |
+| `error_analysis/single_turn_results.json` | Raw single-turn bot responses |
+| `error_analysis/multi_turn_results.json` | Raw multi-turn conversation traces |
+| `error_analysis/single_turn_analysis.csv` | Per-trace scores + open coding + failure mode flags |
+| `error_analysis/multi_turn_analysis.csv` | Per-trace scores + open coding + failure mode flags |
+
+### Swapping the chatbot LLM
+
+The chatbot model is configured in `application.py`. The judge model used for evaluation is separate and set via `--judge-model` (default: `gpt-4o`). When replacing the chatbot LLM (e.g. with Gemma 4), re-run `just eval` to get updated scores — then compare against `baseline_scores.json`.
+
+## Conversation Extraction Tools
+
+Extract conversation data from Burr tracking files for further analysis:
 
 - **`extract_conversations.py`**: Command-line tool to extract conversations from Burr LocalTrackingClient storage
 - **`conversation_extraction.ipynb`**: Interactive Jupyter notebook for exploration and analysis
@@ -94,32 +146,22 @@ State is preserved across conversation turns using selective field retention, en
 
 ## Installation
 
+Requires [uv](https://docs.astral.sh/uv/).
+
 1. **Clone the repository**
 ```bash
 git clone <repository-url>
 cd multi_turn_chatbot_eval
 ```
 
-2. **Create and activate a virtual environment**
+2. **Install dependencies and set up environment**
 ```bash
-# Create virtual environment
-python -m venv .venv
-
-# Activate on macOS/Linux
-source .venv/bin/activate
-
-# Activate on Windows
-.venv\Scripts\activate
+just setup
 ```
 
-3. **Install dependencies**
-```bash
-pip install -r requirements.txt
-```
+This creates a virtual environment, installs all dependencies via `uv`, and generates a `.env` template.
 
-4. **Set up environment variables**
-
-Create a `.env` file in the project root:
+3. **Add your OpenAI API key to `.env`**
 ```bash
 OPENAI_API_KEY=your_openai_api_key_here
 ```
