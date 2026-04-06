@@ -11,7 +11,9 @@
       "Bash(python3 -c \"from deepeval.evaluate.configs import AsyncConfig, DisplayConfig; import inspect; print\\(inspect.signature\\(AsyncConfig.__init__\\)\\); print\\(inspect.signature\\(DisplayConfig.__init__\\)\\)\")",
       "Bash(python3 -m py_compile /Users/josereyes/Dev/multi_turn_chatbot_eval/eval_runner.py)",
       "Bash(python3 -m py_compile eval_runner.py)",
-      "Bash(python3 -m py_compile compare_baselines.py)"
+      "Bash(python3 -m py_compile compare_baselines.py)",
+      "Bash(grep -rn \"sk-\\\\|api_key\\\\s*=\\\\s*['\\\\\"][^$]\\\\|password\\\\s*=\\\\s*['\\\\\"]\" eval_runner.py compare_baselines.py)",
+      "Bash(git rm:*)"
     ]
   }
 }
